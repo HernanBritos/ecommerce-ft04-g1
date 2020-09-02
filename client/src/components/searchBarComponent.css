@@ -1,0 +1,27 @@
+/**Componente entero**/
+.bar {
+  width: 260px;
+  height: 40px;
+  background: darkgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/**Boton**/
+.bar img {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  margin-left: -8px;
+  border-radius: 15%;
+}
+.bar button {
+  width: 30px;
+  height: 30px;
+  border-radius: 15%;
+}
+/**Input**/
+.bar .search {
+  width: 190px;
+  margin-left: 5px;
+}
