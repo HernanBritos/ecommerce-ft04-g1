@@ -1,5 +1,4 @@
 import React from "react";
-import HomeScreen from "./components/HomeScreen";
 import SearchBarComponent from "./components/searchBarComponent";
 import "./App.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
@@ -40,7 +39,6 @@ function App() {
       </aside>
       <main className="main">
         <div className="content">
-          <Route path="/" exact={true} component={HomeScreen} />
         </div>
       </main>
     </BrowserRouter>
