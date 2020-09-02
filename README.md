@@ -53,7 +53,7 @@ __IMPORTANTE:__ Es necesario contar minimamente con la última versión estable 
 Actualmente las versiónes necesarias son:
 
  * __Node__: 12.18.3 o mayor
- * __NPM__: 6.14.16 o mayor
+ * __NPM__: 6.14.8 o mayor
 
 Para verificar que versión tienen instalada:
 
