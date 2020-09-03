@@ -3,7 +3,6 @@ const { Product } = require('../db.js');
 const { Categories }= require('../db.js');
 
 
-
 server.get('/', (req, res, next) => {
 	Product.findAll()
 		.then(products => {
@@ -13,6 +12,7 @@ server.get('/', (req, res, next) => {
 });
 
 //-------------------------------------------------------------------------//
+
 
 //POST /products
 
@@ -72,6 +72,7 @@ server.put('/:id', (req, res, next) => {
 		res.status(200).json(response)
 	}).catch(error => res.status(400).send('Ocurrio un error'));
 });
+
 
 //---------------------------------------------------------------------------//
 
