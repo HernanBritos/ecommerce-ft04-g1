@@ -39,7 +39,6 @@ const { OrderProduct } = sequelize.models;
 const { ShoppingCart } = sequelize.models;
 const { User } = sequelize.models;
 
-
 // Aca vendrian las relaciones
 
 
@@ -55,6 +54,7 @@ ShoppingCart.belongsTo(User, { as: 'user' });
 // ShoppingCart.belongsToMany(OrderProduct, { as: 'OrderProduct' });
 OrderProduct.hasMany(Product, { as: 'product' });
 OrderProduct.belongsTo(ShoppingCart, { as: 'shoppingcart' });
+
 
 
 module.exports = {

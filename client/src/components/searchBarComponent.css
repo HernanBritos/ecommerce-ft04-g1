@@ -1,0 +1,45 @@
+/**Componente entero**/
+.bar {
+  width: 260px;
+  height: 45px;
+  background: rgb(219, 218, 213);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+}
+/**Boton**/
+.bar img {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin-left: -8px;
+  border-radius: 15%;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+}
+.bar button {
+  width: 35px;
+  height: 35px;
+  margin-right: 6px;
+  border-radius: 15%;
+  border-style: solid;
+  border-width: 1px;
+}
+.bar button:hover {
+  box-shadow: 1px 1px grey;
+}
+/**Input**/
+.bar .search {
+  width: 190px;
+  height: 27px;
+  margin-left: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 5px;
+  background: rgb(245, 244, 244);
+}
