@@ -2,7 +2,7 @@
 .bar {
   width: 260px;
   height: 45px;
-  background: rgb(168, 167, 167);
+  background: rgb(219, 218, 213);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +19,7 @@
   border-radius: 15%;
   border-style: solid;
   border-width: 1px;
+  cursor: pointer;
 }
 .bar button {
   width: 35px;
@@ -27,6 +28,9 @@
   border-radius: 15%;
   border-style: solid;
   border-width: 1px;
+}
+.bar button:hover {
+  box-shadow: 1px 1px grey;
 }
 /**Input**/
 .bar .search {
@@ -37,5 +41,5 @@
   border-width: 1px;
   border-color: black;
   border-radius: 5px;
-  background: rgb(233, 232, 232);
+  background: rgb(245, 244, 244);
 }
