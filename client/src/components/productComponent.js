@@ -5,11 +5,11 @@ import "./productComponent.css";
 class ProductComponent extends React.Component {
   render() {
     return (
-      <div className="card">
-        <div className="image">
+      <div className="prodComp">
+        <div className="prodCompImage">
           <img src=""></img>
         </div>
-        <div className="productData">
+        <div className="prodData">
           <span>Zapato Prueba</span>
           <span>Categoria Prueba </span>
           <span role="img">Rating prueba &#11088;</span>

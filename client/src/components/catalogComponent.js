@@ -2,23 +2,28 @@ import React from "react";
 import "./catalogComponent.css";
 import ProductCard from "./productCard";
 import data from "./data";
-import { Route } from "react-router-dom";
+import axios from "axios";
 
 class CatalogComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = { products: [] };
+  }
+  componentDidMount() {
+    axios.get("http://localhost:3001/products").then((data) => {
+      this.setState({ products: data.data });
+    });
+  }
   render() {
     return (
       <div className="catalog">
-        {data.products.map((product) => {
+        {this.state.products.map((product) => {
           return (
             <div className="pcard">
-              <Route
-                path="/"
-                render={() => (
-                  <div>
-                    <ProductCard producto={product} />
-                  </div>
-                )}
-              />
+              <div>
+                <ProductCard producto={product} />
+              </div>
+
               {/* <ProductCard producto={product} /> */}
             </div>
           );
