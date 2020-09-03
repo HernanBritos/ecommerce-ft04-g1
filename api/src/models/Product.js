@@ -28,7 +28,6 @@ module.exports = (sequelize) => {
     category: {
       type: DataTypes.STRING,
     }
-
- });
+  });
 
 };
