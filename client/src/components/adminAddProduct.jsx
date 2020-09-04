@@ -9,7 +9,7 @@ return (
 <div class={cComponent.products} ng-app="app" ng-controller="AppCtrl">
 
   <md-content layout-padding>
-    <div class="actionpane">
+    <div class={cComponent.actionpane}>
     <Link to="/admin/products/add">
       <button class="btn btn-default">New Product</button>
     </Link> 
@@ -30,23 +30,43 @@ return (
         <tbody>
           <tr>
             <td>123434</td>
-            <td><span class={cComponent.name}>Titanuim streak wedding band</span>
+            <td><span class={cComponent.name}>Zapatos Negros</span>
 </td>
-            <td>Rings</td>
-            <td>N5,000.00</td>
+            <td>Botas</td>
+            <td>10,000.00</td>
             <td>12</td>
             <td><span class="label label-success"> Available </span></td>
-            <td>4 Feb 2017</td>
+            <td>07 Ago 2020</td>
+            <div class={cComponent.botones} >
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked />  Edit
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option2" autocomplete="off" /> Delete
+            </label>
+            </div>
+            </div>
           </tr>
           <tr>
             <td>123434</td>
-            <td><span class={cComponent.name}>Cascade sterling silver wedding band</span>
+            <td><span class={cComponent.name}>Botas Altas Rojas</span>
 </td>
-            <td>Rings</td>
-            <td>N5,000.00</td>
+            <td>Zapatos</td>
+            <td>5,000.00</td>
             <td>12</td>
             <td><span class="label label-danger"> UnAvailable </span></td>
-            <td>4 Feb 2017</td>
+            <td>20 Marzo 2020</td>
+            <div class={cComponent.botones} >
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked />  Edit  
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option2" autocomplete="off" /> Delete
+            </label>
+            </div>
+            </div>
           </tr>
         </tbody>
       </table>
