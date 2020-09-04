@@ -22,19 +22,7 @@
   text-shadow: 1px 1px grey;
 }
 /* BARRA LATERAL */
-.sidebar {
-  position: fixed;
-  transform: translateX(-17rem);
-  width: 17rem;
-  background-color: rgb(243, 220, 193);
-  height: 100%;
-  transition: all 0.5s;
-  margin-top: 100px;
-}
-.sidebar.open {
-  transform: translateX(0);
-}
-.close-button {
+.closeButton {
   border-radius: 25px;
   width: 3rem;
   height: 3rem;
@@ -46,7 +34,7 @@
   cursor: pointer;
   position: absolute;
 }
-.brand-button {
+.brandButton {
   font-size: 3rem;
   padding: 0.5rem;
   background: none;

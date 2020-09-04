@@ -1,5 +1,5 @@
 import React from "react";
-import "./catalogComponent.css";
+import cComponent from "../components/css/catalogComponent.module.css";
 import ProductCard from "./productCard";
 import data from "./data";
 import axios from "axios";
@@ -17,10 +17,10 @@ class CatalogComponent extends React.Component {
   render() {
     console.log(this.state.products);
     return (
-      <div className="catalog">
+      <div className={cComponent.catalog}>
         {this.state.products.map((product) => {
           return (
-            <div className="pcard">
+            <div className={cComponent.pCard}>
               <div>
                 <ProductCard producto={product} />
               </div>

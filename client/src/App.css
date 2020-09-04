@@ -1,0 +1,12 @@
+.sidebar {
+  position: fixed;
+  transform: translateX(-17rem);
+  width: 17rem;
+  background-color: rgb(243, 220, 193);
+  height: 100%;
+  transition: all 0.5s;
+  margin-top: 100px;
+}
+.sidebar.open {
+  transform: translateX(0);
+}
