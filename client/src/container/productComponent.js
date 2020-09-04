@@ -1,15 +1,15 @@
 import React from "react";
-import "./productComponent.css";
+import pComp from "./css/productComponent.module.css";
 // import { Link } from "react-router-dom";
 
 class ProductComponent extends React.Component {
   render() {
     return (
-      <div className="prodComp">
-        <div className="prodCompImage">
+      <div className={pComp.prodComp}>
+        <div>
           <img src=""></img>
         </div>
-        <div className="prodData">
+        <div>
           <span>Zapato Prueba</span>
           <span>Categoria Prueba </span>
           <span role="img">Rating prueba &#11088;</span>

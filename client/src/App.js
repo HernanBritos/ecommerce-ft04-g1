@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
 import CatalogComponent from "./components/catalogComponent";
-import ProductComponent from "./components/productComponent";
+import ProductComponent from "./container/productComponent";
 import HeaderInicio from "./components/headerInicio";
 
 function App() {

@@ -1,5 +1,5 @@
 import React from "react";
-import "./productCard.css";
+import pCard from "./css/productCard.module.css";
 import { Link } from "react-router-dom";
 
 class ProductCard extends React.Component {
@@ -9,14 +9,14 @@ class ProductCard extends React.Component {
   }
   render() {
     return (
-      <Link to={"/product/" + this.props.producto._id}>
-        <div className="card">
-          <div className="image">
+      <Link to={"/product/" + this.props.producto.idProduct}>
+        <div className={pCard.card}>
+          <div className={pCard.image}>
             <img src={require(`${this.props.producto.img}`)}></img>
           </div>
-          <div className="productData">
+          <div className={pCard.productData}>
             <span>{this.props.producto.name}</span>
-            <span>{this.props.producto.categoria}</span>
+            <span>{this.props.producto.category}</span>
             <span> {this.props.producto.rating} &#11088;</span>
             <span> $ {this.props.producto.price}</span>
           </div>

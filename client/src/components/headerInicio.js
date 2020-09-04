@@ -1,6 +1,6 @@
 import React from "react";
-import "./headerInicio.css";
-import SearchBarComponent from "./searchBarComponent";
+import hInicio from "../components/css/headerInicio.module.css";
+import SearchBarComponent from "../container/searchBarComponent";
 
 class HeaderInicio extends React.Component {
   render() {
@@ -12,14 +12,14 @@ class HeaderInicio extends React.Component {
     };
     return (
       <div>
-        <div className="header">
-          <button className="brand-button" onClick={openMenu}>
+        <div className={hInicio.header}>
+          <button className={hInicio.brandButton} onClick={openMenu}>
             &#9776;
           </button>
-          <a className="brand" href="/">
+          <a className={hInicio.brand} href="/">
             Asia Shoes
           </a>
-          <div className="searchbar">
+          <div className={hInicio.searchbar}>
             <SearchBarComponent />
           </div>
         </div>
@@ -27,7 +27,7 @@ class HeaderInicio extends React.Component {
           <a href="#">Iniciar Sesion</a>
           <a href="#">Registrarse</a>
           <h3>Categorias de Compra</h3>
-          <button className="close-button" onClick={closeMenu}>
+          <button className={hInicio.closeButton} onClick={closeMenu}>
             x
           </button>
           <ul>
