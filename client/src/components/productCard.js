@@ -12,7 +12,7 @@ class ProductCard extends React.Component {
       <Link to={"/product/" + this.props.producto._id}>
         <div className="card">
           <div className="image">
-            <img src={require(`${this.props.producto.image}`)}></img>
+            <img src={require(`${this.props.producto.img}`)}></img>
           </div>
           <div className="productData">
             <span>{this.props.producto.name}</span>

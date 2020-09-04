@@ -15,6 +15,7 @@ class CatalogComponent extends React.Component {
     });
   }
   render() {
+    console.log(this.state.products);
     return (
       <div className="catalog">
         {this.state.products.map((product) => {
