@@ -15,10 +15,17 @@ class ProductCard extends React.Component {
             <img src={require(`${this.props.producto.img}`)}></img>
           </div>
           <div className={pCard.productData}>
-            <span>{this.props.producto.name}</span>
-            <span>{this.props.producto.category}</span>
-            <span> {this.props.producto.rating} &#11088;</span>
-            <span> $ {this.props.producto.price}</span>
+            <span className={pCard.name}>{this.props.producto.name}</span>
+            <span className={pCard.category}>
+              {this.props.producto.category}
+            </span>
+            <span className={pCard.price}> $ {this.props.producto.price}</span>
+            <span className={pCard.stock}>
+              {this.props.producto.stock}
+              <span className={pCard.stockIcon} role="img">
+                &#9921;
+              </span>
+            </span>
           </div>
         </div>
       </Link>

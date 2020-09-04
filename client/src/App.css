@@ -10,3 +10,6 @@
 .sidebar.open {
   transform: translateX(0);
 }
+.content {
+  margin-left: 20px;
+}
