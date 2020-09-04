@@ -9,10 +9,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    idProduct: {
-      type: DataTypes.INTEGER,
-      primaryKey:true,
-    },
+    
     description: {
       type: DataTypes.STRING,
     },
@@ -25,9 +22,7 @@ module.exports = (sequelize) => {
     stock: {
       type: DataTypes.INTEGER,
     },
-    category: {
-      type: DataTypes.STRING,
-    }
+
   });
 
 };
