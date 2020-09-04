@@ -4,13 +4,12 @@ const { Categories }= require('../db.js');
 
 
 server.get('/', (req, res, next) => {
-	Product.findAll()
+	Product.findAll({includes: [{model: Categories }]})
 		.then(products => {
 			res.send(products);
 		})
 		.catch(next);
-});
-
+})
 //-------------------------------------------------------------------------//
 
 
@@ -20,26 +19,27 @@ server.get('/', (req, res, next) => {
 // si no retorna un status 400.
 // Si pudo crear el producto retorna el status 201 y 
 // retorna la información del producto.
- 
+
 server.post('/', (req, res ,next) => {	
-	const {idProduct,name,description,stock,category,price,img}=req.body;
+	const {idCategory,name,description,stock,price,img}=req.body;
 		Product.create({
-			idProduct: idProduct,
 			name: name,
 			description: description,
 			stock: stock,
 			price: price,
 			img: img,
-			category:category,
-		}) .then(newProduct => {
-			return Categories.map(category =>{
-				return newProduct.addCategory(category)
+		}).then(newProduct => {
+			console.log(newProduct.__proto__)
+			Categories.findById(idCategory)
+			.then(category => {
+				newProduct.addCategory(category)
 			})
+			return newProduct
 		}) 	
-		.then(categories => {
-			return Promise.all(categories).then(info => res.send(info))
+		.then(productNew => {
+			return res.send(productNew)
 		})
-		.catch(err => res.status(400).send('No se encuentra los campos requeridos'))
+		.catch(err => res.status(400).send(err))
 });
 
 //--------------------------------------------------------------------------//
@@ -93,6 +93,30 @@ server.delete('/:id', (req, res, next ) => {
 	})
 })
 
+ 
+// DELETE /products/category/:id
+// Elimina una categoria
+
+server.delete('/category/:id', (req,res ) => {
+	const id= req.params.id;
+	Categories.destroy({
+		where: {
+			id:id
+		}
+		.then(deleteCategory => {
+			res.json(deleteCategory);
+		}).catch(res.send())
+	});
+
+
+})
+
 //--------------------------------------------------------------------------//
+
+
+
+
+
+
 
 module.exports = server;
