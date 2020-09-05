@@ -1,20 +1,34 @@
 import React from "react";
-import "./catalogComponent.css";
+import cComponent from "../components/css/catalogComponent.module.css";
 import ProductCard from "./productCard";
-import data from "./data";
+import axios from "axios";
 
-function CatalogComponent() {
-  return (
-    <div className="catalog">
-      {data.products.map((product) => {
-        return (
-          <div className="pcard">
-            <ProductCard producto={product} />
-          </div>
-        );
-      })}
-    </div>
-  );
+class CatalogComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = { products: [] };
+  }
+  componentDidMount() {
+    axios.get("http://localhost:3001/products").then((data) => {
+      this.setState({ products: data.data });
+    });
+  }
+  render() {
+    console.log(this.state.products);
+    return (
+      <div className={cComponent.catalog}>
+        {this.state.products.map((product) => {
+          return (
+            <div className={cComponent.pCard}>
+              <div>
+                <ProductCard producto={product} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 }
 
 export default CatalogComponent;

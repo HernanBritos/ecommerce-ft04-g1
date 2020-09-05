@@ -1,0 +1,26 @@
+.form {
+  background: rgb(250, 186, 122);
+  height: 100%;
+  display: flex;
+  font-size: calc(22px + 2vmin);
+  color: white;
+  font-family: "Oswald";
+  font-size: xx-large;
+  font-weight: 600;
+  -webkit-text-stroke: 0.8px black;
+  padding: 3rem 0 3rem 0;
+}
+.Fcontent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 30rem;
+}
+.tituloForm {
+  font-family: "Lobster";
+  margin-left: 2rem;
+  margin-right: 8rem;
+  -webkit-text-stroke: 1px black;
+}

@@ -1,0 +1,24 @@
+.products {
+  margin-top: 20px;
+  border-bottom: 1px dotted #ccc;
+  cursor: pointer;
+  padding: 10px;
+  background: rgb(250, 186, 122);
+  font-family: "Lobster";
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.actionpane {
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6px;
+  border-radius: 10px;
+}
