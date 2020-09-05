@@ -40,8 +40,11 @@ function App() {
           <Route
             path="/product/:id"
             exact={true}
-            render={() => <ProductComponent />}
-          />
+            render={p => {
+            return (<ProductComponent
+              producto={p.match.params.id}
+            />)}}
+            />
         </div>
       </main>
     </BrowserRouter>

@@ -9,7 +9,7 @@ class ProductCard extends React.Component {
   }
   render() {
     return (
-      <Link to={"/product/" + this.props.producto.idProduct}>
+      <Link to={"/product/" + this.props.producto.id}>
         <div className={pCard.card}>
           <div className={pCard.image}>
             <img
