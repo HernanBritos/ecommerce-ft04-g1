@@ -26,14 +26,14 @@ class ProductComponent extends React.Component {
       <div className={pComp.card}>
           <div className={pComp.image}>
             {/* <img
-              src={require(`${this.props.producto.img}`)}
+              src= {require(`../components/img/${this.state.producto.img}`)}
               alt="productCardImage"
             ></img> */}
           </div>
           <div className={pComp.productData}>
             <span className={pComp.name}>{this.state.producto.name}</span>
-            <span className={pComp.category}>
-              {this.state.producto.category}
+            <span className={pComp.description}>
+              {this.state.producto.description}
             </span>
             <span className={pComp.price}> $ {this.state.producto.price}</span>
             <span className={pComp.stock}>
