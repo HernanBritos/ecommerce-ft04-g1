@@ -1,7 +1,7 @@
 .header {
   height: 100px;
   width: 100%;
-  background: rgb(248, 158, 158);
+  background: rgb(250, 186, 122);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,10 +16,10 @@
   font-family: "Lobster", cursive;
   color: white;
   -webkit-text-stroke: 0.9px black;
-  text-decoration: none;
 }
 .brand:hover {
   text-shadow: 1px 1px grey;
+  color: white;
 }
 .brandButton:hover {
   text-shadow: 1.5px 1.5px grey;

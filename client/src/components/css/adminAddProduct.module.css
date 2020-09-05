@@ -1,8 +1,4 @@
-
-.products .name {
-    
-      border-bottom: 1px dotted #ccc;
-      cursor: pointer;
-      
+.products {
+  border-bottom: 1px dotted #ccc;
+  cursor: pointer;
 }
-  

@@ -1,7 +1,6 @@
 import React from "react";
 import cComponent from "../components/css/catalogComponent.module.css";
 import ProductCard from "./productCard";
-import data from "./data";
 import axios from "axios";
 
 class CatalogComponent extends React.Component {
@@ -24,8 +23,6 @@ class CatalogComponent extends React.Component {
               <div>
                 <ProductCard producto={product} />
               </div>
-
-              {/* <ProductCard producto={product} /> */}
             </div>
           );
         })}

@@ -7,7 +7,7 @@ class ProductComponent extends React.Component {
     return (
       <div className={pComp.prodComp}>
         <div>
-          <img src=""></img>
+          <img src="" alt="productImage"></img>
         </div>
         <div>
           <span>Zapato Prueba</span>
