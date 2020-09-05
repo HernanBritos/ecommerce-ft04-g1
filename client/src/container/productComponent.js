@@ -1,23 +1,55 @@
 import React from "react";
 import pComp from "./css/productComponent.module.css";
 // import { Link } from "react-router-dom";
+import axios from "axios";
 
 class ProductComponent extends React.Component {
-  render() {
-    return (
-      <div className={pComp.prodComp}>
-        <div>
-          <img src="" alt="productImage"></img>
-        </div>
-        <div>
-          <span>Zapato Prueba</span>
-          <span>Categoria Prueba </span>
-          <span role="img">Rating prueba &#11088;</span>
-          <span> Precio producto prueba</span>
-        </div>
-      </div>
-    );
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.state = { producto: {} };
   }
+
+  componentDidMount() {
+    axios.get(`http://localhost:3001/products/${this.props.producto}`).then((data) => {
+      this.setState({ producto: data.data });
+      
+    });
+    }
+
+  render() {
+  console.log(this.props.producto);
+ 
+  if (this.props.producto) {
+    console.log(this.state.producto);
+    return (
+      <div className={pComp.card}>
+          <div className={pComp.image}>
+            {/* <img
+              src= {require(`../components/img/${this.state.producto.img}`)}
+              alt="productCardImage"
+            ></img> */}
+          </div>
+          <div className={pComp.productData}>
+            <span className={pComp.name}>{this.state.producto.name}</span>
+            <span className={pComp.description}>
+              {this.state.producto.description}
+            </span>
+            <span className={pComp.price}> $ {this.state.producto.price}</span>
+            <span className={pComp.stock}>
+              {this.state.producto.stock}
+              <span className={pComp.stockIcon} role="img">
+                &#9921;
+              </span>
+            </span>
+          </div>
+        </div>
+    );
+  } else {
+    return <div>Product Not Found</div>;
+  } 
+   
 }
 
+};
 export default ProductComponent;

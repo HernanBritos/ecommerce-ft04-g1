@@ -34,8 +34,8 @@ export default function FormProduct() {
         name: `${input.name}`,
         description: `${input.description}`,
         price: `${input.price}`,
-        stock: `${input.stock}`,
         img: `${input.img}`,
+        stock: `${input.stock}`,
       })
       .then((data) => {
         return data;

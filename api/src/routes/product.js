@@ -225,8 +225,7 @@ server.get('/search?query={valor}', (req,res) => {
 
 server.get('/:id', (req, res) => {
 	const id=req.params.id;
-
-	Product.findById({
+	Product.findOne({
 		where: { id:id }		
 	}).then (newProduct => {
 		res.send(newProduct)
