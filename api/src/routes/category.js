@@ -11,7 +11,6 @@ server.get('/', (req, res, next) => {
 		.catch(next);
 })
 
-
 server.post('/', (req,res) => {
 
   Categories.create({
