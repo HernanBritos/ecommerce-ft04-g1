@@ -17,7 +17,7 @@ export default class AdminAddProduct extends React.Component {
     return (
       <div class={cComponent.products} ng-app="app" ng-controller="AppCtrl">
         <md-content layout-padding>
-          <div className="actionpane">
+          <div className={cComponent.actionpane}>
             <Link to="/admin/products/add">
               <button className="btn btn-secondary">Nuevo Producto</button>
             </Link>
@@ -47,6 +47,32 @@ export default class AdminAddProduct extends React.Component {
                       <td>{product.price}</td>
                       <td>{product.stock}</td>
                       <td>{product.img}</td>
+                      <div class={cComponent.botones}>
+                        <div
+                          class="btn-group btn-group-toggle"
+                          data-toggle="buttons"
+                        >
+                          <label class="btn btn-secondary active">
+                            <input
+                              type="radio"
+                              name="options"
+                              id="option1"
+                              autocomplete="off"
+                              checked
+                            />{" "}
+                            Edit
+                          </label>
+                          <label class="btn btn-secondary">
+                            <input
+                              type="radio"
+                              name="options"
+                              id="option2"
+                              autocomplete="off"
+                            />{" "}
+                            Delete
+                          </label>
+                        </div>
+                      </div>
                     </tr>
                   );
                 })}
