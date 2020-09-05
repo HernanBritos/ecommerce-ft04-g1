@@ -1,16 +1,16 @@
 import React from "react";
-import cComponent from "../components/css/adminAddProduct.module.css";
+import cComponent from "../components/css/adminAddCategory.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default class AdminAddProduct extends React.Component {
+export default class AdminAddCategory extends React.Component {
   constructor() {
     super();
-    this.state = { products: [] };
+    this.state = { categories: [] };
   }
   componentDidMount() {
-    axios.get("http://localhost:3001/products").then((data) => {
-      this.setState({ products: data.data });
+    axios.get("http://localhost:3001/category").then((data) => {
+      this.setState({ categories: data.data });
     });
   }
   render() {
@@ -18,8 +18,8 @@ export default class AdminAddProduct extends React.Component {
       <div class={cComponent.products} ng-app="app" ng-controller="AppCtrl">
         <md-content layout-padding>
           <div className={cComponent.actionpane}>
-            <Link to="/admin/products/add">
-              <button className="btn btn-success">Nuevo Producto</button>
+            <Link to="/admin/categories/add">
+              <button className="btn btn-success">Nueva Categoria</button>
             </Link>
           </div>
 
@@ -29,25 +29,21 @@ export default class AdminAddProduct extends React.Component {
                 <tr>
                   <th>ID</th>
                   <th>Nombre</th>
-                  <th>Categoria</th>
-                  <th>Precio</th>
-                  <th>Cantidad</th>
-                  <th>Imagen</th>
+                  <th>Fecha de creacion</th>
+                  <th>Ultima modificacion</th>
                   <th>Accion</th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.products.map((product) => {
+                {this.state.categories.map((category) => {
                   return (
                     <tr>
-                      <td>{product.id}</td>
+                      <td>{category.id}</td>
                       <td>
-                        <span className={cComponent.name}>{product.name}</span>
+                        <span className={cComponent.name}>{category.name}</span>
                       </td>
-                      <td>{product.category}</td>
-                      <td>{product.price}</td>
-                      <td>{product.stock}</td>
-                      <td>{product.img}</td>
+                      <td>{category.createdAt}</td>
+                      <td>{category.updatedAt}</td>
                       <div class={cComponent.botones}>
                         <div
                           class="btn-group btn-group-toggle"

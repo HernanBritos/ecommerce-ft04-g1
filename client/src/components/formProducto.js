@@ -32,7 +32,7 @@ export default function FormProduct() {
     axios
       .post("http://localhost:3001/products", {
         name: `${input.name}`,
-        category: `${input.description}`,
+        description: `${input.description}`,
         price: `${input.price}`,
         stock: `${input.stock}`,
         img: `${input.img}`,
