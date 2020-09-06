@@ -1,7 +1,50 @@
-.prodComp {
-  width: 800px;
-  height: 565px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: grey;
+.card {
+  width: 250px;
+  height: 350px;
+  background: rgb(243, 220, 193);
+  border-radius: 10px;
+  transition: box-shadow 1s;
+  box-shadow: 1px 1px 1px 1px grey;
+}
+.card:hover {
+  box-shadow: 4px 4px 4px 4px grey;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.image img {
+  width: 250px;
+  height: 200px;
+  border-radius: 10px 10px 0 0;
+}
+.productData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.productData span {
+  margin-top: 8px;
+  font-size: 16px;
+  border-radius: 2px;
+  font-family: "Lato";
+}
+.productData span:first-of-type {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Cinzel", sans-serif;
+}
+.stockIcon {
+  margin-left: 6px;
+  color: rgb(80, 33, 1);
+  padding: 0 0.4px 0 0.4px;
+}
+.stock {
+  display: inline-flex;
+  margin-left: 11.8rem;
+  
+}
+.price {
+  color: rgb(17, 94, 30);
 }
