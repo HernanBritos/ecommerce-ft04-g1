@@ -1,6 +1,6 @@
 import React from "react";
-import cComponent from "../components/css/catalogComponent.module.css";
-import ProductCard from "./productCard";
+import cComponent from "./css/catalogComponent.module.css";
+import ProductCard from "../components/productCard";
 import axios from "axios";
 
 class CatalogComponent extends React.Component {

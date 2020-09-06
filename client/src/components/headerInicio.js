@@ -1,7 +1,7 @@
 import React from "react";
 import hInicio from "../components/css/headerInicio.module.css";
 import SearchBarComponent from "../container/searchBarComponent";
-import SideBar from "./sideBarComponent.js";
+import SideBar from "../container/sideBarComponent.js";
 
 class HeaderInicio extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class HeaderInicio extends React.Component {
             &#9776;
           </button>
           <a className={hInicio.brand} href="/">
-            Asia Shoes
+            Asia Pilar Shoes
           </a>
           <div className={hInicio.searchbar}>
             <SearchBarComponent />

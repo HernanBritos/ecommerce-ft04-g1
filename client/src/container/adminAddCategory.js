@@ -1,5 +1,5 @@
 import React from "react";
-import cComponent from "../components/css/adminAddCategory.module.css";
+import cComponent from "./css/adminAddCategory.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ export default class AdminAddCategory extends React.Component {
     this.state = { categories: [] };
   }
   componentDidMount() {
-    axios.get("http://localhost:3001/category").then((data) => {
+    axios.get("http://localhost:3001/categories").then((data) => {
       this.setState({ categories: data.data });
     });
   }
@@ -21,6 +21,9 @@ export default class AdminAddCategory extends React.Component {
             <Link to="/admin/categories/add">
               <button className="btn btn-success">Nueva Categoria</button>
             </Link>
+            <center>
+              <h2>Categorías</h2>
+            </center>
           </div>
 
           <div className="tables">
@@ -36,6 +39,26 @@ export default class AdminAddCategory extends React.Component {
               </thead>
               <tbody>
                 {this.state.categories.map((category) => {
+                  var cId = category.id;
+                  const filter = (el) => {
+                    return el.id !== cId;
+                  };
+                  const editar = () => {
+                    console.log("editar");
+                  };
+                  const borrar = async () => {
+                    console.log(cId);
+                    this.setState({
+                      categories: this.state.categories.filter(filter),
+                    });
+                    await axios
+                      .delete(`http://localhost:3001/categories/${cId}`, {
+                        params: cId,
+                      })
+                      .then((res) => {
+                        return res;
+                      });
+                  };
                   return (
                     <tr>
                       <td>{category.id}</td>
@@ -49,25 +72,12 @@ export default class AdminAddCategory extends React.Component {
                           class="btn-group btn-group-toggle"
                           data-toggle="buttons"
                         >
-                          <label class="btn btn-primary">
-                            <input
-                              type="radio"
-                              name="options"
-                              id="option1"
-                              autocomplete="off"
-                              checked
-                            />{" "}
+                          <button onClick={editar} className="btn btn-primary">
                             Editar
-                          </label>
-                          <label class="btn btn-danger">
-                            <input
-                              type="radio"
-                              name="options"
-                              id="option2"
-                              autocomplete="off"
-                            />{" "}
+                          </button>
+                          <button onClick={borrar} className="btn btn-danger">
                             Eliminar
-                          </label>
+                          </button>
                         </div>
                       </div>
                     </tr>
