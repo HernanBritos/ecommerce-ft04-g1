@@ -16,19 +16,19 @@ class ProductComponent extends React.Component {
       
     });
     }
+    
 
   render() {
-  console.log(this.props.producto);
- 
+   
   if (this.props.producto) {
-    console.log(this.state.producto);
+    console.log(this.state.producto.img);
     return (
       <div className={pComp.card}>
           <div className={pComp.image}>
-            {/* <img
-              src= {require(`../components/img/${this.state.producto.img}`)}
+            <img
+              src={require(`${"../components/img/zapato1.jpg"}`)}
               alt="productCardImage"
-            ></img> */}
+            ></img>
           </div>
           <div className={pComp.productData}>
             <span className={pComp.name}>{this.state.producto.name}</span>

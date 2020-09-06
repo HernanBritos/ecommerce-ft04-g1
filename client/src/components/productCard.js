@@ -13,7 +13,7 @@ class ProductCard extends React.Component {
         <div className={pCard.card}>
           <div className={pCard.image}>
             <img
-              src={require(`${this.props.producto.img}`)}
+              src={require(`${"./img/"+this.props.producto.img}`)}
               alt="productCardImage"
             ></img>
           </div>
