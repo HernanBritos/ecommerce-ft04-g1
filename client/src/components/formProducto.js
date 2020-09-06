@@ -6,6 +6,7 @@ import axios from "axios";
 export default function FormProduct() {
   const [input, setInput] = useState({
     name: "",
+    category: "",
     description: "",
     price: "",
     stock: "",
@@ -33,6 +34,7 @@ export default function FormProduct() {
       .post("http://localhost:3001/products", {
         name: `${input.name}`,
         description: `${input.description}`,
+        category: `${input.category}`,
         price: `${input.price}`,
         img: `${input.img}`,
         stock: `${input.stock}`,
@@ -40,21 +42,33 @@ export default function FormProduct() {
       .then((data) => {
         return data;
       });
+    return (window.location = "http://localhost:3000/admin/products");
   };
 
   return (
     <form className={cComponent.form} onSubmit={handleSubmit}>
       <h1 className={`my-3 ${cComponent.tituloForm}`}>Añadir Producto... </h1>
       <div className={cComponent.Fcontent}>
-        <div className="nose">
+        <div className="form-group">
           <label htmlFor="productname">Nombre de producto: </label>
           <input
             name="name"
             value={input.name}
             type="text"
             onChange={handleInputChange}
-            class="form-control"
+            className="form-control"
             id="ProductName"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="productname">Categoria: </label>
+          <input
+            name="category"
+            value={input.category}
+            type="text"
+            onChange={handleInputChange}
+            className="form-control"
+            id="ProductCategory"
           />
         </div>
         <div className="form-group">
@@ -86,7 +100,7 @@ export default function FormProduct() {
             value={input.stock}
             type="number"
             onChange={handleInputChange}
-            class="form-control"
+            className="form-control"
             id="stock"
           />
         </div>
@@ -105,7 +119,7 @@ export default function FormProduct() {
             value={input.img}
             type="text"
             onChange={handleInputChange}
-            class="form-control"
+            className="form-control"
             id="img"
           />
         </div>

@@ -32,21 +32,22 @@ export default function FormCategory() {
       .then((data) => {
         return data;
       });
+    return (window.location = "http://localhost:3000/admin/categories");
   };
 
   return (
     <form className={cComponent.form} onSubmit={handleSubmit}>
       <h1 className={`my-3 ${cComponent.tituloForm}`}>Añadir Categoria... </h1>
       <div className={cComponent.Fcontent}>
-        <div className="nose">
-          <label htmlFor="productname">Nombre de Categoria: </label>
+        <div className="form-group">
+          <label htmlFor="name">Nombre de Categoria: </label>
           <input
             name="name"
             value={input.name}
             type="text"
             onChange={handleInputChange}
             class="form-control"
-            id="CategoryName"
+            id="Name"
           />
         </div>
         <button type="submit" className="btn-secondary">
