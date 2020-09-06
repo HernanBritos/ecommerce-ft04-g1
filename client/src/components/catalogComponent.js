@@ -15,19 +15,29 @@ class CatalogComponent extends React.Component {
   }
   render() {
     console.log(this.state.products);
-    return (
-      <div className={cComponent.catalog}>
-        {this.state.products.map((product) => {
-          return (
-            <div className={cComponent.pCard}>
-              <div>
-                <ProductCard producto={product} />
+    if (this.state.products.length > 0) {
+      return (
+        <div className={cComponent.catalog}>
+          {this.state.products.map((product) => {
+            return (
+              <div className={cComponent.pCard}>
+                <div>
+                  <ProductCard producto={product} />
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-    );
+            );
+          })}
+        </div>
+      );
+    } else {
+      return (
+        <div className={cComponent.catalog}>
+          <div className={`alert alert-warning ${cComponent.alerta}`}>
+            Oops! Parece que no hay ningún producto, prueba creando uno.
+          </div>
+        </div>
+      );
+    }
   }
 }
 

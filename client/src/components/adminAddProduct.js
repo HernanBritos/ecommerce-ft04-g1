@@ -38,6 +38,26 @@ export default class AdminAddProduct extends React.Component {
               </thead>
               <tbody>
                 {this.state.products.map((product) => {
+                  var pId = product.id;
+                  const filter = (el) => {
+                    return el === this.state.products[pId];
+                  };
+                  const editar = () => {
+                    console.log("editar");
+                  };
+                  const borrar = async () => {
+                    console.log(pId);
+                    this.setState({
+                      products: this.state.products.filter(filter),
+                    });
+                    await axios
+                      .delete(`http://localhost:3001/products/${pId}`, {
+                        params: pId,
+                      })
+                      .then((res) => {
+                        return res;
+                      });
+                  };
                   return (
                     <tr>
                       <td>{product.id}</td>
@@ -48,32 +68,14 @@ export default class AdminAddProduct extends React.Component {
                       <td>{product.price}</td>
                       <td>{product.stock}</td>
                       <td>{product.img}</td>
-                      <div class={cComponent.botones}>
-                        <div
-                          class="btn-group btn-group-toggle"
-                          data-toggle="buttons"
-                        >
-                          <label class="btn btn-primary">
-                            <input
-                              type="radio"
-                              name="options"
-                              id="option1"
-                              autocomplete="off"
-                              checked
-                            />{" "}
-                            Editar
-                          </label>
-                          <label class="btn btn-danger">
-                            <input
-                              type="radio"
-                              name="options"
-                              id="option2"
-                              autocomplete="off"
-                            />{" "}
-                            Eliminar
-                          </label>
-                        </div>
-                      </div>
+                      <span className={cComponent.botones}>
+                        <button onClick={editar} className="btn btn-primary">
+                          Editar
+                        </button>
+                        <button onClick={borrar} className="btn btn-danger">
+                          Eliminar
+                        </button>
+                      </span>
                     </tr>
                   );
                 })}
