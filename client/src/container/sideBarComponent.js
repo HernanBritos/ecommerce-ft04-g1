@@ -1,5 +1,6 @@
 import React from "react";
 import sBar from "./css/sideBarComponent.module.css";
+import { Link } from "react-router-dom";
 
 class SideBarComponent extends React.Component {
   render() {
@@ -16,6 +17,11 @@ class SideBarComponent extends React.Component {
         <button className={sBar.closeButton} onClick={this.props.onclose}>
           x
         </button>
+        <Link to="/admin">
+          <div className={sBar.admin}>
+            <button className={`btn btn-secondary`}>Admin</button>
+          </div>
+        </Link>
       </div>
     );
   }

@@ -13,7 +13,7 @@ class ProductCard extends React.Component {
         <div className={pCard.card}>
           <div className={pCard.image}>
             <img
-              src={require(`${"./img/"+this.props.producto.img}`)}
+              src={require(`${"./img/" + this.props.producto.img}`)}
               alt="productCardImage"
             ></img>
           </div>
@@ -23,11 +23,8 @@ class ProductCard extends React.Component {
               {this.props.producto.category}
             </span>
             <span className={pCard.price}> $ {this.props.producto.price}</span>
-            <span className={pCard.stock}>
-              {this.props.producto.stock}
-              <span className={pCard.stockIcon} role="img">
-                &#9921;
-              </span>
+            <span className={pCard.carrito}>
+              <img src={require("./img/carrito-de-compras.png")}></img>
             </span>
           </div>
         </div>

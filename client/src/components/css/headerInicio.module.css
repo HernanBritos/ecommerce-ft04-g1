@@ -15,17 +15,17 @@
   font-size: 45px;
   font-family: "Lobster", cursive;
   color: white;
-  -webkit-text-stroke: 0.9px black;
+  -webkit-text-stroke: 0.8px rgb(0, 0, 0);
 }
 .brand:hover {
   text-shadow: 1px 1px grey;
   color: white;
 }
 .brandButton:hover {
-  text-shadow: 1.5px 1.5px grey;
+  text-shadow: 1px 1px grey;
 }
 .brandButton {
-  font-size: 3rem;
+  font-size: 2.5rem;
   padding: 0.5rem;
   background: none;
   border: none;

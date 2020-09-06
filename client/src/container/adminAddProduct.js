@@ -1,5 +1,5 @@
 import React from "react";
-import cComponent from "../components/css/adminAddProduct.module.css";
+import cComponent from "./css/adminAddProduct.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -21,6 +21,9 @@ export default class AdminAddProduct extends React.Component {
             <Link to="/admin/products/add">
               <button className="btn btn-success">Nuevo Producto</button>
             </Link>
+            <center>
+              <h2>Productos</h2>
+            </center>
           </div>
 
           <div className="tables">
@@ -40,7 +43,7 @@ export default class AdminAddProduct extends React.Component {
                 {this.state.products.map((product) => {
                   var pId = product.id;
                   const filter = (el) => {
-                    return el === this.state.products[pId];
+                    return el.id !== pId;
                   };
                   const editar = () => {
                     console.log("editar");

@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
-import CatalogComponent from "./components/catalogComponent";
-import FormProduct from "./components/formProducto.js";
-import FormCategory from "./components/formCategory.js";
-import AdminAddProduct from "./components/adminAddProduct.js";
-import AdminAddCategory from "./components/adminAddCategory.js";
+import CatalogComponent from "./container/catalogComponent";
+import FormProduct from "./container/formProducto.js";
+import FormCategory from "./container/formCategory.js";
+import AdminAddProduct from "./container/adminAddProduct.js";
+import AdminAddCategory from "./container/adminAddCategory.js";
 import ProductComponent from "./container/productComponent";
 import HeaderInicio from "./components/headerInicio";
+import AdminPanel from "./container/adminPanel";
 import "./bootstrap.min.css";
 
 function App() {
@@ -17,16 +18,7 @@ function App() {
       <main className="main">
         <div className="content">
           <Route path="/" exact={true} render={() => <CatalogComponent />} />
-          <Route
-            path="/admin/products"
-            exact={true}
-            render={() => <AdminAddProduct />}
-          />
-          <Route
-            path="/admin/categories"
-            exact={true}
-            render={() => <AdminAddCategory />}
-          />
+          <Route path="/admin" exact={true} render={() => <AdminPanel />} />
           <Route
             path="/admin/products/add"
             exact={true}
@@ -40,11 +32,10 @@ function App() {
           <Route
             path="/product/:id"
             exact={true}
-            render={p => {
-            return (<ProductComponent
-              producto={p.match.params.id}
-            />)}}
-            />
+            render={(p) => {
+              return <ProductComponent producto={p.match.params.id} />;
+            }}
+          />
         </div>
       </main>
     </BrowserRouter>

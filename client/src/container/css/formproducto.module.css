@@ -24,3 +24,6 @@
   margin-right: 8rem;
   -webkit-text-stroke: 1px black;
 }
+.back {
+  background: rgb(250, 186, 122);
+}
