@@ -152,10 +152,10 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const idProduct = req.params.idProduct;
   const idCategoria = req.params.idCategoria;
 
-  Categories.update(
+  Categories.update(          //findOrCreate()
     {
-      //{include: [{models:Product}]} Creo que en este caso no iria, pero si agregaria el
-      name: req.params.name, //                                       {include: [{models: Categories}]}
+      //{include: [{model:Product}]} Creo que en este caso no iria, pero si agregaria el
+      name: req.params.name, //                                       {include: [{model: Categories}]}
     },
     {
       where: {
