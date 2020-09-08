@@ -40,25 +40,27 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Product } = sequelize.models;
 const { Categories } = sequelize.models;
-const { Reviews } = sequelize.models;
+const { Review } = sequelize.models;
 const { OrderProduct } = sequelize.models;
 const { ShoppingCart } = sequelize.models;
 const { User } = sequelize.models;
 
 // Aca vendrian las relaciones
 
-//Product.hasMany(Reviews, { as: 'reviews' });
-Product.belongsToMany(Categories, { through: "Productxcategories" });
-//  Product.belongsToMany(OrderProduct, { as: 'orderproduct' });
-//  Reviews.belongsTo(Product, { as: 'product' });
-//  Review.belongsTo(User, { as: 'user' });
-Categories.belongsToMany(Product, { through: "Productxcategories" });
-//  User.hasMany(Review, { as: 'review' });
-//  User.hasMany(ShoppingCart, { as: 'shoppingcart' });
-//  ShoppingCart.belongsTo(User, { as: 'user' });
-//  ShoppingCart.belongsToMany(OrderProduct, { as: 'orderproduct' });
-//  OrderProduct.hasMany(Product, { as: 'product' });
-//  OrderProduct.belongsTo(ShoppingCart, { as: 'shoppingcart' });
+
+Product.hasMany(Review, { as: 'review' });
+Product.belongsToMany(Categories, { through: 'Productxcategories' });
+Product.belongsTo(OrderProduct, { as: 'OrderProduct' });
+Review.belongsTo(Product, { as: 'product' });
+Review.belongsTo(User, { as: 'user' });
+Categories.belongsToMany(Product, { through: 'Productxcategories' });
+User.hasMany(Review, { as: 'review' });
+User.hasMany(ShoppingCart, { as: 'ShoppingCart' });
+ShoppingCart.belongsTo(User, { as: 'user' });
+ShoppingCart.hasMany(OrderProduct, { as: 'OrderProduct' });
+OrderProduct.hasMany(Product, { as: 'product' });
+OrderProduct.belongsTo(ShoppingCart, { as: 'ShoppingCart' });
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
