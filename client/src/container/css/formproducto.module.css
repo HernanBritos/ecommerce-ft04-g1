@@ -12,7 +12,7 @@
 }
 .Fcontent {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
@@ -27,7 +27,6 @@
 .back {
   background: rgb(250, 186, 122);
 }
-
 
 fieldset {
   border: none;
@@ -77,7 +76,7 @@ input[type="text"] {
   right: 1em;
   top: 0.9em;
   color: #a8a8a8;
-  transition: transform .2s ease-out, color .2s ease-out;
+  transition: transform 0.2s ease-out, color 0.2s ease-out;
   font-size: 0.85em;
 }
 

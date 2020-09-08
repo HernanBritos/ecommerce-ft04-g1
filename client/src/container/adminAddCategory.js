@@ -15,7 +15,7 @@ export default class AdminAddCategory extends React.Component {
   }
   render() {
     return (
-      <div class={cComponent.products} ng-app="app" ng-controller="AppCtrl">
+      <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
         <md-content layout-padding>
           <div className={cComponent.actionpane}>
             <Link to="/admin/categories/add">

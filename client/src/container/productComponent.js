@@ -11,24 +11,19 @@ class ProductComponent extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/products/${this.props.producto}`).then((data) => {
-      this.setState({ producto: data.data });
-      
-    });
-    }
-    
+    axios
+      .get(`http://localhost:3001/products/${this.props.producto}`)
+      .then((data) => {
+        this.setState({ producto: data.data });
+      });
+  }
 
   render() {
-   
-  if (this.props.producto) {
-    console.log(this.state.producto.img);
-    return (
-      <div className={pComp.card}>
+    if (this.props.producto) {
+      return (
+        <div className={pComp.card}>
           <div className={pComp.image}>
-            <img
-              src={require(`${"../components/img/zapato1.jpg"}`)}
-              alt="productCardImage"
-            ></img>
+            <img className="imagen" src="" alt="productCardImage"></img>
           </div>
           <div className={pComp.productData}>
             <span className={pComp.name}>{this.state.producto.name}</span>
@@ -44,12 +39,10 @@ class ProductComponent extends React.Component {
             </span>
           </div>
         </div>
-    );
-  } else {
-    return <div>Product Not Found</div>;
-  } 
-   
+      );
+    } else {
+      return <div>Product Not Found</div>;
+    }
+  }
 }
-
-};
 export default ProductComponent;

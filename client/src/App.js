@@ -4,8 +4,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import CatalogComponent from "./container/catalogComponent";
 import FormProduct from "./container/formProducto.js";
 import FormCategory from "./container/formCategory.js";
-import AdminAddProduct from "./container/adminAddProduct.js";
-import AdminAddCategory from "./container/adminAddCategory.js";
 import ProductComponent from "./container/productComponent";
 import HeaderInicio from "./components/headerInicio";
 import AdminPanel from "./container/adminPanel";
