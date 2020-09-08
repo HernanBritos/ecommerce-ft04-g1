@@ -1,6 +1,7 @@
 import React from "react";
 import pCard from "./css/productCard.module.css";
 import { Link } from "react-router-dom";
+var placeholder = "./img/Placeholder.png";
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -12,10 +13,14 @@ class ProductCard extends React.Component {
       <Link to={"/product/" + this.props.producto.id}>
         <div className={pCard.card}>
           <div className={pCard.image}>
-            <img
-              src={require(`${"./img/" + this.props.producto.img}`)}
-              alt="productCardImage"
-            ></img>
+            {this.props.producto.img.includes("jpg") ? (
+              <img
+                src={require(`${"./img/" + this.props.producto.img}`)}
+                alt="productCardImage"
+              ></img>
+            ) : (
+              <img src={require(`${placeholder}`)} alt="productCardImage"></img>
+            )}
           </div>
           <div className={pCard.productData}>
             <span className={pCard.name}>{this.props.producto.name}</span>
@@ -24,7 +29,10 @@ class ProductCard extends React.Component {
             </span>
             <span className={pCard.price}> $ {this.props.producto.price}</span>
             <span className={pCard.carrito}>
-              <img src={require("./img/carrito-de-compras.png")}></img>
+              <img
+                alt="carrito"
+                src={require("./img/carrito-de-compras.png")}
+              ></img>
             </span>
           </div>
         </div>

@@ -15,7 +15,7 @@ export default class AdminAddProduct extends React.Component {
   }
   render() {
     return (
-      <div class={cComponent.products} ng-app="app" ng-controller="AppCtrl">
+      <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
         <md-content layout-padding>
           <div className={cComponent.actionpane}>
             <Link to="/admin/products/add">
@@ -62,7 +62,7 @@ export default class AdminAddProduct extends React.Component {
                       });
                   };
                   return (
-                    <tr>
+                    <tr key={product.id}>
                       <td>{product.id}</td>
                       <td>
                         <span className={cComponent.name}>{product.name}</span>
@@ -71,14 +71,14 @@ export default class AdminAddProduct extends React.Component {
                       <td>{product.price}</td>
                       <td>{product.stock}</td>
                       <td>{product.img}</td>
-                      <span className={cComponent.botones}>
+                      <td className={cComponent.botones}>
                         <button onClick={editar} className="btn btn-primary">
                           Editar
                         </button>
                         <button onClick={borrar} className="btn btn-danger">
                           Eliminar
                         </button>
-                      </span>
+                      </td>
                     </tr>
                   );
                 })}

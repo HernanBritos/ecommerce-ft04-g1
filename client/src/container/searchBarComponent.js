@@ -26,17 +26,19 @@ class searchBarComponent extends React.Component {
       // Cuando el form se submitea llama a una funcion
       // que sera obtenida de this.props, le pasa el estado
       // y asi se comunica con el back
-      <form onSubmit={this.props} className={sBar.bar}>
-        <button className={sBar.boton} type="submit">
-          <img className={sBar.img} src={search} alt="searchBtn" />
-        </button>
-        <input
-          className={sBar.search}
-          type="text"
-          placeholder="Buscar producto..."
-          value={this.state.value}
-          onChange={this.handleInputChange}
-        ></input>
+      <form>
+        <div className={sBar.bar}>
+          <button className={sBar.boton} type="submit">
+            <img className={sBar.img} src={search} alt="searchBtn" />
+          </button>
+          <input
+            className={sBar.search}
+            type="text"
+            placeholder="Buscar producto..."
+            value={this.state.value}
+            onChange={this.handleInputChange}
+          ></input>
+        </div>
       </form>
     );
   }

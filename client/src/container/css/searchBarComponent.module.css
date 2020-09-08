@@ -3,26 +3,26 @@
   width: 340px;
   height: 59px;
   background: rgb(255, 237, 189);
-  display: flex;
   border-radius: 50px;
-  padding: 0px 0 5px 0;
+  display: inline-flexbox;
+  padding: 9px 0 0 9px;
 }
 /**Boton**/
 .img {
-  width: 40px;
-  height: 38px;
+  width: 42px;
+  height: 40px;
   cursor: pointer;
   border-radius: 50px;
   border-style: solid;
   border-width: 0.2px;
   border-color: rgb(160, 158, 158);
-  margin: 11.5px 10px 0 10px;
 }
 .boton {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
   background: transparent;
   border-style: none;
+  margin-right: 35px;
 }
 .img:hover {
   box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(201, 200, 199);
@@ -35,10 +35,8 @@
   border-radius: 15px;
   border-style: solid;
   border-color: rgb(160, 158, 158);
-  margin-top: 10.2px;
-  margin-left: 54px;
-  padding: 0 0 0px 10px;
   border-width: 0.1px;
+  padding-left: 5px;
 }
 .search:focus {
   box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(201, 200, 199);

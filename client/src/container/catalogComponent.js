@@ -14,13 +14,12 @@ class CatalogComponent extends React.Component {
     });
   }
   render() {
-    console.log(this.state.products);
     if (this.state.products.length > 0) {
       return (
         <div className={cComponent.catalog}>
           {this.state.products.map((product) => {
             return (
-              <div className={cComponent.pCard}>
+              <div key={product.id} className={cComponent.pCard}>
                 <div>
                   <ProductCard producto={product} />
                 </div>

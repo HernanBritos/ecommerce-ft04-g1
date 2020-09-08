@@ -7,12 +7,12 @@ class SideBarComponent extends React.Component {
     return (
       <div>
         <div className={sBar.auth}>
-          <a className={sBar.signIn} href="#">
+          <button className={sBar.signIn} href="#">
             Iniciar Sesion
-          </a>
-          <a className={sBar.signUp} href="#">
+          </button>
+          <button className={sBar.signUp} href="#">
             Registrarse
-          </a>
+          </button>
         </div>
         <button className={sBar.closeButton} onClick={this.props.onclose}>
           x

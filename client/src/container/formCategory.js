@@ -8,8 +8,6 @@ export default function FormCategory() {
     name: "",
   });
 
-  const [errors, setErrors] = React.useState({});
-
   const handleInputChange = function (e) {
     setInput({
       ...input,
@@ -52,7 +50,7 @@ export default function FormCategory() {
               value={input.name}
               type="text"
               onChange={handleInputChange}
-              class="form-control"
+              className="form-control"
               id="Name"
             />
           </div>
