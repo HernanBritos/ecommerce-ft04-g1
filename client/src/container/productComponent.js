@@ -2,7 +2,7 @@ import React from "react";
 import pComp from "./css/productComponent.module.css";
 // import { Link } from "react-router-dom";
 import axios from "axios";
-
+var placeholder = require('./img/Placeholder.png');
 class ProductComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -23,8 +23,17 @@ class ProductComponent extends React.Component {
       return (
         <div className={pComp.card}>
           <div className={pComp.image}>
-            <img className="imagen" src="" alt="productCardImage"></img>
-          </div>
+            {console.log(this.state.producto)}
+            {/* <img className="imagen" id='imagen' src='' alt="productCardImage"></img> */}
+            {this.props.img.includes("jpg") ? (
+              <img
+                src={require(`${"./img/" + this.props.img}`)}
+                alt="productCardImage"
+              ></img>
+            ) : (
+              <img src={require(`${placeholder}`)} alt="productCardImage"></img>
+            )}
+          </div> 
           <div className={pComp.productData}>
             <span className={pComp.name}>{this.state.producto.name}</span>
             <span className={pComp.description}>

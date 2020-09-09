@@ -59,7 +59,7 @@ export default function FormProduct() {
     axios.get("http://localhost:3001/categories/").then((response) => {
       setCategories(response.data);
     });
-  });
+  },categories);
 
   return (
     <div className={cComponent.back}>
@@ -82,7 +82,7 @@ export default function FormProduct() {
           </div>
           <div className="form-group">
             <label htmlFor="productname">Categoria: </label>
-              <fieldset aria-labelledby="lblDBXP">
+            <fieldset aria-labelledby="lblDBXP">
               <div id="choicelist">
                 {categories &&
                   categories.map((cat) => (
@@ -134,14 +134,6 @@ export default function FormProduct() {
               id="stock"
             />
           </div>
-          {/* <div className="form-group">
-          <label htmlFor="exampleFormControlFile1"></label>
-          <input
-            type="file"
-            className="form-control-file"
-            id="exampleFormControlFile1"
-          />
-        </div> */}
           <div className="form-group">
             <label htmlFor="img">Imagen: </label>
             <input

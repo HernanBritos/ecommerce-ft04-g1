@@ -72,9 +72,11 @@ export default class AdminAddProduct extends React.Component {
                       <td>{product.stock}</td>
                       <td>{product.img}</td>
                       <td className={cComponent.botones}>
+                        <Link to={`/admin/products/edit/${product.id}`}>
                         <button onClick={editar} className="btn btn-primary">
                           Editar
                         </button>
+                        </Link>
                         <button onClick={borrar} className="btn btn-danger">
                           Eliminar
                         </button>
