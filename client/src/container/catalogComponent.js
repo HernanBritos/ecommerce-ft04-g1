@@ -1,23 +1,19 @@
 import React from "react";
 import cComponent from "./css/catalogComponent.module.css";
 import ProductCard from "../components/productCard";
+import {useState, useEffect} from 'react';
 import axios from "axios";
 
-class CatalogComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = { products: [] };
-  }
-  componentDidMount() {
+function CatalogComponent (props) {
+  const [products, setProducts] = useState([]);
+  useEffect(()=> {
     axios.get("http://localhost:3001/products").then((data) => {
-      this.setState({ products: data.data });
+      setProducts( data.data );
     });
-  }
-  render() {
-    if (this.state.products.length > 0) {
+  },products) 
       return (
         <div className={cComponent.catalog}>
-          {this.state.products.map((product) => {
+          {products && products.map((product) => {
             return (
               <div key={product.id} className={cComponent.pCard}>
                 <div>
@@ -28,16 +24,5 @@ class CatalogComponent extends React.Component {
           })}
         </div>
       );
-    } else {
-      return (
-        <div className={cComponent.catalog}>
-          <div className={`alert alert-warning ${cComponent.alerta}`}>
-            Oops! Parece que no hay ningún producto, prueba creando uno.
-          </div>
-        </div>
-      );
-    }
-  }
 }
-
 export default CatalogComponent;

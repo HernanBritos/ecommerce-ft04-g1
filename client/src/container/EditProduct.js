@@ -7,14 +7,6 @@
     // Formulario del producto 
     
     export default function FormProduct(props) {
-    const [input, setInput] = useState({
-      name: "",
-      category: "",
-      description: "",
-      price: "",
-      stock: "",
-      img: "",
-    });
     console.log(props);
     // Estados locales 
 
@@ -23,34 +15,15 @@
     const [errors, setErrors] = useState({});
   
     // Eventos que se realizan
-
-    const handleInputChange = function (e) {
-      setInput({
-        ...input,
-        [e.target.name]: e.target.value,
-      });
-    };
   
     const handleProductInputChange = function (e) {
   
-        var Product = {};
+        var Product = e.target.value;
         setProduct({
           ...product,
-          [e.target.name]: e.target.value,
+          [e.target.name]: Product,
         });
       };
-    
-
-    const handleCategoryInputChange = function (e) {
-  
-      var categories = [];
-      categories.push(e.target.id)
-      setInput({
-        ...input,
-        nameCat: categories,
-      });
-      console.log(categories);
-    };
   
     const handleSubmit = function (e) {
       e.preventDefault();
@@ -104,15 +77,11 @@
             </div>
             <div className="form-group">
               <label htmlFor="productname">Categoria: </label>
-          <button id="selectedDBXP" aria-expanded="false" aria-labelledby="lblDBXP DBXPList" onclick="return DBXPclick();">
-            <span id="DBXPList"></span>
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              </button>
               <fieldset aria-labelledby="lblDBXP">
                 <div id="choicelist">
                 {categories && categories.map(cat => (
                   <div>
-                    <input name="DBXP" type="checkbox" id={cat.id} onChange={handleProductInputChange} />
+                    <input name='category' value={cat.name} type="radio" id={cat.id} onChange={handleProductInputChange} />
                     <label for={cat.id} aria-label="categories">{cat.name}</label>
                   </div>
                 ))}

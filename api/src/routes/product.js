@@ -211,7 +211,7 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
 
 Product.findAll();
 server.get("/search?query={valor}", (req, res) => {
-  const valor = req.query;
+  const valor = req.query.query;
 
   Product.findAll({
     where: Sequelize.and({ name: valor }, Sequelize.or({ description: valor })),
