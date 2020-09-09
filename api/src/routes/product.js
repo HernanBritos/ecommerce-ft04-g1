@@ -196,7 +196,7 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
   const nameCat = req.params.nombreCat;
 
   Product.findAll({
-    where: { name: nameCat },
+    where: { category: nameCat },
   })
     .then(function (products) {
       res.send(products);

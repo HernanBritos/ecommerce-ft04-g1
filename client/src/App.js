@@ -46,11 +46,11 @@ function App() {
             }}
           />
           <Route
-            path="/products/categoria/"
+            path="/products/categoria/:nombreCat"
             exact={false}
-            render={(c) =>  <ProductCategory />}
-            
-          />
+            render={(c) => { 
+           return <ProductCategory nombrecat={c.match.params.nombreCat} />}}
+         />
         </div>
       </main>
     </BrowserRouter>
