@@ -10,7 +10,10 @@ class ProductCard extends React.Component {
   }
   render() {
     return (
-      <Link to={"/product/" + this.props.producto.id}>
+      <Link to={{
+        pathname: "/product/" + this.props.producto.id,
+        state:{img: this.props.producto.img}
+        }}>
         <div className={pCard.card}>
           <div className={pCard.image}>
             {this.props.producto.img.includes("jpg") ? (
