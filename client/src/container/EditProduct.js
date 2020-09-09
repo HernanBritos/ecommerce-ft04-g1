@@ -1,7 +1,8 @@
  import React, { useState, useEffect } from "react";
  import cComponent from "./css/formproducto.module.css";
  import { Link } from "react-router-dom";
- import axios from "axios";
+ import axios from "axios"
+;
 
     // Formulario del producto 
     
@@ -14,7 +15,7 @@
       stock: "",
       img: "",
     });
-
+    console.log(props);
     // Estados locales 
 
     const [product, setProduct] = useState({});
@@ -54,13 +55,13 @@
     const handleSubmit = function (e) {
       e.preventDefault();
       axios
-        .post("http://localhost:3001/products", {
-          name: `${input.name}`,
-          description: `${input.description}`,
-          category: `${input.category}`,
-          price: `${input.price}`,
-          img: `${input.img}`,
-          stock: `${input.stock}`,
+        .put(`http://localhost:3001/products/${props.producto}`, {
+          name: `${product.name}`,
+          description: `${product.description}`,
+          category: `${product.category}`,
+          price: `${product.price}`,
+          img: `${product.img}`,
+          stock: `${product.stock}`,
         })
         .then((data) => {
           return data;
@@ -71,7 +72,7 @@
     
     // Peticion de producto y categoria 
     useEffect(() => {
-       axios.get("http://localhost:3001/products/" + props.producto). then((response) => {
+       axios.get("http://localhost:3001/products/" + props.producto).then((response) => {
            setProduct(response.data);
        })
        axios.get("http://localhost:3001/categories/").then((response) => {

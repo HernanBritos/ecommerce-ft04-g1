@@ -59,7 +59,7 @@ export default function FormProduct() {
     axios.get("http://localhost:3001/categories/").then((response) => {
       setCategories(response.data);
     });
-  });
+  },categories);
 
   return (
     <div className={cComponent.back}>
@@ -82,20 +82,6 @@ export default function FormProduct() {
           </div>
           <div className="form-group">
             <label htmlFor="productname">Categoria: </label>
-            {/* <input
-              name="category"
-              value={input.category}
-              type="text"
-              onChange={handleInputChange}
-              className="form-control"
-              id="ProductCategory"
-            /> */}
-            {/* 
-    constructor() {
-    super();
-    this.state = { categories: [] };
-       }
-        */}
             <fieldset aria-labelledby="lblDBXP">
               <div id="choicelist">
                 {categories &&
@@ -148,14 +134,6 @@ export default function FormProduct() {
               id="stock"
             />
           </div>
-          {/* <div className="form-group">
-          <label htmlFor="exampleFormControlFile1"></label>
-          <input
-            type="file"
-            className="form-control-file"
-            id="exampleFormControlFile1"
-          />
-        </div> */}
           <div className="form-group">
             <label htmlFor="img">Imagen: </label>
             <input

@@ -66,7 +66,7 @@ server.put("/:id", (req, res, next) => {
     },
     {
       where: {
-        idProduct: id,
+        id: id,
       },
       returning: true,
     }

@@ -7,6 +7,7 @@ import FormCategory from "./container/formCategory.js";
 import ProductComponent from "./container/productComponent";
 import HeaderInicio from "./components/headerInicio";
 import AdminPanel from "./container/adminPanel";
+import EditProduct from './container/EditProduct';
 import "./bootstrap.min.css";
 
 function App() {
@@ -31,7 +32,16 @@ function App() {
             path="/product/:id"
             exact={true}
             render={(p) => {
-              return <ProductComponent producto={p.match.params.id} />;
+              console.log(p);
+              return <ProductComponent img={p.location.state.img} producto={p.match.params.id} />;
+            }}
+          />
+          <Route
+            path='/admin/products/edit/:id'
+            exact={true}
+            render={(p) => {
+              console.log(p.match.params.id)
+              return <EditProduct producto={p.match.params.id} />
             }}
           />
         </div>
