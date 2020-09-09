@@ -9,6 +9,7 @@ import HeaderInicio from "./components/headerInicio";
 import AdminPanel from "./container/adminPanel";
 import EditProduct from './container/EditProduct';
 import "./bootstrap.min.css";
+import ProductCategory from "./container/productCategory";
 
 function App() {
   return (
@@ -44,6 +45,12 @@ function App() {
               return <EditProduct producto={p.match.params.id} />
             }}
           />
+          <Route
+            path="/products/categoria/:nombreCat"
+            exact={false}
+            render={(c) => { 
+           return <ProductCategory nombrecat={c.match.params.nombreCat} />}}
+         />
         </div>
       </main>
     </BrowserRouter>

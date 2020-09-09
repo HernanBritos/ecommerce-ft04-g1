@@ -2,6 +2,7 @@ import React from "react";
 import sBar from "./css/sideBarComponent.module.css";
 import { Link } from "react-router-dom"; 
 import axios from 'axios';
+import ProductCategory from "./productCategory"
 
 class SideBarComponent extends React.Component {
 
@@ -15,7 +16,7 @@ constructor() {
 componentDidMount() {
   axios.get("http://localhost:3001/categories").then((data) => {
     this.setState({ categories: data.data });
-    console.log(this.state.categories)
+    
   });
 }
 
@@ -24,17 +25,6 @@ handleCategoryInputChange (e) {
   categories.push(e.target.id);
   
 };
-
-handleSubmit (e) {
-  e.preventDefault();
-  axios
-    .get(`http://localhost:3001/products/category/${this.cat.name}`)
-     .then((data) => {
-      return data;
-    });
-  return (window.location = "http://localhost:3000/admin");
-};
-
 
   render() {
     return (
@@ -56,33 +46,53 @@ handleSubmit (e) {
             <button className={`btn btn-secondary`}>Admin</button>
           </div>
         </Link>
+        <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Filtrar por Categoria <span class="caret"></span></button>
+                <ul class="dropdown-menu scrollable-menu" role="menu">
+                {this.state.categories &&
+                  this.state.categories.map((cat) => (
+                    <div>
+                       <label htmlFor={cat.id} aria-label="categories">
+                      <Link to={"/products/categoria/" + cat.name} > 
+                        {cat.name}
+                        </Link>
+                      </label>
+                    </div>
+                    ))}
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</div>
         <div className={sBar.categories}>
         <label htmlFor="productname">Elegir x Categorias:  </label>
-        
         <fieldset aria-labelledby="lblDBXP">
               <div id="choicelist">
                 {this.state.categories &&
                   this.state.categories.map((cat) => (
-                    <div key={cat.id}>
-                      <input
-                        name="DBXP"
+                   <div key={cat.id}>
+                     <input 
+                        name="name" 
                         type="radio"
-                        id= {cat.id}
+                        id= {cat.id}  	
                         onChange={this.handleCategoryInputChange}
                       />
                       <label htmlFor={cat.id} aria-label="categories">
+                      <Link to={"/products/categoria/" + cat.name} > 
                         {cat.name}
+                        </Link>
                       </label>
-                    </div>
+                     </div>
                   ))}
-              </div>
-              <button onSubmit={this.handleSubmit}> Filtrar por Categorias
-             </button>
-            </fieldset>
-           
-            
-        </div>
-      </div>
+                </div>  
+             </fieldset>
+          </div> 
+       </div> 
     );
   }
 }
