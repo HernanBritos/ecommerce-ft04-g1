@@ -8,6 +8,7 @@ import ProductComponent from "./container/productComponent";
 import HeaderInicio from "./components/headerInicio";
 import AdminPanel from "./container/adminPanel";
 import "./bootstrap.min.css";
+import ProductCategory from "./container/productCategory";
 
 function App() {
   return (
@@ -33,6 +34,12 @@ function App() {
             render={(p) => {
               return <ProductComponent producto={p.match.params.id} />;
             }}
+          />
+          <Route
+            path="/products/categoria/"
+            exact={false}
+            render={(c) =>  <ProductCategory />}
+            
           />
         </div>
       </main>
