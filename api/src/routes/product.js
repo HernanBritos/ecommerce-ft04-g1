@@ -22,10 +22,11 @@ server.get("/", (req, res, next) => {
 // retorna la información del producto.
 
 server.post("/", (req, res, next) => {
-  const { idCategory, name, description, stock, price, img } = req.body;
+  const { category, name, description, stock, price, img } = req.body;
 
   Product.create({
     name: name,
+    category : category,
     description: description,
     stock: stock,
     price: price,
@@ -33,7 +34,7 @@ server.post("/", (req, res, next) => {
   })
     .then((newProduct) => {
       //console.log(newProduct.__proto__)
-      Categories.findById(idCategory).then((category) => {
+      Categories.findById(category).then((category) => {
         newProduct.addCategory(category);
       });
       return newProduct;

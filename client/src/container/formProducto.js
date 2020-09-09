@@ -29,11 +29,11 @@ export default function FormProduct() {
   };
 
   const handleCategoryInputChange = function (e) {
-    var categories = [];
-    categories.push(e.target.id);
+    var categories = "";
+    categories = e.target.name;
     setInput({
       ...input,
-      nameCat: categories,
+      category: categories,
     });
     console.log(categories);
   };
@@ -88,7 +88,7 @@ export default function FormProduct() {
                   categories.map((cat) => (
                     <div key={cat.id}>
                       <input
-                        name="DBXP"
+                        name={cat.name}
                         type="checkbox"
                         id={cat.id}
                         onChange={handleCategoryInputChange}

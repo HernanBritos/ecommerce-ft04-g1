@@ -49,11 +49,11 @@ const { User } = sequelize.models;
 
 
 Product.hasMany(Review, { as: 'review' });
-Product.belongsToMany(Categories, { through: 'Productxcategories' });
+Product.belongsTo(Categories, { as: 'categories' });
 Product.belongsTo(OrderProduct, { as: 'OrderProduct' });
 Review.belongsTo(Product, { as: 'product' });
 Review.belongsTo(User, { as: 'user' });
-Categories.belongsToMany(Product, { through: 'Productxcategories' });
+Categories.hasMany(Product, { as: 'product' });
 User.hasMany(Review, { as: 'review' });
 User.hasMany(ShoppingCart, { as: 'ShoppingCart' });
 ShoppingCart.belongsTo(User, { as: 'user' });
