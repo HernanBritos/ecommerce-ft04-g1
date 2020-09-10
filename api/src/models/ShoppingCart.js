@@ -4,11 +4,6 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('ShoppingCart', {
-    idKey: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
-    },
     idUser: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -22,11 +17,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM('confimardo', 'pendiente'),
+      type: DataTypes.ENUM('confirmado', 'pendiente'),
       allowNull: false,
     },
     address: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull:false,
     },
     description: {
