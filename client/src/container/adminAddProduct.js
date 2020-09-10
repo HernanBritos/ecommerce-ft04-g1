@@ -1,19 +1,18 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import cComponent from "./css/adminAddProduct.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default class AdminAddProduct extends React.Component {
-  constructor() {
-    super();
-    this.state = { products: [] };
-  }
-  componentDidMount() {
+export default function AdminAddProduct () {
+
+     const [products, setProducts] = useState([]); 
+
+  useEffect(() => {
     axios.get("http://localhost:3001/products").then((data) => {
-      this.setState({ products: data.data });
+      setProducts( data.data );
     });
-  }
-  render() {
+  }, products)
+
     return (
       <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
         <md-content layout-padding>
@@ -40,7 +39,7 @@ export default class AdminAddProduct extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.products.map((product) => {
+                {products.map((product) => {
                   var pId = product.id;
                   const filter = (el) => {
                     return el.id !== pId;
@@ -50,9 +49,7 @@ export default class AdminAddProduct extends React.Component {
                   };
                   const borrar = async () => {
                     console.log(pId);
-                    this.setState({
-                      products: this.state.products.filter(filter),
-                    });
+                    setProducts(products.filter(filter));
                     await axios
                       .delete(`http://localhost:3001/products/${pId}`, {
                         params: pId,
@@ -90,5 +87,4 @@ export default class AdminAddProduct extends React.Component {
         </md-content>
       </div>
     );
-  }
 }

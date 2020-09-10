@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import sBar from "./css/searchBarComponent.module.css";
 import { Link } from "react-router-dom";
 import axios from 'axios';
@@ -7,6 +7,8 @@ import cComponent from "./css/catalogComponent.module.css";
 var search = require("../components/img/lupa.jpg");
 
 
+
+    
 class searchBarComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -34,6 +36,7 @@ componentDidUpdate = () => {
 }
 cambioFlag = () => {
   this.setState({flag: true });
+
 }
 
  render() {

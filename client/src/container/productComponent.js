@@ -1,33 +1,25 @@
 import React from "react";
 import pComp from "./css/productComponent.module.css";
 // import { Link } from "react-router-dom";
-import axios from "axios";
 var placeholder = require('./img/Placeholder.png');
-class ProductComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-    this.state = { producto: {} };
-  }
 
-  componentDidMount() {
-    axios
-      .get(`http://localhost:3001/products/${this.props.producto}`)
-      .then((data) => {
-        this.setState({ producto: data.data });
-      });
-  }
+function  ProductComponent(props) {
+  
+  // useEffect(() => {
+  //   axios.get("http://localhost:3001/products").then((data) => {
+  //     setProducts( data.data );
+  //   });
+  // }, products)
 
-  render() {
-    if (this.props.producto) {
+    if (props.producto) {
       return (
         <div className={pComp.card}>
           <div className={pComp.image}>
-            {console.log(this.state.producto)}
+            {console.log(props.producto)}
             {/* <img className="imagen" id='imagen' src='' alt="productCardImage"></img> */}
-            {this.props.img.includes("jpg") ? (
+            {props.producto.img.includes("jpg") ? (
               <img
-                src={require(`${"./img/" + this.props.img}`)}
+                src={require(`${"./img/" + props.producto.img}`)}
                 alt="productCardImage"
               ></img>
             ) : (
@@ -35,13 +27,13 @@ class ProductComponent extends React.Component {
             )}
           </div> 
           <div className={pComp.productData}>
-            <span className={pComp.name}>{this.state.producto.name}</span>
+            <span className={pComp.name}>{props.producto.name}</span>
             <span className={pComp.description}>
-              {this.state.producto.description}
+              {props.producto.description}
             </span>
-            <span className={pComp.price}> $ {this.state.producto.price}</span>
+            <span className={pComp.price}> $ {props.producto.price}</span>
             <span className={pComp.stock}>
-              {this.state.producto.stock}
+              {props.producto.stock}
               <span className={pComp.stockIcon} role="img">
                 &#9921;
               </span>
@@ -52,6 +44,5 @@ class ProductComponent extends React.Component {
     } else {
       return <div>Product Not Found</div>;
     }
-  }
 }
 export default ProductComponent;
