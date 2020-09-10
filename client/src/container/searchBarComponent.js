@@ -1,27 +1,23 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import sBar from "./css/searchBarComponent.module.css";
 var search = require("../components/img/lupa.jpg");
 // Importo la imagen del boton que acciona el form o searchbar
 
-class searchBarComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: "",
+function searchBarComponent () {
+    const [input, setInput] = useState({
+      value: '',
+    });
       // Creamos el estado del componente para almacenar
       // el valor del campo de busqueda
-    };
-  }
 
-  handleInputChange = async (e) => {
+  const handleInputChange = async (e) => {
     e.persist();
-    await this.setState({ value: e.target.value });
+    await setInput({value: e.target.value});
     // Funcion que maneja el estado del input
     // a medida que se va modificando, pasandolo
     // al estado general del componente
   };
 
-  render() {
     return (
       // Cuando el form se submitea llama a una funcion
       // que sera obtenida de this.props, le pasa el estado
@@ -35,13 +31,12 @@ class searchBarComponent extends React.Component {
             className={sBar.search}
             type="text"
             placeholder="Buscar producto..."
-            value={this.state.value}
-            onChange={this.handleInputChange}
+            value={input.value}
+            onChange={handleInputChange}
           ></input>
         </div>
       </form>
     );
-  }
 }
 
 export default searchBarComponent;

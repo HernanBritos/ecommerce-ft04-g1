@@ -34,7 +34,7 @@ function App() {
             exact={true}
             render={(p) => {
               console.log(p);
-              return <ProductComponent img={p.location.state.img} producto={p.match.params.id} />;
+              return <ProductComponent producto={p.location.state} />;
             }}
           />
           <Route

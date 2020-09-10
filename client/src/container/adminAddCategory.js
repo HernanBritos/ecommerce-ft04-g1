@@ -1,19 +1,19 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import cComponent from "./css/adminAddCategory.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default class AdminAddCategory extends React.Component {
-  constructor() {
-    super();
-    this.state = { categories: [] };
-  }
-  componentDidMount() {
+export default function AdminAddCategory() {
+  
+    
+  const [category,setCategory]= useState([])
+
+  useEffect(() => {
     axios.get("http://localhost:3001/categories").then((data) => {
-      this.setState({ categories: data.data });
+      setCategory(data.data);
     });
-  }
-  render() {
+  },category);
+  
     return (
       <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
         <md-content layout-padding>
@@ -38,7 +38,7 @@ export default class AdminAddCategory extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.categories.map((category) => {
+                {category.map((category) => {
                   var cId = category.id;
                   const filter = (el) => {
                     return el.id !== cId;
@@ -48,9 +48,7 @@ export default class AdminAddCategory extends React.Component {
                   };
                   const borrar = async () => {
                     console.log(cId);
-                    this.setState({
-                      categories: this.state.categories.filter(filter),
-                    });
+                    setCategory(category.filter(filter));
                     await axios
                       .delete(`http://localhost:3001/categories/${cId}`, {
                         params: cId,
@@ -89,5 +87,4 @@ export default class AdminAddCategory extends React.Component {
         </md-content>
       </div>
     );
-  }
 }
