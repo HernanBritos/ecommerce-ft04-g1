@@ -1,6 +1,7 @@
 const server = require("express").Router();
 const { Product } = require("../db.js");
 const { Categories } = require("../db.js");
+const { Op } = require("sequelize");
 
 //--------------------------------------------------------------------------//
 // GET Muestra todos los productos
@@ -209,13 +210,18 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
 // GET /search?query={valor}
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
 
-Product.findAll();
-server.get("/search?query={valor}", (req, res) => {
+
+server.get("/search", (req, res) => {
   const valor = req.query.query;
 
   Product.findAll({
-    where: Sequelize.and({ name: valor }, Sequelize.or({ description: valor })),
-  })
+    where: {
+        [Op.or]: [
+            { name: { [Op.substring]:  valor } },
+            { description: { [Op.substring]: valor } },
+        ],
+    }
+})
     .then((products) => {
       res.send(products);
     })
