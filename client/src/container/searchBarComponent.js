@@ -1,42 +1,71 @@
 import React, {useState, useEffect} from "react";
 import sBar from "./css/searchBarComponent.module.css";
+import { Link } from "react-router-dom";
+import axios from 'axios';
+import ProductCard from "../components/productCard";
+import cComponent from "./css/catalogComponent.module.css";
 var search = require("../components/img/lupa.jpg");
-// Importo la imagen del boton que acciona el form o searchbar
 
-function searchBarComponent () {
-    const [input, setInput] = useState({
-      value: '',
-    });
-      // Creamos el estado del componente para almacenar
-      // el valor del campo de busqueda
 
-  const handleInputChange = async (e) => {
-    e.persist();
-    await setInput({value: e.target.value});
-    // Funcion que maneja el estado del input
-    // a medida que se va modificando, pasandolo
-    // al estado general del componente
+
+    
+class searchBarComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: [],
+      search: "",
+      flag: true
+    };
+  }
+
+handleInputChange = (e) => {
+  
+  this.setState({ search: e.target.value });
+  console.log(this.state.search) 
   };
 
-    return (
-      // Cuando el form se submitea llama a una funcion
-      // que sera obtenida de this.props, le pasa el estado
-      // y asi se comunica con el back
-      <form>
-        <div className={sBar.bar}>
-          <button className={sBar.boton} type="submit">
-            <img className={sBar.img} src={search} alt="searchBtn" />
-          </button>
-          <input
-            className={sBar.search}
-            type="text"
-            placeholder="Buscar producto..."
-            value={input.value}
-            onChange={handleInputChange}
-          ></input>
-        </div>
-      </form>
-    );
+componentDidUpdate = () => {
+  if(this.state.flag){ 
+    axios.get(`http://localhost:3001/products/search?query=${this.state.search}`)
+    .then((data) => {
+    this.setState({ value: data.data } );
+    this.setState({flag: false});
+    });
+  } 
+}
+cambioFlag = () => {
+  this.setState({flag: true });
+
 }
 
-export default searchBarComponent;
+ render() {
+    return (
+      <div>
+    <form >
+    <div className={sBar.bar}>
+    <Link to={{
+      pathname:"/products/search",
+      state: this.state.value
+    }}>
+    <button className={sBar.boton} type="submit" onClick={this.cambioFlag} >
+      <img className={sBar.img} src={search} alt="searchBtn" />
+     </button>
+     </Link>
+    <input
+    className={sBar.search}
+    type="text"
+    placeholder="Buscar producto..."
+    value={this.state.search}
+    onChange= {(e) => this.handleInputChange(e)}
+    ></input>
+    </div>
+    </form>
+  </div>
+    );
+    
+    }
+   
+    }
+    
+    export default searchBarComponent;

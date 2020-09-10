@@ -10,15 +10,20 @@ import AdminPanel from "./container/adminPanel";
 import EditProduct from './container/EditProduct';
 import "./bootstrap.min.css";
 import ProductCategory from "./container/productCategory";
+import SearchComponent from "./container/SearchComponent";
 
 function App() {
   return (
     <BrowserRouter>
-      <Route path="/" exact={true} render={() => <HeaderInicio />} />
+      <Route path="/" render={() => <HeaderInicio />} />
       <main className="main">
         <div className="content">
           <Route path="/" exact={true} render={() => <CatalogComponent />} />
           <Route path="/admin" exact={true} render={() => <AdminPanel />} />
+          <Route path="/products/search" exact={true} render={(p) => 
+          {console.log(p);
+            return <SearchComponent 
+          producto={p.location.state} />}} />
           <Route
             path="/admin/products/add"
             exact={true}
