@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import cComponent from "./css/formproducto.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import FileUpload from "../components/utils/FileUpload";
 
 export default function FormProduct() {
   const [input, setInput] = useState({
@@ -59,7 +60,11 @@ export default function FormProduct() {
     axios.get("http://localhost:3001/categories/").then((response) => {
       setCategories(response.data);
     });
-  },categories);
+  }, []);
+
+  const UpdateImages = (newImages) => {
+    setInput({ img: newImages });
+  };
 
   return (
     <div className={cComponent.back}>
@@ -67,7 +72,12 @@ export default function FormProduct() {
         <button className="btn btn-primary">Volver al panel de admin</button>
       </Link>
       <form className={cComponent.form} onSubmit={handleSubmit}>
-        <h1 className={`my-3 ${cComponent.tituloForm}`}>Añadir Producto... </h1>
+        <div className={cComponent.upload}>
+          <h1 className={`my-3 ${cComponent.tituloForm}`}>
+            Añadir Producto...{" "}
+          </h1>
+          <FileUpload refreshFunction={UpdateImages} />
+        </div>
         <div className={cComponent.Fcontent}>
           <div className="form-group">
             <label htmlFor="productname">Nombre de producto: </label>
@@ -89,7 +99,7 @@ export default function FormProduct() {
                     <div key={cat.id}>
                       <input
                         name={cat.name}
-                        type="checkbox"
+                        type="radio"
                         id={cat.id}
                         onChange={handleCategoryInputChange}
                       />
@@ -132,17 +142,6 @@ export default function FormProduct() {
               onChange={handleInputChange}
               className="form-control"
               id="stock"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="img">Imagen: </label>
-            <input
-              name="img"
-              value={input.img}
-              type="text"
-              onChange={handleInputChange}
-              className="form-control"
-              id="img"
             />
           </div>
           <button type="submit" className="btn-success">

@@ -10,7 +10,7 @@ function CatalogComponent(props) {
     axios.get("http://localhost:3001/products").then((data) => {
       setProducts(data.data);
     });
-  }, products);
+  }, []);
   return (
     <div className={cComponent.catalog}>
       {products.length !== 0 ? (

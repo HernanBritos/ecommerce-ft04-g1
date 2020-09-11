@@ -12,9 +12,8 @@ function ProductCategory(props) {
       .get(`http://localhost:3001/products/categoria/${props.nombrecat}`)
       .then((data) => {
         setProducts(data.data);
-        console.log(props.nombrecat);
       });
-  }, products);
+  }, [props.nombrecat]);
 
   return (
     <div>
