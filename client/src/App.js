@@ -7,7 +7,7 @@ import FormCategory from "./container/formCategory.js";
 import ProductComponent from "./container/productComponent";
 import HeaderInicio from "./components/headerInicio";
 import AdminPanel from "./container/adminPanel";
-import EditProduct from './container/EditProduct';
+import EditProduct from "./container/EditProduct";
 import "./bootstrap.min.css";
 import ProductCategory from "./container/productCategory";
 import SearchComponent from "./container/SearchComponent";
@@ -15,15 +15,18 @@ import SearchComponent from "./container/SearchComponent";
 function App() {
   return (
     <BrowserRouter>
-      <Route path="/" render={() => <HeaderInicio />} />
+      <Route path="/" exact={true} render={() => <HeaderInicio />} />
       <main className="main">
         <div className="content">
           <Route path="/" exact={true} render={() => <CatalogComponent />} />
           <Route path="/admin" exact={true} render={() => <AdminPanel />} />
-          <Route path="/products/search" exact={true} render={(p) => 
-          {console.log(p);
-            return <SearchComponent 
-          producto={p.location.state} />}} />
+          <Route
+            path="/products/search"
+            exact={true}
+            render={(p) => {
+              return <SearchComponent producto={p.location.state} />;
+            }}
+          />
           <Route
             path="/admin/products/add"
             exact={true}
@@ -38,24 +41,23 @@ function App() {
             path="/product/:id"
             exact={true}
             render={(p) => {
-              console.log(p);
               return <ProductComponent producto={p.location.state} />;
             }}
           />
           <Route
-            path='/admin/products/edit/:id'
+            path="/admin/products/edit/:id"
             exact={true}
             render={(p) => {
-              console.log(p.match.params.id)
-              return <EditProduct producto={p.match.params.id} />
+              return <EditProduct producto={p.match.params.id} />;
             }}
           />
           <Route
             path="/products/categoria/:nombreCat"
             exact={false}
-            render={(c) => { 
-           return <ProductCategory nombrecat={c.match.params.nombreCat} />}}
-         />
+            render={(c) => {
+              return <ProductCategory nombrecat={c.match.params.nombreCat} />;
+            }}
+          />
         </div>
       </main>
     </BrowserRouter>

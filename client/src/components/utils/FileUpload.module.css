@@ -1,0 +1,8 @@
+.fullarea {
+  width: 150px;
+  height: 150px;
+  background: white;
+  border-radius: 10px;
+  margin-left: 30px;
+  cursor: pointer;
+}
