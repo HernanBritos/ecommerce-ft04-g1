@@ -2,6 +2,7 @@ const server = require("express").Router();
 const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const {ShoppingCart} = require ('../db.js');
+const OrderProduct = require("../models/OrderProduct.js");
 
 // GET /users
 server.get("/", (req, res, next) => {
@@ -85,7 +86,7 @@ ShoppingCart.findOne({
 }).then((response)=> {
   res.status(200).json(response);
 }).catch((err) =>
-res.status(400).send(err, " WARNING! -> You can´t modificate the UserCart")
+res.status(400).send(err, " WARNING! -> UserCart does not exist")
 );
 });
 
@@ -157,5 +158,17 @@ server.delete("/:id/cart", (req, res, next) => {
   });
 });
 
+// GET /users/:id/orders
+
+server.get("/:id/orders", (req, res) => {
+  const id = req.params.id;
+  ShoppingCart.findOne({
+    where: {idUser: id},
+  }).then((response)=> {
+    res.status(200).json(response);
+  }).catch((err) =>
+  res.status(400).send(err, " WARNING! -> Order does not exist")
+  );
+  });
 
 module.exports = server;

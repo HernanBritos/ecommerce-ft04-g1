@@ -4,11 +4,6 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('OrderProduct', {
-    idOrder: {
-      type: DataTypes.INTEGER,
-      primaryKey:true,
-      allowNull: false,
-    },
     idProduct: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -20,6 +15,11 @@ module.exports = (sequelize) => {
     ammount: {
       type: DataTypes.REAL,
       allowNull: false,
-    }
+    },
+    status: {
+      type: DataTypes.ENUM('entregado', 'pendiente'),
+      allowNull: false,
+    },
+
   });
 };
