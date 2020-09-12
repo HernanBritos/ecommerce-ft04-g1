@@ -68,14 +68,10 @@ function App() {
           <Route
             path="/users/edit/:id"
             exact={true}
-            render={() => {
-              return <EditUserForm />}}
+            render={(u) => {
+              return <EditUserForm usuario={u.match.params.id} />}}
             />
-             render={(c) => {
-             return <ProductCategory nombrecat={c.match.params.nombreCat} />;
-            }}
-            />
-        </div>
+          </div>
       </main>
     </BrowserRouter>
   );
