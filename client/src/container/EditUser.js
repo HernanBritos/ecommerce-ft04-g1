@@ -4,7 +4,7 @@ import cComponent from "./css/formproducto.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function EditUserForm() {
+export default function EditUserForm(props) {
   const [user, setUser] = useState({
     name: "",
     lastname: "",
@@ -12,8 +12,9 @@ export default function EditUserForm() {
     password: "",
     phone: "",
     address: "",
+   
   });
-
+  console.log(props)
   const handleInputChange = function (e) {
     setUser({
       ...user,
@@ -30,7 +31,7 @@ export default function EditUserForm() {
   const handleSubmit = function (e) {
     e.preventDefault();
     axios
-      .put("http://localhost:3001/users/:id", {
+      .put(`http://localhost:3001/users/${props.usuario}`, {
         name: `${user.name}`,
         lastname: `${user.lastname}`,
         email: `${user.email}`,
@@ -41,11 +42,11 @@ export default function EditUserForm() {
       .then((data) => {
         return data;
       });
-    return (window.location = "http://localhost:3000/user");
+    return (window.location = "http://localhost:3000");
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3001/users/:id").then((response) => {
+    axios.get(`http://localhost:3001/users/${props.usuario}`).then((response) => {
       setUser(response.data);
     });
   }, []);
@@ -77,7 +78,7 @@ export default function EditUserForm() {
           <div className="form-group">
             <label htmlFor="email"> email: </label>
             <input
-              name="description"
+              name="email"
               value={user.email}
               onChange={handleInputChange}
             />

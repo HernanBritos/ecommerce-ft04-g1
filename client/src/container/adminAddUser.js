@@ -66,7 +66,7 @@ export default function AdminAddUser () {
                       <td>{user.phone}</td>
                       <td>{user.address}</td>
                       <td className={cComponent.botones}>
-                        <Link to={`/admin/users/edit/${user.id}`}>
+                        <Link to={`/users/edit/${user.id}`}>
                         <button onClick={editar} className="btn btn-primary">
                           Editar
                         </button>
