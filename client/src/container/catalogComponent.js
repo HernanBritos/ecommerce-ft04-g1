@@ -1,19 +1,22 @@
 import React from "react";
 import cComponent from "./css/catalogComponent.module.css";
 import ProductCard from "../components/productCard";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { listProduct } from "../Redux/Products/Actions/productActions";
+import {useSelector, useDispatch} from 'react-redux';
+
 
 function CatalogComponent(props) {
-  const [products, setProducts] = useState([]);
+  const productList = useSelector(state => state.productList);
+  const {products, loading, error} = productList;
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    axios.get("http://localhost:3001/products").then((data) => {
-      setProducts(data.data);
-    });
-  }, []);
+   dispatch(listProduct());
+  },[]);
   return (
     <div className={cComponent.catalog}>
-      {products.length !== 0 ? (
+       {products? (
         products.map((product) => {
           return (
             <div key={product.id} className={cComponent.pCard}>

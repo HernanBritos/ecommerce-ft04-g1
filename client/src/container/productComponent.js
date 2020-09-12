@@ -1,46 +1,53 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { detailsProduct } from "../Redux/Products/Actions/productActions";
 import pComp from "./css/productComponent.module.css";
+import {useSelector, useDispatch} from 'react-redux';
+
+
 // import { Link } from "react-router-dom";
 var placeholder = "/imagenes/Placeholder.png";
 
 function ProductComponent(props) {
-  // useEffect(() => {
-  //   axios.get("http://localhost:3001/products").then((data) => {
-  //     setProducts( data.data );
-  //   });
-  // }, products)
+  const productDetails = useSelector(state => state.productDetails);
+  const {product, loading, error} = productDetails;
+  const dispatch = useDispatch();
 
-  if (props.producto) {
+  useEffect(() => {
+    dispatch(detailsProduct(props.producto.match.params.id));
+    },[]);
+
+
     return (
       <div className={pComp.card}>
+        {
+        loading? (<div>Loading...</div>):
+        error? (<div>{error}</div>): 
+        (<div>
         <div className={pComp.image}>
-          {props.producto.img.includes("jpg") ? (
             <img
-              src={`/imagenes/${props.producto.img}`}
+              src={`/imagenes/${product.img}`}
               alt="productCardImage"
             ></img>
-          ) : (
-            <img src={`${placeholder}`} alt="productCardImage"></img>
-          )}
-        </div>
+            </div>
         <div className={pComp.productData}>
-          <span className={pComp.name}>{props.producto.name}</span>
-          <span className={pComp.category}>{props.producto.category}</span>
+          <span className={pComp.name}>{product.name}</span>
+          <span className={pComp.category}>{product.category}</span>
           <span className={pComp.description}>
-            {props.producto.description}
+            {product.description}
           </span>
-          <span className={pComp.price}> $ {props.producto.price}</span>
+          <span className={pComp.price}> $ {product.price}</span>
           <span className={pComp.stock}>
-            {props.producto.stock}
+            {product.stock}
             <span className={pComp.stockIcon} role="img">
               &#9921;
             </span>
           </span>
         </div>
-      </div>
+        </div>
+        )
+        }
+        </div>       
     );
-  } else {
-    return <div>Product Not Found</div>;
-  }
-}
+  } 
+
 export default ProductComponent;

@@ -41,7 +41,7 @@ function App() {
             path="/product/:id"
             exact={true}
             render={(p) => {
-              return <ProductComponent producto={p.location.state} />;
+              return <ProductComponent producto={p} />;
             }}
           />
           <Route
