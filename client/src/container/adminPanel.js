@@ -1,6 +1,7 @@
 import React from "react";
 import AddProduct from "./adminAddProduct";
 import AddCategory from "./adminAddCategory";
+import AddUser from "./adminAddUser";
 import aPanel from "./css/adminPanel.module.css";
 import { Link } from "react-router-dom";
 
@@ -17,6 +18,7 @@ class AdminPanel extends React.Component {
           <h2 className={aPanel.centrar}>Admin Panel</h2>
           <AddCategory />
           <AddProduct />
+          <AddUser/>
         </div>
       </div>
     );

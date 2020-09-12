@@ -11,6 +11,8 @@ import EditProduct from './container/EditProduct';
 import "./bootstrap.min.css";
 import ProductCategory from "./container/productCategory";
 import SearchComponent from "./container/SearchComponent";
+import FormUser from "./container/addUser";
+import EditUserForm from "./container/EditUser";
 
 function App() {
   return (
@@ -56,6 +58,18 @@ function App() {
             render={(c) => { 
            return <ProductCategory nombrecat={c.match.params.nombreCat} />}}
          />
+         <Route
+          path= "/users/signup"
+          exact={true}
+          render={() => { 
+            return <FormUser />}}
+           />
+          <Route
+            path="/users/edit/:id"
+            exact={true}
+            render={() => {
+              return <EditUserForm />}}
+            />
         </div>
       </main>
     </BrowserRouter>
