@@ -1,7 +1,7 @@
 import React from "react";
 import pCard from "./css/productCard.module.css";
 import { Link } from "react-router-dom";
-var placeholder = "./img/Placeholder.png";
+var placeholder = "/imagenes/Placeholder.png";
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -10,19 +10,21 @@ class ProductCard extends React.Component {
   }
   render() {
     return (
-      <Link to={{
-        pathname: "/product/" + this.props.producto.id,
-        state:{img: this.props.producto.img}
-        }}>
+      <Link
+        to={{
+          pathname: "/product/" + this.props.producto.id,
+          state: this.props.producto,
+        }}
+      >
         <div className={pCard.card}>
           <div className={pCard.image}>
             {this.props.producto.img.includes("jpg") ? (
               <img
-                src={require(`${"./img/" + this.props.producto.img}`)}
+                src={`/imagenes/${this.props.producto.img}`}
                 alt="productCardImage"
               ></img>
             ) : (
-              <img src={require(`${placeholder}`)} alt="productCardImage"></img>
+              <img src={`${placeholder}`} alt="productCardImage"></img>
             )}
           </div>
           <div className={pCard.productData}>
@@ -32,10 +34,7 @@ class ProductCard extends React.Component {
             </span>
             <span className={pCard.price}> $ {this.props.producto.price}</span>
             <span className={pCard.carrito}>
-              <img
-                alt="carrito"
-                src={require("./img/carrito-de-compras.png")}
-              ></img>
+              <img alt="carrito" src="/imagenes/carrito-de-compras.png"></img>
             </span>
           </div>
         </div>

@@ -36,7 +36,8 @@
   border-style: solid;
   border-color: rgb(160, 158, 158);
   border-width: 0.1px;
-  padding-left: 5px;
+  padding-left: 10px;
+  margin-left: 10px;
 }
 .search:focus {
   box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(201, 200, 199);

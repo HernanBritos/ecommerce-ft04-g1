@@ -49,3 +49,27 @@
   display: flex;
   justify-content: center;
 }
+.category {
+  border-style: none;
+  background: rgb(240, 159, 66);
+  width: 90px;
+  height: 25px;
+  text-align: center;
+  display: flex;
+  margin: 10px;
+  border-radius: 5px;
+  font-weight: 300;
+}
+.categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 10px;
+}
+.filtro {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  background: white;
+}
