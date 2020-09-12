@@ -1,5 +1,5 @@
 import React from 'react';
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import cComponent from "./css/formproducto.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -48,7 +48,7 @@ export default function EditUserForm() {
     axios.get("http://localhost:3001/users/:id").then((response) => {
       setUser(response.data);
     });
-  },[]);
+  }, []);
 
   return (
     <div className={cComponent.back}>
@@ -59,7 +59,7 @@ export default function EditUserForm() {
         <h1 className={`my-3 ${cComponent.tituloForm}`}> Editar informacion </h1>
         <div className={cComponent.Fcontent}>
           <div className="form-group">
-            <label htmlFor="productname"> Nombre </label>
+            <label htmlFor="name"> Nombre </label>
             <input
               name="name"
               value={user.name}
@@ -68,7 +68,7 @@ export default function EditUserForm() {
           </div>
           <div className="form-group">
             <label htmlFor="lastname"> Apellido: </label>
-            <input 
+            <input
               name="lastname"
               value={user.lastname}
               onChange={handleInputChange}
@@ -109,7 +109,7 @@ export default function EditUserForm() {
             />
           </div>
           <button type="submit" className="btn-success">
-             Guardar cambios
+            Guardar cambios
           </button>
         </div>
       </form>
