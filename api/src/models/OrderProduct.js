@@ -4,6 +4,10 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('OrderProduct', {
+    idShoppingcart: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     idProduct: {
       type: DataTypes.INTEGER,
       allowNull: false,
