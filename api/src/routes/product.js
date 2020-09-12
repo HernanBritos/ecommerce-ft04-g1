@@ -241,7 +241,7 @@ server.get("/:id", (req, res) => {
     .then((newProduct) => {
       res.send(newProduct);
     })
-    .catch((err) => res.send(err));
+    .catch((err) => res.status(404).send(err));
 });
 
 //------------------------------------------------------------------------------------------------------------//

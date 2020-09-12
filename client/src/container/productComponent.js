@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { detailsProduct } from "../Redux/Products/Actions/productActions";
 import pComp from "./css/productComponent.module.css";
 import {useSelector, useDispatch} from 'react-redux';
-
+import { Link } from "react-router-dom";
 
 // import { Link } from "react-router-dom";
 var placeholder = "/imagenes/Placeholder.png";
@@ -18,6 +18,12 @@ function ProductComponent(props) {
 
 
     return (
+      <div>
+        <div>
+       <Link to="/">
+        <button className="btn btn-primary">Volver al panel de admin</button>
+      </Link>
+      </div>
       <div className={pComp.card}>
         {
         loading? (<div>Loading...</div>):
@@ -46,7 +52,8 @@ function ProductComponent(props) {
         </div>
         )
         }
-        </div>       
+        </div>  
+        </div>    
     );
   } 
 

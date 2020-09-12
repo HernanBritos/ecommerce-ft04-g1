@@ -35,7 +35,7 @@ function FormUser(props) {
           .then((data) => {
             return data;
           });
-        return (window.location = "http://localhost:3000/user");
+        return (window.location = "http://localhost:3000/");
       };
 
     return (
