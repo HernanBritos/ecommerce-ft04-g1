@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import cComponent from "./css/formproducto.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {useSelector, useDispatch} from 'react-redux';
+import { editProduct } from "../Redux/Products/Actions/productActions";
 
 // Formulario del producto
 
 export default function FormProduct(props) {
   // Estados locales
+  // const editProduct = useSelector(state => state.editProduct);
+  // const {product, loading, error} = editProduct;
+  // const dispatch = useDispatch();
 
   const [product, setProduct] = useState({});
   const [categories, setCategories] = useState([]);

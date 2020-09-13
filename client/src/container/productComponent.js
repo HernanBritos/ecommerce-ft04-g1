@@ -16,7 +16,7 @@ function ProductComponent(props) {
     dispatch(detailsProduct(props.producto.match.params.id));
     },[]);
 
-
+console.log(props);
     return (
       <div>
         <div>
