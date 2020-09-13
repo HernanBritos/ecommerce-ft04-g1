@@ -8,7 +8,7 @@ import {
   PRODUCT_EDIT_REQUEST,
   PRODUCT_EDIT_SUCCESS,
   PRODUCT_EDIT_FAIL,
-} from "../constantes/productConstants";
+} from "../constantes/categoryConstants";
 import axios from "axios";
 
 const listProduct = () => async (dispatch) => {

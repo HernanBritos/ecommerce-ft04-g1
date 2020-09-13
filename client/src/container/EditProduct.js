@@ -2,49 +2,44 @@ import React, { useState, useEffect } from "react";
 import cComponent from "./css/formproducto.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { editProduct } from "../Redux/Products/Actions/productActions";
+import { detailsProduct } from "../Redux/Products/Actions/productActions";
 
 // Formulario del producto
 
 export default function FormProduct(props) {
   // Estados locales
+  const productDetails = useSelector((state) => state.productDetails);
+  const { productDet, loadingDet, errorDet } = productDetails;
+  const productEdit = useSelector((state) => state.productEdit);
+  const { product, loading, error } = productEdit;
+  const dispatch = useDispatch();
 
-  const [product, setProduct] = useState({});
+  const [productInput, setProductInput] = useState({});
   const [categories, setCategories] = useState([]);
 
   // Eventos que se realizan
 
   const handleProductInputChange = function (e) {
     var Product = e.target.value;
-    setProduct({
-      ...product,
+    setProductInput({
+      ...productInput,
       [e.target.name]: Product,
     });
   };
 
   const handleSubmit = function (e) {
     e.preventDefault();
-    axios
-      .put(`http://localhost:3001/products/${props.producto}`, {
-        name: `${product.name}`,
-        description: `${product.description}`,
-        category: `${product.category}`,
-        price: `${product.price}`,
-        img: `${product.img}`,
-        stock: `${product.stock}`,
-      })
-      .then((data) => {
-        return data;
-      });
-    return (window.location = "http://localhost:3000/admin");
+    dispatch(editProduct(productInput));
   };
 
   // Peticion de producto y categoria
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/products/" + props.producto)
-      .then((response) => {
-        setProduct(response.data);
-      });
+    // axios
+    //   .get("http://localhost:3001/products/" + props.producto)
+    dispatch(detailsProduct(props.producto));
+    setProductInput(productDet);
     axios.get("http://localhost:3001/categories/").then((response) => {
       setCategories(response.data);
     });
@@ -63,7 +58,7 @@ export default function FormProduct(props) {
             <label htmlFor="productname">Nombre de producto: </label>
             <input
               name="name"
-              value={product.name}
+              value={productInput.name}
               type="text"
               onChange={handleProductInputChange}
               className="form-control"
@@ -98,7 +93,7 @@ export default function FormProduct(props) {
               className="form-control"
               rows="3"
               name="description"
-              value={product.description}
+              value={productInput.description}
               onChange={handleProductInputChange}
               id="Description"
             ></textarea>
@@ -107,7 +102,7 @@ export default function FormProduct(props) {
             <label htmlFor="price">Precio: </label>
             <input
               name="price"
-              value={product.price}
+              value={productInput.price}
               type="real"
               onChange={handleProductInputChange}
               className="form-control"
@@ -118,7 +113,7 @@ export default function FormProduct(props) {
             <label htmlFor="stock">Cantidad: </label>
             <input
               name="stock"
-              value={product.stock}
+              value={productInput.stock}
               type="number"
               onChange={handleProductInputChange}
               className="form-control"
@@ -129,7 +124,7 @@ export default function FormProduct(props) {
             <label htmlFor="img">Imagen: </label>
             <input
               name="img"
-              value={product.img}
+              value={productInput.img}
               type="text"
               onChange={handleProductInputChange}
               className="form-control"
