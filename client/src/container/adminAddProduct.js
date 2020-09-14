@@ -43,9 +43,6 @@ export default function AdminAddProduct() {
                 const filter = (el) => {
                   return el.id !== pId;
                 };
-                const editar = () => {
-                  console.log("editar");
-                };
                 const borrar = async () => {
                   console.log(pId);
                   setProducts(products.filter(filter));
@@ -69,9 +66,7 @@ export default function AdminAddProduct() {
                     <td>{product.img}</td>
                     <td className={cComponent.botones}>
                       <Link to={`/admin/products/edit/${product.id}`}>
-                        <button onClick={editar} className="btn btn-primary">
-                          Editar
-                        </button>
+                        <button className="btn btn-primary">Editar</button>
                       </Link>
                       <button onClick={borrar} className="btn btn-danger">
                         Eliminar

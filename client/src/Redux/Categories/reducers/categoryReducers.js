@@ -1,52 +1,42 @@
 import {
-  PRODUCT_LIST_REQUEST,
-  PRODUCT_LIST_SUCCESS,
-  PRODUCT_LIST_FAIL,
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
-  PRODUCT_DETAILS_FAIL,
-  PRODUCT_EDIT_REQUEST,
-  PRODUCT_EDIT_SUCCESS,
-  PRODUCT_EDIT_FAIL,
+  CATEGORY_LIST_REQUEST,
+  CATEGORY_LIST_SUCCESS,
+  CATEGORY_LIST_FAIL,
+  CATEGORY_DETAILS_REQUEST,
+  CATEGORY_DETAILS_SUCCESS,
+  CATEGORY_DETAILS_FAIL,
+  CATEGORY_DELETE_SUCCESS,
 } from "../constantes/categoryConstants";
 
-function productListReducer(state = { products: [] }, action) {
+function categoryListReducer(state = { categories: [] }, action) {
+  const filter = (el) => {
+    return el.id !== action.payload;
+  };
   switch (action.type) {
-    case PRODUCT_LIST_REQUEST:
-      return { loading: true };
-    case PRODUCT_LIST_SUCCESS:
-      return { loading: false, products: action.payload };
-    case PRODUCT_LIST_FAIL:
-      return { loading: false, error: action.payload };
+    case CATEGORY_LIST_REQUEST:
+      return { loadingCat: true };
+    case CATEGORY_LIST_SUCCESS:
+      return { loadingCat: false, categories: action.payload };
+    case CATEGORY_LIST_FAIL:
+      return { loadingCat: false, errorCat: action.payload };
+    case CATEGORY_DELETE_SUCCESS:
+      return (state = { categories: state.categories.filter(filter) });
     default:
       return state;
   }
 }
 
-function productDetailsReducer(state = { productDet: {} }, action) {
+function categoryDetailsReducer(state = { categoryDet: {} }, action) {
   switch (action.type) {
-    case PRODUCT_DETAILS_REQUEST:
-      return { loadingDet: true };
-    case PRODUCT_DETAILS_SUCCESS:
-      return { loadingDet: false, productDet: action.payload };
-    case PRODUCT_DETAILS_FAIL:
-      return { loadingDet: false, errorDet: action.payload };
+    case CATEGORY_DETAILS_REQUEST:
+      return { loadingCatDet: true };
+    case CATEGORY_DETAILS_SUCCESS:
+      return { loadingCatDet: false, categoryDet: action.payload };
+    case CATEGORY_DETAILS_FAIL:
+      return { loadingCatDet: false, errorCatDet: action.payload };
     default:
       return state;
   }
 }
 
-function productEditReducer(state = { product: {} }, action) {
-  switch (action.type) {
-    case PRODUCT_EDIT_REQUEST:
-      return { loading: true };
-    case PRODUCT_EDIT_SUCCESS:
-      return { loading: false, product: action.payload };
-    case PRODUCT_EDIT_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-}
-
-export { productListReducer, productDetailsReducer, productEditReducer };
+export { categoryListReducer, categoryDetailsReducer };

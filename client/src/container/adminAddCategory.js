@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import cComponent from "./css/adminAddCategory.module.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import {
+  listCategory,
+  deleteCategory,
+} from "../Redux/Categories/Actions/categoryActions";
 
 export default function AdminAddCategory() {
-  const [category, setCategory] = useState([]);
-
+  const dispatch = useDispatch();
+  const categoryList = useSelector((state) => state.categoryList);
+  const { categories, loadingCat, errorCat } = categoryList;
   useEffect(() => {
-    axios.get("http://localhost:3001/categories").then((data) => {
-      setCategory(data.data);
-    });
-  }, []);
+    dispatch(listCategory());
+  }, [dispatch]);
 
   return (
     <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
@@ -36,44 +39,39 @@ export default function AdminAddCategory() {
               </tr>
             </thead>
             <tbody>
-              {category.map((category) => {
-                var cId = category.id;
-                const filter = (el) => {
-                  return el.id !== cId;
-                };
-                const editar = () => {
-                  console.log("editar");
-                };
-                const borrar = async () => {
-                  console.log(cId);
-                  setCategory(category.filter(filter));
-                  await axios
-                    .delete(`http://localhost:3001/categories/${cId}`, {
-                      params: cId,
-                    })
-                    .then((res) => {
-                      return res;
-                    });
-                };
-                return (
-                  <tr key={cId}>
-                    <td>{category.id}</td>
-                    <td>
-                      <span className={cComponent.name}>{category.name}</span>
-                    </td>
-                    <td>{category.createdAt}</td>
-                    <td>{category.updatedAt}</td>
-                    <td className={cComponent.botones}>
-                      <button onClick={editar} className="btn btn-primary">
-                        Editar
-                      </button>
-                      <button onClick={borrar} className="btn btn-danger">
-                        Eliminar
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {categories &&
+                categories.map((category) => {
+                  var cId = category.id;
+                  const borrar = () => {
+                    console.log(cId);
+                    dispatch(deleteCategory(cId));
+                  };
+                  return loadingCat ? (
+                    <div className="alert alert-success">Cargando...</div>
+                  ) : errorCat ? (
+                    <div className="alert alert-danger">
+                      Se produjo un error, por favor inténtelo de nuevo más
+                      tarde.
+                    </div>
+                  ) : (
+                    <tr key={cId}>
+                      <td>{category.id}</td>
+                      <td>
+                        <span className={cComponent.name}>{category.name}</span>
+                      </td>
+                      <td>{category.createdAt}</td>
+                      <td>{category.updatedAt}</td>
+                      <td className={cComponent.botones}>
+                        <Link to={`/admin/categories/edit/${category.id}`}>
+                          <button className="btn btn-primary">Editar</button>
+                        </Link>
+                        <button onClick={borrar} className="btn btn-danger">
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

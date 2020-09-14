@@ -1,61 +1,65 @@
 import {
-  PRODUCT_LIST_REQUEST,
-  PRODUCT_LIST_SUCCESS,
-  PRODUCT_LIST_FAIL,
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
-  PRODUCT_DETAILS_FAIL,
-  PRODUCT_EDIT_REQUEST,
-  PRODUCT_EDIT_SUCCESS,
-  PRODUCT_EDIT_FAIL,
+  CATEGORY_LIST_REQUEST,
+  CATEGORY_LIST_SUCCESS,
+  CATEGORY_LIST_FAIL,
+  CATEGORY_DETAILS_REQUEST,
+  CATEGORY_DETAILS_SUCCESS,
+  CATEGORY_DETAILS_FAIL,
+  CATEGORY_EDIT_REQUEST,
+  CATEGORY_EDIT_SUCCESS,
+  CATEGORY_EDIT_FAIL,
+  CATEGORY_DELETE_SUCCESS,
 } from "../constantes/categoryConstants";
 import axios from "axios";
 
-const listProduct = () => async (dispatch) => {
+const listCategory = () => async (dispatch) => {
   try {
-    dispatch({ type: PRODUCT_LIST_REQUEST });
-    const { data } = await axios.get("http://localhost:3001/products/");
-    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+    dispatch({ type: CATEGORY_LIST_REQUEST });
+    const { data } = await axios.get("http://localhost:3001/categories/");
+    dispatch({ type: CATEGORY_LIST_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
+    dispatch({ type: CATEGORY_LIST_FAIL, payload: error.message });
   }
 };
 
-const detailsProduct = (productId) => async (dispatch) => {
+const detailsCategory = (categoryId) => async (dispatch) => {
   try {
-    dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
+    dispatch({ type: CATEGORY_DETAILS_REQUEST, payload: categoryId });
     const { data } = await axios.get(
-      "http://localhost:3001/products/" + productId
+      "http://localhost:3001/categories/" + categoryId
     );
-    dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+    dispatch({ type: CATEGORY_DETAILS_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
+    dispatch({ type: CATEGORY_DETAILS_FAIL, payload: error.message });
   }
 };
 
-const editProduct = (product) => async (dispatch) => {
+const editCategory = (category) => async (dispatch) => {
   try {
-    dispatch({ type: PRODUCT_EDIT_REQUEST, payload: product });
-    // const { data } = await axios.put(
-    //   "http://localhost:3001/products/" + productId
-    // );
+    dispatch({ type: CATEGORY_EDIT_REQUEST, payload: category });
     axios
-      .put(`http://localhost:3001/products/${product.id}`, {
-        name: `${product.name}`,
-        description: `${product.description}`,
-        category: `${product.category}`,
-        price: `${product.price}`,
-        img: `${product.img}`,
-        stock: `${product.stock}`,
+      .put(`http://localhost:3001/categories/${category.id}`, {
+        name: `${category.name}`,
       })
       .then((data) => {
         return data;
       });
-    dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: product });
+    dispatch({ type: CATEGORY_EDIT_SUCCESS, payload: category });
     return (window.location = "http://localhost:3000/admin");
   } catch (error) {
-    dispatch({ type: PRODUCT_EDIT_FAIL, payload: error.message });
+    dispatch({ type: CATEGORY_EDIT_FAIL, payload: error.message });
   }
 };
 
-export { listProduct, detailsProduct, editProduct };
+const deleteCategory = (categoryId) => async (dispatch) => {
+  await axios
+    .delete(`http://localhost:3001/categories/${categoryId}`, {
+      params: categoryId,
+    })
+    .then((res) => {
+      return res;
+    });
+  dispatch({ type: CATEGORY_DELETE_SUCCESS, payload: categoryId });
+};
+
+export { listCategory, detailsCategory, editCategory, deleteCategory };

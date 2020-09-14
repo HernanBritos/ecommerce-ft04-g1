@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { detailsProduct } from "../Redux/Products/Actions/productActions";
 import pComp from "./css/productComponent.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-// import { Link } from "react-router-dom";
 var placeholder = "/imagenes/Placeholder.png";
 
 function ProductComponent(props) {
@@ -14,7 +13,7 @@ function ProductComponent(props) {
 
   useEffect(() => {
     dispatch(detailsProduct(props.producto.match.params.id));
-  }, []);
+  }, [dispatch, props.producto.match.params.id]);
 
   return (
     <div>
@@ -25,22 +24,23 @@ function ProductComponent(props) {
       </div>
       <div className={pComp.card}>
         {loadingDet ? (
-          <video
-            autoplay
-            loop
-            muted
-            playsinline
-            src="/imagenes/loading.mp4"
-          ></video>
+          <div className="alert alert-success">Cargando...</div>
         ) : errorDet ? (
           <div>{errorDet}</div>
         ) : (
           <div>
             <div className={pComp.image}>
-              <img
-                src={`/imagenes/${productDet.img}`}
-                alt="productCardImage"
-              ></img>
+              {productDet.img ? (
+                <img
+                  src={`/imagenes/${productDet.img}`}
+                  alt="productCardImage"
+                ></img>
+              ) : (
+                <img
+                  src={`/imagenes/${placeholder}`}
+                  alt="productCardImage"
+                ></img>
+              )}
             </div>
             <div className={pComp.productData}>
               <span className={pComp.name}>{productDet.name}</span>
