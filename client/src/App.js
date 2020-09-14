@@ -13,9 +13,8 @@ import ProductCategory from "./container/productCategory";
 import SearchComponent from "./container/SearchComponent";
 import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
-import CartComponent from "./container/cartcomponent"
+import CartComponent from "./container/cartcomponent";
 import EditCategory from "./container/EditCategory";
-
 
 function App() {
   return (
@@ -82,16 +81,17 @@ function App() {
             path="/users/edit/:id"
             exact={true}
             render={(u) => {
-            return <EditUserForm usuario={u.match.params.id} />}}
-            />
-            <Route
-            path="/users/cart"
+              return <EditUserForm usuario={u.match.params.id} />;
+            }}
+          />
+          <Route
+            path="/users/cart/:id?"
             exact={true}
             render={(c) => {
-              return <CartComponent c={c} />}}
-           />
-          </div>
-
+              return <CartComponent c={c} />;
+            }}
+          />
+        </div>
       </main>
     </BrowserRouter>
   );

@@ -38,7 +38,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 0 1rem 2rem;
-  background: rgb(250, 186, 122);
+  background: rgb(248, 171, 94);
   border-radius: 7px;
   border-style: none;
   font-family: "Lato";
@@ -50,15 +50,22 @@
   justify-content: center;
 }
 .category {
-  border-style: none;
-  background: rgb(250, 186, 122);
+  border-style: solid;
+  background: rgb(248, 171, 94);
   width: 90px;
-  height: 25px;
-  text-align: center;
+  height: 75%;
   display: flex;
   margin: 10px;
   border-radius: 5px;
-  font-weight: 300;
+  color: rgb(29, 27, 27);
+  font-weight: 400;
+  border-width: 0.5px;
+  border-color: rgb(114, 114, 114);
+}
+.category p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .categories {
   display: flex;
@@ -70,6 +77,6 @@
   margin-left: 20px;
   margin-top: 20px;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   background: white;
 }
