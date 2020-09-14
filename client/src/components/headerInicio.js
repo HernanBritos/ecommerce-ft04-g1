@@ -2,6 +2,7 @@ import React from "react";
 import hInicio from "../components/css/headerInicio.module.css";
 import SearchBarComponent from "../container/searchBarComponent";
 import SideBar from "../container/sideBarComponent.js";
+import Cart from "../container/cart"
 
 class HeaderInicio extends React.Component {
   render() {
@@ -21,12 +22,17 @@ class HeaderInicio extends React.Component {
             Asia Pilar Shoes
           </a>
           <div className={hInicio.searchbar}>
+            <Cart />
+          </div>
+          <div className={hInicio.searchbar}>
             <SearchBarComponent />
           </div>
         </div>
         <aside className="sidebar">
           <SideBar onclose={closeMenu} />
         </aside>
+        
+        
       </div>
     );
   }

@@ -7,7 +7,8 @@ class ProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
-  }
+}
+
   render() {
     return (
       <Link
@@ -26,6 +27,7 @@ class ProductCard extends React.Component {
             ) : (
               <img src={`${placeholder}`} alt="productCardImage"></img>
             )}
+            
           </div>
           <div className={pCard.productData}>
             <span className={pCard.name}>{this.props.producto.name}</span>
@@ -34,7 +36,14 @@ class ProductCard extends React.Component {
             </span>
             <span className={pCard.price}> $ {this.props.producto.price}</span>
             <span className={pCard.carrito}>
+            <Link 
+            to={{ 
+            pathname: "/users/cart",
+            state: this.props.producto.id,
+            }}
+            >
               <img alt="carrito" src="/imagenes/carrito-de-compras.png"></img>
+            </Link>
             </span>
           </div>
         </div>
