@@ -8,6 +8,7 @@ class ProductCard extends React.Component {
     super(props);
     this.props = props;
   }
+
   render() {
     return (
       <Link
@@ -33,9 +34,24 @@ class ProductCard extends React.Component {
               {this.props.producto.category}
             </span>
             <span className={pCard.price}> $ {this.props.producto.price}</span>
-            <span className={pCard.carrito}>
-              <img alt="carrito" src="/imagenes/carrito-de-compras.png"></img>
-            </span>
+            {this.props.producto.stock !== 0 ? (
+              <span className={pCard.carrito}>
+                <Link
+                  to={{
+                    pathname:
+                      "/users/cart/" + this.props.producto.id + "?qty=" + 1,
+                    state: this.props.producto.id,
+                  }}
+                >
+                  <img
+                    alt="carrito"
+                    src="/imagenes/carrito-de-compras.png"
+                  ></img>
+                </Link>
+              </span>
+            ) : (
+              <div className="alert-danger"> Sin Stock!</div>
+            )}
           </div>
         </div>
       </Link>

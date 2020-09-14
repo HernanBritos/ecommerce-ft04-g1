@@ -22,26 +22,22 @@ server.get("/", (req, res, next) => {
 // Si pudo crear el producto retorna el status 201 y
 // retorna la información del producto.
 
-server.post("/", (req, res, next) => {
+server.post("/", (req, res) => {
   const { category, name, description, stock, price, img } = req.body;
 
   Product.create({
     name: name,
-    category : category,
+    category: category,
     description: description,
     stock: stock,
     price: price,
     img: img,
   })
     .then((newProduct) => {
-      //console.log(newProduct.__proto__)
-      Categories.findById(category).then((category) => {
-        newProduct.addCategory(category);
-      });
-      return newProduct;
-    })
-    .then((productNew) => {
-      return res.send(productNew);
+      // Categories.findById(category).then((category) => {
+      //   newProduct.addCategory(category);
+      // });
+      return res.send(newProduct);
     })
     .catch((err) => res.status(400).send(err));
 });
@@ -154,7 +150,8 @@ server.post("/:idProducto/category/:idCategoria", (req, res) => {
   const idProduct = req.params.idProduct;
   const idCategoria = req.params.idCategoria;
 
-  Categories.update(          //findOrCreate()
+  Categories.update(
+    //findOrCreate()
     {
       //{include: [{model:Product}]} Creo que en este caso no iria, pero si agregaria el
       name: req.params.name, //                                       {include: [{model: Categories}]}
@@ -210,18 +207,17 @@ server.get("/categoria/:nombreCat", (req, res, next) => {
 // GET /search?query={valor}
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
 
-
 server.get("/search", (req, res) => {
   const valor = req.query.query;
 
   Product.findAll({
     where: {
-        [Op.or]: [
-            { name: { [Op.substring]:  valor } },
-            { description: { [Op.substring]: valor } },
-        ],
-    }
-})
+      [Op.or]: [
+        { name: { [Op.substring]: valor } },
+        { description: { [Op.substring]: valor } },
+      ],
+    },
+  })
     .then((products) => {
       res.send(products);
     })

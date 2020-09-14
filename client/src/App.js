@@ -13,11 +13,14 @@ import ProductCategory from "./container/productCategory";
 import SearchComponent from "./container/SearchComponent";
 import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
+import CartComponent from "./container/cartcomponent";
+import EditCategory from "./container/EditCategory";
 
 function App() {
   return (
     <BrowserRouter>
       <Route path="/" exact={true} render={() => <HeaderInicio />} />
+
       <main className="main">
         <div className="content">
           <Route path="/" exact={true} render={() => <CatalogComponent />} />
@@ -54,24 +57,41 @@ function App() {
             }}
           />
           <Route
+            path="/admin/categories/edit/:id"
+            exact={true}
+            render={(p) => {
+              return <EditCategory category={p.match.params.id} />;
+            }}
+          />
+          <Route
             path="/products/categoria/:nombreCat"
-            exact={false}
-            render={(c) => { 
-           return <ProductCategory nombrecat={c.match.params.nombreCat} />}}
-         />
-         <Route
-          path= "/users/signup"
-          exact={true}
-          render={() => { 
-            return <FormUser />}}
-           />
+            exact={true}
+            render={(c) => {
+              return <ProductCategory nombrecat={c.match.params.nombreCat} />;
+            }}
+          />
+          <Route
+            path="/users/signup"
+            exact={true}
+            render={() => {
+              return <FormUser />;
+            }}
+          />
           <Route
             path="/users/edit/:id"
             exact={true}
             render={(u) => {
-              return <EditUserForm usuario={u.match.params.id} />}}
-            />
-          </div>
+              return <EditUserForm usuario={u.match.params.id} />;
+            }}
+          />
+          <Route
+            path="/users/cart/:id?"
+            exact={true}
+            render={(c) => {
+              return <CartComponent c={c} />;
+            }}
+          />
+        </div>
       </main>
     </BrowserRouter>
   );

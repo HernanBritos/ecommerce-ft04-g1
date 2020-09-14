@@ -3,20 +3,27 @@ import cComponent from "./css/catalogComponent.module.css";
 import ProductCard from "../components/productCard";
 import { useEffect } from "react";
 import { listProduct } from "../Redux/Products/Actions/productActions";
-import {useSelector, useDispatch} from 'react-redux';
-
+import { useSelector, useDispatch } from "react-redux";
 
 function CatalogComponent(props) {
-  const productList = useSelector(state => state.productList);
-  const {products, loading, error} = productList;
+  const productList = useSelector((state) => state.productList);
+  const { products, loading, error } = productList;
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-   dispatch(listProduct());
-  },[]);
+    dispatch(listProduct());
+  }, [dispatch]);
   return (
     <div className={cComponent.catalog}>
-       {products? (
+      {loading ? (
+        <div className={`alert alert-success ${cComponent.alerta}`}>
+          Cargando...
+        </div>
+      ) : error ? (
+        <div className={`alert alert-danger ${cComponent.alerta}`}>
+          Se produjo un error, por favor inténtelo de nuevo más tarde.
+        </div>
+      ) : products.length > 0 ? (
         products.map((product) => {
           return (
             <div key={product.id} className={cComponent.pCard}>
@@ -27,8 +34,8 @@ function CatalogComponent(props) {
           );
         })
       ) : (
-        <div className={` ${cComponent.alerta} alert alert-warning`}>
-          Oops! No hay productos creados aún. Prueba creando uno.
+        <div className={`alert alert-warning ${cComponent.alerta}`}>
+          Oops! Parece que no hay productos, intenta creando uno.
         </div>
       )}
     </div>

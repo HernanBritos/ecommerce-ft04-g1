@@ -20,6 +20,28 @@ server.post("/", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+server.put("/:id", (req, res, next) => {
+  const id = req.params.id;
+
+  Categories.update(
+    {
+      name: req.body.name,
+    },
+    {
+      where: {
+        id: id,
+      },
+      returning: true,
+    }
+  )
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) =>
+      res.status(400).send(err, " WARNING! -> You can´t modificate the product")
+    );
+});
+
 server.delete("/:id", (req, res, next) => {
   const id = req.params.id;
   Categories.destroy({
@@ -31,6 +53,17 @@ server.delete("/:id", (req, res, next) => {
       res.status(404).json({ message: "Not found" });
     }
   });
+});
+
+server.get("/:id", (req, res) => {
+  const id = req.params.id;
+  Categories.findOne({
+    where: { id: id },
+  })
+    .then((Category) => {
+      res.send(Category);
+    })
+    .catch((err) => res.status(404).send(err));
 });
 
 module.exports = server;
