@@ -1,53 +1,52 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import cComponent from "./css/formproducto.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 function FormUser(props) {
+  const [user, setUser] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: "",
+  });
 
-    const [user,setUser]= useState({
-        name: '',
-        lastname: '',
-        email: '',
-        password: '',
-        phone: '',
-        address: '',
-    })
+  const handleInputChange = function (e) {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    const handleInputChange = function (e) {
-        setUser({
-          ...user,
-          [e.target.name]: e.target.value,
-        });
-    }    
+  const handleSubmit = function (e) {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3001/users", {
+        name: `${user.name}`,
+        lastname: `${user.lastname}`,
+        email: `${user.email}`,
+        password: `${user.password}`,
+        phone: `${user.phone}`,
+        address: `${user.address}`,
+      })
+      .then((data) => {
+        return data;
+      });
+    return (window.location = "http://localhost:3000/");
+  };
 
-    const handleSubmit = function (e) {
-        e.preventDefault();
-        axios
-          .post("http://localhost:3001/users", {
-            name: `${user.name}`,
-            lastname: `${user.lastname}`,
-            email: `${user.email}`,
-            password: `${user.password}`,
-            phone: `${user.phone}`,
-            address: `${user.address}`,
-          })
-          .then((data) => {
-            return data;
-          });
-        return (window.location = "http://localhost:3000/");
-      };
-
-    return (
+  return (
     <div className={cComponent.back}>
       <Link to="/">
         <button className="btn btn-primary">Volver al panel de admin</button>
       </Link>
-      <form className={cComponent.form} onSubmit={handleSubmit} >
+      <form className={cComponent.form} onSubmit={handleSubmit}>
         <h1 className={`my-3 ${cComponent.tituloForm}`}>Registrarse </h1>
         <div className={cComponent.Fcontent}>
           <div className="form-group">
-            <label htmlFor="productname">Nombre  </label>
+            <label htmlFor="productname">Nombre </label>
             <input
               name="name"
               onChange={handleInputChange}
@@ -58,21 +57,21 @@ function FormUser(props) {
           <div className="form-group">
             <label htmlFor="apellido">Apellido </label>
             <input
-            name="lastname"
-            onChange={handleInputChange}
-            value={user.lastname}
+              name="lastname"
+              onChange={handleInputChange}
+              value={user.lastname}
             />
           </div>
           <div className="form-group">
             <label htmlFor="description">Email </label>
             <input
-            name="email"
-            onChange={handleInputChange}
-            value={user.email}
+              name="email"
+              onChange={handleInputChange}
+              value={user.email}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password </label>
+            <label htmlFor="password">Contraseña </label>
             <input
               name="password"
               onChange={handleInputChange}
@@ -81,7 +80,7 @@ function FormUser(props) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="phone">Phone </label>
+            <label htmlFor="phone">Teléfono </label>
             <input
               name="phone"
               onChange={handleInputChange}
@@ -89,7 +88,7 @@ function FormUser(props) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="address">Address </label>
+            <label htmlFor="address">Direccion </label>
             <input
               name="address"
               onChange={handleInputChange}
@@ -102,8 +101,7 @@ function FormUser(props) {
         </div>
       </form>
     </div>
-    )
+  );
 }
 
-
-export default FormUser; 
+export default FormUser;

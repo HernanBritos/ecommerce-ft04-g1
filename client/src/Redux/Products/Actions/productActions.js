@@ -5,9 +5,6 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
-  PRODUCT_EDIT_REQUEST,
-  PRODUCT_EDIT_SUCCESS,
-  PRODUCT_EDIT_FAIL,
 } from "../constantes/productConstants";
 import axios from "axios";
 
@@ -34,28 +31,19 @@ const detailsProduct = (productId) => async (dispatch) => {
 };
 
 const editProduct = (product) => async (dispatch) => {
-  try {
-    dispatch({ type: PRODUCT_EDIT_REQUEST, payload: product });
-    // const { data } = await axios.put(
-    //   "http://localhost:3001/products/" + productId
-    // );
-    axios
-      .put(`http://localhost:3001/products/${product.id}`, {
-        name: `${product.name}`,
-        description: `${product.description}`,
-        category: `${product.category}`,
-        price: `${product.price}`,
-        img: `${product.img}`,
-        stock: `${product.stock}`,
-      })
-      .then((data) => {
-        return data;
-      });
-    dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: product });
-    return (window.location = "http://localhost:3000/admin");
-  } catch (error) {
-    dispatch({ type: PRODUCT_EDIT_FAIL, payload: error.message });
-  }
+  axios
+    .put(`http://localhost:3001/products/${product.id}`, {
+      name: `${product.name}`,
+      description: `${product.description}`,
+      category: `${product.category}`,
+      price: `${product.price}`,
+      img: `${product.img}`,
+      stock: `${product.stock}`,
+    })
+    .then((data) => {
+      return data;
+    });
+  return (window.location = "http://localhost:3000/admin");
 };
 
 export { listProduct, detailsProduct, editProduct };

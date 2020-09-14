@@ -15,14 +15,14 @@
   border-radius: 50px;
   border-style: solid;
   border-width: 0.2px;
-  border-color: rgb(160, 158, 158);
+  border-color: rgb(136, 134, 134);
 }
 .boton {
   width: 17px;
-  height: 17px;
+  height: 16px;
   background: transparent;
   border-style: none;
-  margin-right: 35px;
+  margin-bottom: 5px;
 }
 .img:hover {
   box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(201, 200, 199);
@@ -34,10 +34,12 @@
   background: rgb(252, 245, 245);
   border-radius: 15px;
   border-style: solid;
-  border-color: rgb(160, 158, 158);
+  border-color: rgb(136, 134, 134);
   border-width: 0.1px;
   padding-left: 10px;
-  margin-left: 10px;
+  padding-bottom: 5px;
+  margin-left: 40px;
+  box-shadow: 0.2px 0.3px 0.3px 0.2px rgb(122, 121, 120);
 }
 .search:focus {
   box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(201, 200, 199);

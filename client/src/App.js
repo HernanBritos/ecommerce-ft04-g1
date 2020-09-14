@@ -13,6 +13,7 @@ import ProductCategory from "./container/productCategory";
 import SearchComponent from "./container/SearchComponent";
 import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
+import EditCategory from "./container/EditCategory";
 
 function App() {
   return (
@@ -54,24 +55,34 @@ function App() {
             }}
           />
           <Route
+            path="/admin/categories/edit/:id"
+            exact={true}
+            render={(p) => {
+              return <EditCategory category={p.match.params.id} />;
+            }}
+          />
+          <Route
             path="/products/categoria/:nombreCat"
-            exact={false}
-            render={(c) => { 
-           return <ProductCategory nombrecat={c.match.params.nombreCat} />}}
-         />
-         <Route
-          path= "/users/signup"
-          exact={true}
-          render={() => { 
-            return <FormUser />}}
-           />
+            exact={true}
+            render={(c) => {
+              return <ProductCategory nombrecat={c.match.params.nombreCat} />;
+            }}
+          />
+          <Route
+            path="/users/signup"
+            exact={true}
+            render={() => {
+              return <FormUser />;
+            }}
+          />
           <Route
             path="/users/edit/:id"
             exact={true}
             render={(u) => {
-              return <EditUserForm usuario={u.match.params.id} />}}
-            />
-          </div>
+              return <EditUserForm usuario={u.match.params.id} />;
+            }}
+          />
+        </div>
       </main>
     </BrowserRouter>
   );

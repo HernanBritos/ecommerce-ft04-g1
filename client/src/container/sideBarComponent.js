@@ -1,60 +1,59 @@
-import React from "react";
+import React, { useEffect } from "react";
 import sBar from "./css/sideBarComponent.module.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { listCategory } from "../Redux/Categories/Actions/categoryActions";
 
-class SideBarComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = { categories: [] };
-  }
+function SideBarComponent(props) {
+  const dispatch = useDispatch();
+  const categoryList = useSelector((state) => state.categoryList);
+  const { categories, loadingCat, errorCat } = categoryList;
 
-  componentDidMount() {
-    axios.get("http://localhost:3001/categories").then((data) => {
-      this.setState({ categories: data.data });
-    });
-  }
+  useEffect(() => {
+    dispatch(listCategory());
+  }, [dispatch]);
 
-  handleCategoryInputChange(e) {
-    var categories = [];
-    categories.push(e.target.id);
-  }
-
-  render() {
-    return (
-      <div>
-        <div className={sBar.auth}>
-          <button className={sBar.signIn} href="#">
-            Iniciar Sesion
-          </button>
-          <Link to= "/users/signup">
-            <button className={sBar.signUp} href="#">
-               Registrarse
-            </button>
-          </Link>
-        </div>
-        <button className={sBar.closeButton} onClick={this.props.onclose}>
-          x
+  return (
+    <div>
+      <div className={sBar.auth}>
+        <button className={sBar.signIn} href="#">
+          Iniciar Sesion
         </button>
-        <Link to="/admin">
-          <div className={sBar.admin}>
-            <button className={`btn btn-secondary`}>Admin</button>
-          </div>
+        <Link to="/users/signup">
+          <button className={sBar.signUp} href="#">
+            Registrarse
+          </button>
         </Link>
-        <label className={sBar.filtro}>Filtrar por categoria: </label>
-        <div className={sBar.categories}>
-          {this.state.categories &&
-            this.state.categories.map((cat) => (
-              <div key={cat.id}>
-                <Link to={"/products/categoria/" + cat.name}>
-                  <button className={`${sBar.category}`}>{cat.name}</button>
-                </Link>
-              </div>
-            ))}
-        </div>
       </div>
-    );
-  }
+      <button className={sBar.closeButton} onClick={props.onclose}>
+        x
+      </button>
+      <Link to="/admin">
+        <div className={sBar.admin}>
+          <button className={`btn btn-secondary`}>Admin</button>
+        </div>
+      </Link>
+      <label className={sBar.filtro}>Filtrar por categoria: </label>
+      <div className={sBar.categories}>
+        {loadingCat ? (
+          <div className="alert alert-success">Cargando...</div>
+        ) : errorCat ? (
+          <div className="alert alert-danger">
+            Se produjo un error, por favor inténtelo de nuevo más tarde.
+          </div>
+        ) : (
+          categories.length > 0 &&
+          categories.map((cat) => (
+            <div key={cat.id}>
+              <Link to={"/products/categoria/" + cat.name}>
+                <button className={`${sBar.category}`}>{cat.name}</button>
+              </Link>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default SideBarComponent;
