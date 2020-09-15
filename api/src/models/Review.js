@@ -4,15 +4,6 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('review', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull:false,
-    },
-    starts: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     title: {
       type: DataTypes.STRING,
       allowNull:false,
@@ -21,14 +12,18 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull:false,
     },
-    idUser: {
+    star: {
       type: DataTypes.INTEGER,
-      allowNull:false,
-    },
-    idProduct: {
-      type: DataTypes.INTEGER,
-      allowNull:false,
+      allowNull: false,
     }
+    // idUser: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull:false,
+    // },
+    // idProduct: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull:false,
+    // }
   });
 
 };
