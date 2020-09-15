@@ -1,11 +1,13 @@
 /**Componente entero**/
 .bar {
-  width: 340px;
-  height: 59px;
+  width: 330px;
+  height: 63px;
   background: rgb(255, 237, 189);
-  border-radius: 50px;
-  display: inline-flexbox;
-  padding: 9px 0 0 9px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  padding: 0px 0 0 6px;
+  box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(68, 67, 67);
 }
 /**Boton**/
 .img {
@@ -13,34 +15,35 @@
   height: 40px;
   cursor: pointer;
   border-radius: 50px;
-  border-style: solid;
-  border-width: 0.2px;
-  border-color: rgb(136, 134, 134);
+  border-style: none;
+  box-shadow: 0.5px 0.4px 0.5px 0.5px rgb(83, 83, 83);
 }
 .boton {
   width: 17px;
   height: 16px;
   background: transparent;
   border-style: none;
-  margin-bottom: 5px;
+  margin-bottom: 22px;
+  margin-right: 5px;
 }
-.img:hover {
-  box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(201, 200, 199);
-}
+/* .img:hover {
+  box-shadow: 0.5px 0.5px rgb(68, 67, 67);
+} */
 /**Input**/
 .search {
   width: 240px;
   height: 40px;
   background: rgb(252, 245, 245);
-  border-radius: 15px;
-  border-style: solid;
-  border-color: rgb(136, 134, 134);
-  border-width: 0.1px;
+  border-radius: 10px;
+  border-style: none;
+  box-shadow: 0.5px 0.4px 0.5px 0.5px rgb(83, 83, 83);
+  border-width: 0.8px;
   padding-left: 10px;
   padding-bottom: 5px;
   margin-left: 40px;
-  box-shadow: 0.2px 0.3px 0.3px 0.2px rgb(122, 121, 120);
+  margin-top: 2px;
+}
+/* .search:hover {
 }
 .search:focus {
-  box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(201, 200, 199);
-}
+} */
