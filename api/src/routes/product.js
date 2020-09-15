@@ -2,6 +2,7 @@ const server = require("express").Router();
 const { Product } = require("../db.js");
 const { Categories } = require("../db.js");
 const { Op } = require("sequelize");
+const { Review } = require("../db.js")
 
 //--------------------------------------------------------------------------//
 // GET Muestra todos los productos
@@ -241,5 +242,87 @@ server.get("/:id", (req, res) => {
 });
 
 //------------------------------------------------------------------------------------------------------------//
+// GET /product/:id/review/
+// Podés tener esta ruta, o directamente obtener todas las reviews en la ruta de GET product.
+server.get('/:id/review', (req, res) => {
+  const id = req.params.id;
+  Review.findAll({
+    where: { id: id },
+  }).then(review => {
+    res.send(review);
+  });
+});
 
+//------------------------------------------------------------------------------------------------------------//
+
+// POST /product/:id/review
+
+server.post('/:id/review', (req, res) => {
+  const title = req.body.title;
+  const description = req.body.description;
+  const star = req.body.star;
+  const id = req.params.id;
+ // const userId = req.body.userId;
+  Review.create({
+    title,
+    description: description,
+    star: star,
+  })
+    .then(newReview => {
+      newReview.setProduct(id);
+//      newReview.setUser(userId);
+    })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(err => res.status(500).send(err));
+});
+
+//------------------------------------------------------------------------------------------------------------//
+// PUT /product/:id/review/:idReview
+server.put('/:id/review/:idReview', (req, res) => {
+  const idProduct = req.params.id;
+  const idReview = req.params.idReview;
+  
+  Product.findByPk(idProduct).then((product) => {
+  Review.update(
+    {
+      title: req.body.title,
+      description: req.body.description,
+      star: req.body.star,
+    }, 
+    { 
+      where: {
+      id: idReview,
+    },
+    returning: true,
+  })
+})
+    .then(response => {
+      const review = response;
+      return review;
+    })
+    .then(review => res.send(review))
+    .catch(err => res.send(err.message));
+});
+
+
+//------------------------------------------------------------------------------------------------------------//
+// DELETE /product/:id/review/:idReview
+
+server.delete('/:id/review/:idReview', (req, res) => {
+  const id = req.params.id;
+  const idReview = req.params.idReview;
+  Review.destroy({
+    where: { productId: id },
+  }).then((removed) => {
+    if (removed) {
+      res.status(200).end();
+    } else {
+      res.status(404).json({ message: "Not found" });
+    }
+  });
+});
+
+//------------------------------------------------------------------------------------------------------------//
 module.exports = server;
