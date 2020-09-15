@@ -19,7 +19,7 @@ import EditCategory from "./container/EditCategory";
 function App() {
   return (
     <BrowserRouter>
-      <Route path="/" exact={true} render={() => <HeaderInicio />} />
+      <Route path="/" render={() => <HeaderInicio />} />
 
       <main className="main">
         <div className="content">

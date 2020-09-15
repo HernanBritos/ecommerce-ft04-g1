@@ -38,7 +38,7 @@ server.post("/", (req, res) => {
       // Categories.findById(category).then((category) => {
       //   newProduct.addCategory(category);
       // });
-      return res.send(newProduct);
+      return res.status(200).send(newProduct);
     })
     .catch((err) => res.status(400).send(err));
 });

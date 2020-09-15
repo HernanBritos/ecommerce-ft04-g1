@@ -43,32 +43,35 @@ function ProductComponent(props) {
                 src={`/imagenes/${productDet.img}`}
                 alt="fotoCarrito"
               />
-              <div className={`${cComponent.cardDet}`}>{productDet.name}</div>
-              <div className={cComponent.cardDesc}>
-                <p>
-                  <i>{productDet.description}</i>
-                </p>
-              </div>
-              <h4 className={cComponent.cardCat}>{productDet.category}</h4>
-              <div className={`${cComponent.qty}`}>
-                <label htmlFor="stock">Cantidad: </label>
-                <input
-                  name="stock"
-                  type="number"
-                  className="form-control"
-                  id="stock"
-                  value={qty}
-                  onChange={(e) => {
-                    setQty(e.target.value);
-                  }}
-                />
-              </div>
-              <div className={`${cComponent.cardPrice}`}>
-                <h4>Precio</h4>
-                <span>$ {productDet.price}</span>
+              <div className={cComponent.prodDet}>
+                <div className={`${cComponent.cardDet}`}>{productDet.name}</div>
+                <h4 className={cComponent.cardCat}>{productDet.category}</h4>
+                <div className={cComponent.cardDesc}>
+                  <p>
+                    <i>{productDet.description}</i>
+                  </p>
+                </div>
+
+                <div className={`${cComponent.qty}`}>
+                  <label htmlFor="stock">Cantidad: </label>
+                  <input
+                    name="stock"
+                    type="number"
+                    className="form-control"
+                    id="stock"
+                    value={qty}
+                    onChange={(e) => {
+                      setQty(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className={`${cComponent.cardPrice}`}>
+                  <h4>Precio</h4>
+                  <span>$ {productDet.price}</span>
+                </div>
                 <button
                   onClick={handleAddToCart}
-                  className={`alert-warning ${cComponent.addcart}`}
+                  className={` ${cComponent.addcart}`}
                 >
                   Añadir al carrito
                 </button>

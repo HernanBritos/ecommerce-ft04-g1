@@ -2,7 +2,7 @@ import React from "react";
 import hInicio from "../components/css/headerInicio.module.css";
 import SearchBarComponent from "../container/searchBarComponent";
 import SideBar from "../container/sideBarComponent.js";
-import Cart from "../container/cart"
+import { Link } from "react-router-dom";
 
 class HeaderInicio extends React.Component {
   render() {
@@ -21,9 +21,21 @@ class HeaderInicio extends React.Component {
           <a className={hInicio.brand} href="/">
             Asia Pilar Shoes
           </a>
-          <div className={hInicio.searchbar}>
-            <Cart />
-          </div>
+          <Link
+            to={{
+              pathname: "/users/cart",
+            }}
+          >
+            <div className={`${hInicio.botoncart}`}>
+              <button className={hInicio.cartboton} type="submit">
+                <img
+                  src={`/imagenes/carrito-de-compras.png`}
+                  className={hInicio.cartbotonimg}
+                />
+              </button>
+            </div>
+          </Link>
+          <div className={hInicio.searchbar}></div>
           <div className={hInicio.searchbar}>
             <SearchBarComponent />
           </div>
@@ -31,8 +43,6 @@ class HeaderInicio extends React.Component {
         <aside className="sidebar">
           <SideBar onclose={closeMenu} />
         </aside>
-        
-        
       </div>
     );
   }
