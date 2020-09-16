@@ -1,7 +1,10 @@
 import React from "react";
 import pCard from "./css/productCard.module.css";
 import { Link } from "react-router-dom";
+import ReactStars from "react-rating-stars-component"
+import AgregarReview from "../container/agregarreview";
 var placeholder = "/imagenes/Placeholder.png";
+
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -9,7 +12,9 @@ class ProductCard extends React.Component {
     this.props = props;
   }
 
+
   render() {
+    console.log(this.props.producto.id)
     return (
       <Link
         to={{
@@ -33,8 +38,19 @@ class ProductCard extends React.Component {
             <span className={pCard.category}>
               {this.props.producto.category}
             </span>
+            <ReactStars count={5} edit={false} size={15} />
+            <Link
+                  to={{
+                    pathname:
+                    "/products/" + this.props.producto.id + "/review",
+                  }}
+                >
+             <div className="AgregarReview"><AgregarReview id={this.props.producto.id} /> </div>
+             {/* <button type="button" className="btn btn-primary"  value="Agregar Review">Agregar Review</button> */}
+            
+            </Link>
             <span className={pCard.price}> $ {this.props.producto.price}</span>
-            {this.props.producto.stock !== 0 ? (
+              {this.props.producto.stock !== 0 ? (
               <span className={pCard.carrito}>
                 <Link
                   to={{
@@ -43,7 +59,7 @@ class ProductCard extends React.Component {
                     state: this.props.producto.id,
                   }}
                 >
-                  <img
+                 <img
                     alt="carrito"
                     src="/imagenes/carrito-de-compras.png"
                   ></img>

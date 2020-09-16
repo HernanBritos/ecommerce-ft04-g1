@@ -15,6 +15,8 @@ import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
 import CartComponent from "./container/cartcomponent";
 import EditCategory from "./container/EditCategory";
+import AddReviewContainer from "./container/addReviewcontainer";
+
 
 function App() {
   return (
@@ -91,6 +93,14 @@ function App() {
               return <CartComponent c={c} />;
             }}
           />
+          <Route
+            path="/products/:id/review"
+            exact={true}
+            render={(p) => {
+              return <AddReviewContainer producto={p.match.params.id} />;
+            }}
+          />
+         
         </div>
       </main>
     </BrowserRouter>
