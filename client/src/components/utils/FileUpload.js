@@ -27,34 +27,36 @@ function FileUpload(props) {
   };
 
   return (
-    <div className={fUp.fullarea}>
-      <Dropzone onDrop={onDrop} multiple={false} maxSize={800000000}>
-        {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <PlusOutlined
-              style={{
-                width: "150px",
-                height: "150px",
-                color: "grey",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: "26px",
-              }}
+    <div className={fUp.component}>
+      <div className={fUp.fullarea}>
+        <Dropzone onDrop={onDrop} multiple={false} maxSize={800000000}>
+          {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <PlusOutlined
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  color: "grey",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "26px",
+                }}
+              />
+            </div>
+          )}
+        </Dropzone>
+        {Image.path && (
+          <div>
+            <img
+              className={fUp.image}
+              src={`/imagenes/${Image.path}`}
+              alt={`productImg`}
             />
           </div>
         )}
-      </Dropzone>
-      {Image.path && (
-        <div>
-          <img
-            style={{ minWidth: "300px", height: "240px" }}
-            src={`/imagenes/${Image.path}`}
-            alt={`productImg`}
-          />
-        </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import sBar from "./css/searchBarComponent.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-var search = "imagenes/lupa.jpg";
+import SearchIcon from "@material-ui/icons/Search";
 
 class searchBarComponent extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class searchBarComponent extends React.Component {
                 type="submit"
                 onClick={this.cambioFlag}
               >
-                <img className={sBar.img} src={search} alt="searchBtn" />
+                <SearchIcon />
               </button>
             </Link>
             <input

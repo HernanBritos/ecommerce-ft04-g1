@@ -3,6 +3,8 @@ import cComponent from "./css/formproducto.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import FileUpload from "../components/utils/FileUpload";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Select from "react-select";
 
 export default function FormProduct() {
   const [input, setInput] = useState({
@@ -30,13 +32,10 @@ export default function FormProduct() {
   };
 
   const handleCategoryInputChange = function (e) {
-    var categories = "";
-    categories = e.target.name;
     setInput({
       ...input,
-      category: categories,
+      category: e.value,
     });
-    console.log(categories);
   };
 
   const handleSubmit = function (e) {
@@ -67,88 +66,79 @@ export default function FormProduct() {
   };
 
   return (
-    <div className={cComponent.back}>
-      <Link to="/admin">
-        <button className="btn btn-primary">Volver al panel de admin</button>
-      </Link>
-      <form className={cComponent.form} onSubmit={handleSubmit}>
+    <div className={cComponent.formPage}>
+      <div className={cComponent.container}>
+        <div className={cComponent.options}>
+          <Link to="/admin">
+            <button className={cComponent.botonBack}>
+              <ArrowBackIcon />
+            </button>
+          </Link>
+        </div>
         <div className={cComponent.upload}>
-          <h1 className={`my-3 ${cComponent.tituloForm}`}>
-            Añadir Producto...{" "}
-          </h1>
+          <h3>Añadir Producto</h3>
           <FileUpload refreshFunction={UpdateImages} />
         </div>
-        <div className={cComponent.Fcontent}>
-          <div className="form-group">
-            <label htmlFor="productname">Nombre de producto: </label>
+        <form className={cComponent.form} onSubmit={handleSubmit}>
+          <div className={cComponent.name}>
+            <label htmlFor="name">Nombre de producto: </label>
             <input
+              placeholder="Nombre"
               name="name"
               value={input.name}
               type="text"
               onChange={handleInputChange}
-              className="form-control"
-              id="ProductName"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="productname">Categoria: </label>
-            <fieldset aria-labelledby="lblDBXP">
-              <div id="choicelist">
-                {categories &&
-                  categories.map((cat) => (
-                    <div key={cat.id}>
-                      <input
-                        name={cat.name}
-                        type="radio"
-                        id={cat.id}
-                        onChange={handleCategoryInputChange}
-                      />
-                      <label htmlFor={cat.id} aria-label="categories">
-                        {cat.name}
-                      </label>
-                    </div>
-                  ))}
-              </div>
-            </fieldset>
+          <div className={cComponent.categories}>
+            <span>Categoria: </span>
+            <Select
+              placeholder="Elija categoría"
+              onChange={handleCategoryInputChange}
+              options={categories.map((opt) => ({
+                label: opt.name,
+                value: opt.name,
+              }))}
+            />
           </div>
-          <div className="form-group">
-            <label htmlFor="description">Descripcion: </label>
+          <button className={cComponent.botonAdd} type="submit">
+            Añadir a Productos
+          </button>
+          <div className={cComponent.description}>
+            <span>Descripcion: </span>
             <textarea
-              className="form-control"
-              rows="3"
+              placeholder="Ingrese descripcion"
+              rows="2"
               name="description"
               value={input.description}
               onChange={handleInputChange}
               id="Description"
             ></textarea>
           </div>
-          <div className="form-group">
-            <label htmlFor="price">Precio: </label>
+          <div className={cComponent.price}>
+            <span>Precio: </span>
             <input
+              placeholder="Diga un precio"
               name="price"
               value={input.price}
               type="real"
               onChange={handleInputChange}
-              className="form-control"
               id="price"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="stock">Cantidad: </label>
+          <div className={cComponent.stock}>
+            <span>Cantidad: </span>
             <input
+              placeholder="Especifique stock"
               name="stock"
               value={input.stock}
               type="number"
               onChange={handleInputChange}
-              className="form-control"
               id="stock"
             />
           </div>
-          <button type="submit" className="btn-success">
-            Añadir a Productos
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
