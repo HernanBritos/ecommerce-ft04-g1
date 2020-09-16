@@ -15,10 +15,12 @@ function SideBarComponent(props) {
 
   return (
     <div>
-      <div className={sBar.auth}>
-        <button className={sBar.signIn} href="#">
-          Iniciar Sesion
-        </button>
+      <div >
+        <Link to="/login">
+          <button className={sBar.signIn} href="#">
+            Iniciar Sesion
+          </button>
+        </Link>
         <Link to="/users/signup">
           <button className={sBar.signUp} href="#">
             Registrarse

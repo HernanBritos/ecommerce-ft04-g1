@@ -15,6 +15,7 @@ import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
 import CartComponent from "./container/cartcomponent";
 import EditCategory from "./container/EditCategory";
+import Login from "./components/loginComp"; 
 
 function App() {
   return (
@@ -89,6 +90,13 @@ function App() {
             exact={true}
             render={(c) => {
               return <CartComponent c={c} />;
+            }}
+          />
+          <Route 
+            path="/login"
+            exact={true}
+            render={(u) => {
+              return <Login u={u} />;
             }}
           />
         </div>

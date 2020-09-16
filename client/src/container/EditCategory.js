@@ -72,7 +72,7 @@ export default function EditCategory(props) {
           )}
 
           <button type="submit" className="btn-success">
-            Modificar producto
+            Modificar categoria
           </button>
         </div>
       </form>
