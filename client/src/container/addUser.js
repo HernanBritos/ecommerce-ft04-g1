@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import cComponent from "./css/formproducto.module.css";
+import cComponent from "./css/formUser.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 function FormUser(props) {
   const [user, setUser] = useState({
@@ -38,68 +39,90 @@ function FormUser(props) {
   };
 
   return (
-    <div className={cComponent.back}>
-      <Link to="/">
-        <button className="btn btn-primary">Volver al panel de admin</button>
-      </Link>
-      <form className={cComponent.form} onSubmit={handleSubmit}>
-        <h1 className={`my-3 ${cComponent.tituloForm}`}>Registrarse </h1>
-        <div className={cComponent.Fcontent}>
-          <div className="form-group">
-            <label htmlFor="productname">Nombre </label>
+    <div className={cComponent.formPage}>
+      <div className={cComponent.container}>
+        <div className={cComponent.options}>
+          <Link to="/admin">
+            <button className={cComponent.botonBack}>
+              <ArrowBackIcon />
+            </button>
+          </Link>
+        </div>
+        <div className={cComponent.upload}>
+          <h3>Registrarse</h3>
+        </div>
+        <form className={cComponent.form} onSubmit={handleSubmit}>
+          <div className={cComponent.name}>
+            <label htmlFor="name">Nombre: </label>
             <input
+              placeholder="Nombre"
               name="name"
-              onChange={handleInputChange}
               value={user.name}
               type="text"
+              onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="apellido">Apellido </label>
+
+          <div className={cComponent.price}>
+            <span>Apellido: </span>
             <input
+              placeholder="Apellido"
               name="lastname"
-              onChange={handleInputChange}
               value={user.lastname}
+              type="text"
+              onChange={handleInputChange}
+              id="price"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="description">Email </label>
+          <div className={cComponent.price}>
+            <span>Email: </span>
             <input
+              placeholder="Email"
               name="email"
-              onChange={handleInputChange}
               value={user.email}
+              type="text"
+              onChange={handleInputChange}
+              id="price"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Contraseña </label>
+          <div className={cComponent.price}>
+            <span>Contraseña: </span>
             <input
+              placeholder="Contraseña"
               name="password"
-              onChange={handleInputChange}
               value={user.password}
               type="password"
+              onChange={handleInputChange}
+              id="price"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="phone">Teléfono </label>
+          <div className={cComponent.price}>
+            <span>Teléfono: </span>
             <input
+              placeholder="Telefono"
               name="phone"
-              onChange={handleInputChange}
               value={user.phone}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="address">Direccion </label>
-            <input
-              name="address"
+              type="text"
               onChange={handleInputChange}
-              value={user.address}
+              id="price"
             />
           </div>
-          <button type="submit" className="btn-success">
-            Registrarse
+          <div className={cComponent.stock}>
+            <span>Direccion: </span>
+            <input
+              placeholder="Direccion"
+              name="address"
+              value={user.address}
+              type="text"
+              onChange={handleInputChange}
+              id="stock"
+            />
+          </div>
+          <button className={cComponent.botonAdd} type="submit">
+            Crear cuenta
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
