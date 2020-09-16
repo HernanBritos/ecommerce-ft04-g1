@@ -3,7 +3,7 @@
   border-bottom: 1px dotted #ccc;
   cursor: pointer;
   padding: 10px;
-  background: rgb(250, 186, 122);
+  background: #fde195;
   font-family: "Lato";
   border-radius: 10px;
   margin-right: 10px;
@@ -16,9 +16,43 @@
 
 .botones {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding-top: 6px;
+}
+.buttonNew {
+  background: #fcb064;
+  border-style: none;
   border-radius: 10px;
+  color: white;
+}
+.editar {
+  width: 70px;
+  height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fde195;
+  margin-right: 7px;
+  border-radius: 7px;
+  border-style: none;
+  font-size: 16px;
+  box-shadow: 0.3px 0.3px 1.3px rgb(0, 0, 0);
+  color: rgb(83, 83, 83);
+}
+.borrar {
+  width: 70px;
+  height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(247, 161, 76);
+  border-radius: 7px;
+  border-style: none;
+  font-size: 17px;
+  box-shadow: 0.3px 0.3px 1.3px rgb(0, 0, 0);
+  color: white;
 }

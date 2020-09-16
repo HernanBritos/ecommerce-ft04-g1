@@ -17,7 +17,7 @@ export default function AdminAddProduct() {
       <md-content layout-padding>
         <div className={cComponent.actionpane}>
           <Link to="/admin/products/add">
-            <button className="btn btn-success">Nuevo Producto</button>
+            <button className={cComponent.buttonNew}>Nuevo Producto</button>
           </Link>
           <center>
             <h2>Productos</h2>
@@ -66,9 +66,9 @@ export default function AdminAddProduct() {
                     <td>{product.img}</td>
                     <td className={cComponent.botones}>
                       <Link to={`/admin/products/edit/${product.id}`}>
-                        <button className="btn btn-primary">Editar</button>
+                        <button className={cComponent.editar}>Editar</button>
                       </Link>
-                      <button onClick={borrar} className="btn btn-danger">
+                      <button onClick={borrar} className={cComponent.borrar}>
                         Eliminar
                       </button>
                     </td>

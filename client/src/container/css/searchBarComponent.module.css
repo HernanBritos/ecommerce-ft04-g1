@@ -2,48 +2,35 @@
 .bar {
   width: 330px;
   height: 63px;
-  background: rgb(255, 237, 189);
+  background: #f8e4ab;
   border-radius: 15px;
   display: flex;
   align-items: center;
   padding: 0px 0 0 6px;
-  box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(68, 67, 67);
+  box-shadow: 0.3px 0.3px 1.5px rgb(83, 83, 83);
 }
 /**Boton**/
-.img {
+.boton {
   width: 42px;
   height: 40px;
   cursor: pointer;
   border-radius: 50px;
   border-style: none;
-  box-shadow: 0.5px 0.4px 0.5px 0.5px rgb(83, 83, 83);
+  box-shadow: 0.3px 0.3px 1.5px rgb(83, 83, 83);
+  background: white;
+  margin-left: 10px;
 }
-.boton {
-  width: 17px;
-  height: 16px;
-  background: transparent;
-  border-style: none;
-  margin-bottom: 22px;
-  margin-right: 5px;
-}
-/* .img:hover {
-  box-shadow: 0.5px 0.5px rgb(68, 67, 67);
-} */
-/**Input**/
+
 .search {
   width: 240px;
   height: 40px;
-  background: rgb(252, 245, 245);
+  background: rgb(255, 255, 255);
   border-radius: 10px;
   border-style: none;
-  box-shadow: 0.5px 0.4px 0.5px 0.5px rgb(83, 83, 83);
+  box-shadow: 0.3px 0.3px 1.5px rgb(83, 83, 83);
   border-width: 0.8px;
   padding-left: 10px;
   padding-bottom: 5px;
-  margin-left: 40px;
+  margin-left: 15px;
   margin-top: 2px;
 }
-/* .search:hover {
-}
-.search:focus {
-} */

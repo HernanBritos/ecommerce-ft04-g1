@@ -1,12 +1,12 @@
 .header {
   height: 100px;
   width: 100%;
-  background: rgb(250, 186, 122);
+  background: #fcb064;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  box-shadow: 0.8px 0.5px 0.5px 0.5px rgb(43, 42, 42);
+  box-shadow: 0.3px 0.3px 1.2px rgb(119, 118, 118);
 }
 .searchbar {
   margin-right: 20px;
@@ -15,8 +15,10 @@
   font-size: 50px;
   font-family: "Lobster", cursive;
   color: white;
-  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
-  text-shadow: 0.5px 0.4px 1px rgb(14, 13, 13);
+  -webkit-text-stroke: 0.4px rgb(0, 0, 0);
+  text-shadow: 0.3px 0.3px 1px rgb(14, 13, 13);
+  margin-left: 200px;
+  letter-spacing: 0.25rem;
 }
 /* .brand:hover {
   text-shadow: 0.5px 0.4px 0.5px 0.5px rgb(83, 83, 83);
@@ -35,12 +37,12 @@
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  text-shadow: 0.5px 0.4px 2px rgb(0, 0, 0);
+  text-shadow: 0.3px 0.3px 1.5px rgb(0, 0, 0);
 }
 
 .botoncart {
   position: absolute;
-  margin-left: 19%;
+  margin-left: 8%;
   bottom: 26%;
 }
 /* .cartboton:hover {
@@ -52,7 +54,7 @@
   background: white;
   border-radius: 6px;
   border-style: none;
-  box-shadow: 0.5px 0.4px 0.5px 0.5px rgb(83, 83, 83);
+  box-shadow: 0.3px 0.3px 1px rgb(83, 83, 83);
 }
 .cartbotonimg {
   width: 25px;
