@@ -316,7 +316,7 @@ server.delete("/:id/review/:idReview", (req, res) => {
   const id = req.params.id;
   const idReview = req.params.idReview;
   Review.destroy({
-    where: { productId: id },
+    where: { id: idReview },
   }).then((removed) => {
     if (removed) {
       res.status(200).end();

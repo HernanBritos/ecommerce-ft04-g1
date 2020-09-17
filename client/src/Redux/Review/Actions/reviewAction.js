@@ -1,5 +1,10 @@
 import axios from "axios";
-import { ADD_REVIEW, GET_REVIEWS } from "../Constants/reviewConstants";
+import {
+  ADD_REVIEW,
+  GET_REVIEWS,
+  DELETE_REVIEW,
+  GET_REVIEWS_REQUEST,
+} from "../Constants/reviewConstants";
 import Cookie from "js-cookie";
 
 const addReview = (review) => {
@@ -14,6 +19,15 @@ const getReviews = (reviews) => {
     type: GET_REVIEWS,
     reviews,
   };
+};
+
+const deleteReview = (reviewId, productId) => async (dispatch) => {
+  await axios
+    .delete(`http://localhost:3001/products/${productId}/review/${reviewId}`)
+    .then((res) => {
+      return res;
+    });
+  dispatch({ type: DELETE_REVIEW, payload: reviewId });
 };
 
 const setReview = (productId, review) => async (dispatch) => {
@@ -40,6 +54,7 @@ const setRating = (productId, suma) => async (dispatch) => {
 
 const fetchReviews = (productId) => async (dispatch, getState) => {
   try {
+    dispatch({ type: GET_REVIEWS_REQUEST });
     const { data } = await axios.get(
       `http://localhost:3001/products/${productId}/review`
     );
@@ -50,4 +65,11 @@ const fetchReviews = (productId) => async (dispatch, getState) => {
   } catch (error) {}
 };
 
-export { addReview, getReviews, setReview, fetchReviews, setRating };
+export {
+  addReview,
+  getReviews,
+  setReview,
+  fetchReviews,
+  setRating,
+  deleteReview,
+};

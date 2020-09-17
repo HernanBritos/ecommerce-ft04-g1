@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   padding-top: 150px;
+  padding-bottom: 100px;
 }
 .container {
   width: 90%;
@@ -95,4 +96,26 @@
 }
 .review {
   margin: 10px;
+  background: white;
+  width: 200px;
+  padding: 10px 0 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.contenido {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.botonEdit button {
+  border-style: none;
+  height: 30px;
+  background: rgb(255, 255, 255);
+}
+.botonDelete button {
+  border-style: none;
+  height: 30px;
+  background: rgb(255, 255, 255);
 }

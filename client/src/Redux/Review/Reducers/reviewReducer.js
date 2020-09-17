@@ -1,4 +1,9 @@
-import { ADD_REVIEW, GET_REVIEWS } from "../Constants/reviewConstants";
+import {
+  ADD_REVIEW,
+  GET_REVIEWS,
+  DELETE_REVIEW,
+  GET_REVIEWS_REQUEST,
+} from "../Constants/reviewConstants";
 
 function addReviewReducer(state = {}, action) {
   switch (action.type) {
@@ -10,10 +15,23 @@ function addReviewReducer(state = {}, action) {
 }
 
 function getReviewReducer(state = { reviews: [] }, action) {
+  const filter = (el) => {
+    return el.id !== action.payload;
+  };
   switch (action.type) {
+    case GET_REVIEWS_REQUEST:
+      return {
+        loadingRev: true,
+        reviews: [],
+      };
     case GET_REVIEWS:
-      return (state = {
+      return {
         reviews: action.payload,
+        loadingRev: false,
+      };
+    case DELETE_REVIEW:
+      return (state = {
+        reviews: state.reviews.filter(filter),
       });
     default:
       return state;

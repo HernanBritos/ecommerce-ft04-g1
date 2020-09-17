@@ -16,53 +16,51 @@ function SideBarComponent(props) {
 
   return (
     <div>
-      <div >
-        <Link to="/login">
-          <button className={sBar.signIn} href="#">
-            Iniciar Sesion
-          </button>
-        </Link>
-      <div className={sBar.auth}>
-        <button className={sBar.signIn} href="#">
-          Iniciar Sesión
-        </button>
-        <Link to="/users/signup">
-          <button className={sBar.signUp} href="#">
-            Registrarse
-          </button>
-        </Link>
-      </div>
-      <button className={sBar.closeButton} onClick={props.onclose}>
-        x
-      </button>
-      <label className={sBar.filtro}>Filtrar por categoria: </label>
-      <div className={sBar.categories}>
-        {loadingCat ? (
-          <div className="alert alert-success">Cargando...</div>
-        ) : errorCat ? (
-          <div className="alert alert-danger">
-            Se produjo un error, por favor inténtelo de nuevo más tarde.
-          </div>
-        ) : (
-          categories.length > 0 &&
-          categories.map((cat) => (
-            <div key={cat.id}>
-              <Link to={"/products/categoria/" + cat.name}>
-                <button className={`${sBar.category}`}>
-                  <p>{cat.name}</p>
-                </button>
-              </Link>
-            </div>
-          ))
-        )}
-      </div>
-      <Link to="/admin">
-        <div className={sBar.admin}>
-          <button className={`btn btn-secondary`}>
-            <SupervisorAccountIcon />
-          </button>
+      <div>
+        <div className={sBar.auth}>
+          <Link to="/login">
+            <button className={sBar.signIn} href="#">
+              Iniciar Sesion
+            </button>
+          </Link>
+          <Link to="/users/signup">
+            <button className={sBar.signUp} href="#">
+              Registrarse
+            </button>
+          </Link>
         </div>
-      </Link>
+        <button className={sBar.closeButton} onClick={props.onclose}>
+          x
+        </button>
+        <label className={sBar.filtro}>Filtrar por categoria: </label>
+        <div className={sBar.categories}>
+          {loadingCat ? (
+            <div className="alert alert-success">Cargando...</div>
+          ) : errorCat ? (
+            <div className="alert alert-danger">
+              Se produjo un error, por favor inténtelo de nuevo más tarde.
+            </div>
+          ) : (
+            categories.length > 0 &&
+            categories.map((cat) => (
+              <div key={cat.id}>
+                <Link to={"/products/categoria/" + cat.name}>
+                  <button className={`${sBar.category}`}>
+                    <p>{cat.name}</p>
+                  </button>
+                </Link>
+              </div>
+            ))
+          )}
+        </div>
+        <Link to="/admin">
+          <div className={sBar.admin}>
+            <button className={`btn btn-secondary`}>
+              <SupervisorAccountIcon />
+            </button>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }

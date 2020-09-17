@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import cComponent from "./css/addReviewContainer.module.css";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import Select from "react-select";
 import {
   fetchReviews,
   setReview,
   setRating,
+  deleteReview,
 } from "../Redux/Review/Actions/reviewAction.js";
 import { useSelector, useDispatch } from "react-redux";
 import ReactStars from "react-rating-stars-component";
@@ -20,7 +23,7 @@ export default function AddReviewContainer(props) {
 
   const dispatch = useDispatch();
   const getReviews = useSelector((state) => state.getReviews);
-  const { reviews } = getReviews;
+  const { loadingRev, reviews } = getReviews;
 
   // const [categories, setCategories] = useState([]);
 
@@ -123,20 +126,48 @@ export default function AddReviewContainer(props) {
           </button>
         </form>
         <div className={cComponent.reviews}>
-          {reviews.map((review) => (
-            <div className={cComponent.review}>
-              <p>{review.title}</p>
-              <p>{review.description}</p>
-              <span>
-                <ReactStars
-                  count={5}
-                  edit={false}
-                  value={review.star}
-                  size={15}
-                />
-              </span>
-            </div>
-          ))}
+          {loadingRev ? (
+            <div className="alert-info">Loading..</div>
+          ) : (
+            reviews.map((review) => {
+              const rating = review.star;
+              const rId = review.id;
+              const onEdit = () => {
+                console.log("editar");
+              };
+
+              const onDelete = () => {
+                dispatch(deleteReview(rId, props.producto));
+              };
+
+              return (
+                <div className={cComponent.review}>
+                  <div className={cComponent.botonDelete}>
+                    <button onClick={onDelete}>
+                      <DeleteIcon style={{ width: "20px", height: "20px" }} />
+                    </button>
+                  </div>
+                  <div className={cComponent.contenido}>
+                    <p>{review.title}</p>
+                    <p>{review.description}</p>
+                    <span>
+                      <ReactStars
+                        count={5}
+                        edit={false}
+                        value={rating}
+                        size={15}
+                      />
+                    </span>
+                  </div>
+                  <div className={cComponent.botonEdit}>
+                    <button onClick={onEdit}>
+                      <EditIcon style={{ width: "20px", height: "20px" }} />
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </div>
