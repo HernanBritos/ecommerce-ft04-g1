@@ -14,6 +14,7 @@ import {
   userDetailsReducer,
 } from "../Users/reducers/userReducer";
 import thunk from "redux-thunk";
+import {addReviewReducer, getReviewReducer} from "../Review/Reducers/reviewReducer"
 
 const cartItems = Cookie.getJSON("cartItems") || [];
 
@@ -29,6 +30,8 @@ const reducer = combineReducers({
   categoryEdit: initialState,
   categoryDetails: categoryDetailsReducer,
   userEdit: initialState,
+  addReview: addReviewReducer,
+  getReviews: getReviewReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
