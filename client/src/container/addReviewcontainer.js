@@ -40,6 +40,7 @@ export default function AddReviewContainer(props) {
     });
   };
 
+
   const handleSubmit = function (e) {
     e.preventDefault();
     dispatch(setReview(props.producto, input));
@@ -160,9 +161,14 @@ export default function AddReviewContainer(props) {
                     </span>
                   </div>
                   <div className={cComponent.botonEdit}>
+                  <Link to={{
+                    pathname:("/products/" + `${props.producto}` + "/review/" + `${review.id}` + "/edit"),
+                    }}
+                    >
                     <button onClick={onEdit}>
                       <EditIcon style={{ width: "20px", height: "20px" }} />
                     </button>
+                  </Link>
                   </div>
                 </div>
               );
