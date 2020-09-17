@@ -24,5 +24,9 @@ module.exports = (sequelize) => {
     stock: {
       type: DataTypes.INTEGER,
     },
+    rating: {
+      type: DataTypes.REAL,
+      allowNull: true,
+    },
   });
 };
