@@ -1,9 +1,11 @@
 const { DataTypes } = require('sequelize');
+const crypto =require('crypto');
+
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('user', {
+  var user =sequelize.define('user', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -15,10 +17,34 @@ module.exports = (sequelize) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: true,
+        isEmail: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      set(value) {
+        const creatSalt = user.randomSalt();
+        this.setDataValue('salt', creatSalt)
+        this.setDataValue(
+          'password',
+          crypto
+          .createHmac('sha1', this.salt)
+          .update(value)
+          .digest('hex'),
+        );
+      },
+    },
+    salt: {
+      type: DataTypes.STRING,
+    },
+    rol: {
+      type: DataTypes.ENUM,
+      values: ['user','admin'],
+      defaultValue: 'user',
     },
     phone: {
       type: DataTypes.STRING,
@@ -29,4 +55,17 @@ module.exports = (sequelize) => {
       allowNull: false,
     }
   });
+
+  user.randomSalt = function() {
+    return crypto.randomBytes(32).toString('hex');
+  }
+
+  user.checkPassword = function(password) {
+    return (
+      crypto
+        .createHmac('sha1' , this.salt)
+        .update(password)
+        .digest('hex') === this.password
+    );
+  };
 };
