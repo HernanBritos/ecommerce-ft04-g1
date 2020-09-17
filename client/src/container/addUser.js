@@ -3,6 +3,8 @@ import cComponent from "./css/formUser.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { addUser } from "../Redux/Users/actions/userActions";
+import { useSelector, useDispatch } from "react-redux";
 
 function FormUser(props) {
   const [user, setUser] = useState({
@@ -13,6 +15,7 @@ function FormUser(props) {
     phone: "",
     address: "",
   });
+  const dispatch = useDispatch();
 
   const handleInputChange = function (e) {
     setUser({
@@ -23,19 +26,7 @@ function FormUser(props) {
 
   const handleSubmit = function (e) {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/users", {
-        name: `${user.name}`,
-        lastname: `${user.lastname}`,
-        email: `${user.email}`,
-        password: `${user.password}`,
-        phone: `${user.phone}`,
-        address: `${user.address}`,
-      })
-      .then((data) => {
-        return data;
-      });
-    return (window.location = "http://localhost:3000/");
+    dispatch(addUser(user));
   };
 
   return (

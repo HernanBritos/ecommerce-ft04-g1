@@ -22,30 +22,28 @@ const dispatch = useDispatch();
 const getReviews = useSelector((state) => state.getReviews);
 const { loadingRev, reviews } = getReviews;
 
-console.log(props)
+const handleInputChange = function (e) {
+setInput({
+    ...input,
+    [e.target.name]: e.target.value,
+});
+};
+const handleInputStarChange = function (e) {
+setInput({
+    ...input,
+    star: e.value,
+});
+};
 
-  const handleInputChange = function (e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const handleInputStarChange = function (e) {
-    setInput({
-      ...input,
-      star: e.value,
-    });
-  };
-
-  const handleSubmit = function (e) {
-    e.preventDefault();
-    dispatch(updateReview(props.props.match.params.id, input));
-    var suma =
-      reviews.reduce((acc, num) => {
-        return acc + num.star;
-      }, 0) / reviews.length;
-    dispatch(setRating(props.props.match.params.id, suma));
-  };
+const handleSubmit = function (e) {
+e.preventDefault();
+dispatch(updateReview(props.props.match.params.id, input));
+var suma =
+    reviews.reduce((acc, num) => {
+    return acc + num.star;
+    }, 0) / reviews.length;
+dispatch(setRating(props.props.match.params.id, suma));
+};
 
  return (
     <div className={cComponent.formPage}>
