@@ -46,7 +46,7 @@ function CartComponent(props) {
             <div className={`${cComponent.cards}`}>
               <img
                 className={`${cComponent.cardImage}`}
-                src={`/imagenes/${el.img}`}
+                src={`/imagenes/uploads/${el.img}`}
                 alt="fotoCarrito"
               />
               <div className={`${cComponent.cardDet}`}>

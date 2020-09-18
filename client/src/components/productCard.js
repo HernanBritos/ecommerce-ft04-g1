@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import pCard from "./css/productCard.module.css";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
@@ -16,8 +16,9 @@ function ProductCard(props) {
         <div className={pCard.image}>
           {props.producto.img.includes("jpg") ? (
             <img
-              src={`/imagenes/${props.producto.img}`}
-              alt="productCardImage"
+              src={`/imagenes/uploads/${props.producto.img}`}
+              alt=""
+              lazyload="true"
             ></img>
           ) : (
             <img src={`${placeholder}`} alt="productCardImage"></img>
@@ -32,6 +33,7 @@ function ProductCard(props) {
             }}
           >
             <ReactStars
+              classNames={pCard.stars}
               count={5}
               value={props.producto.rating}
               edit={false}

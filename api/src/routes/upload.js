@@ -3,7 +3,7 @@ const multer = require("multer");
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../client/public/imagenes/");
+    cb(null, "../client/public/imagenes/uploads");
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`);
@@ -24,8 +24,8 @@ server.post("/", (req, res) => {
     if (err) return res.json({ success: false, err });
     return res.json({
       success: true,
-      image: res.req.file.filename,
-      fileName: res.req.file.filepath,
+      image: res.req.file.path,
+      fileName: res.req.file.filename,
     });
   });
 });

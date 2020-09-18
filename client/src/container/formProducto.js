@@ -14,6 +14,11 @@ export default function FormProduct() {
     price: "",
     stock: "",
     img: "",
+    rating: 0,
+  });
+
+  const [image, setImage] = useState({
+    img: "",
   });
 
   const [categories, setCategories] = useState([]);
@@ -46,8 +51,9 @@ export default function FormProduct() {
         description: `${input.description}`,
         category: `${input.category}`,
         price: `${input.price}`,
-        img: `${input.img}`,
+        img: `${image.img}`,
         stock: `${input.stock}`,
+        rating: `${input.rating}`,
       })
       .then((data) => {
         return data;
@@ -62,7 +68,7 @@ export default function FormProduct() {
   }, []);
 
   const UpdateImages = (newImages) => {
-    setInput({ img: newImages });
+    setImage({ img: newImages });
   };
 
   return (

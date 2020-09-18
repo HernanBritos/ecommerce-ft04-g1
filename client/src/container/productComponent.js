@@ -40,8 +40,9 @@ function ProductComponent(props) {
             <div className={`${cComponent.cards}`}>
               <img
                 className={`${cComponent.cardImage}`}
-                src={`/imagenes/${productDet.img}`}
-                alt="fotoCarrito"
+                src={`/imagenes/uploads/${productDet.img}`}
+                alt=""
+                lazyload="true"
               />
               <div className={cComponent.prodDet}>
                 <div className={`${cComponent.cardDet}`}>{productDet.name}</div>

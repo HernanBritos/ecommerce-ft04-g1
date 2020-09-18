@@ -70,3 +70,7 @@ a {
   width: 20px;
   height: 20px;
 }
+.stars {
+  position: static !important;
+  z-index: auto !important;
+}
