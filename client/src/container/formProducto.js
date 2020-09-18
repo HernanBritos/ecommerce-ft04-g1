@@ -14,7 +14,6 @@ export default function FormProduct() {
     price: "",
     stock: "",
     img: "",
-    rating: 0,
   });
 
   const [image, setImage] = useState({
@@ -53,7 +52,6 @@ export default function FormProduct() {
         price: `${input.price}`,
         img: `${image.img}`,
         stock: `${input.stock}`,
-        rating: `${input.rating}`,
       })
       .then((data) => {
         return data;

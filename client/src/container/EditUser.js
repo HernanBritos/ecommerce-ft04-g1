@@ -33,7 +33,7 @@ export default function EditUserForm(props) {
   useEffect(() => {
     dispatch(getUserDetails(props.usuario));
     setUserInput(userDet);
-  }, [dispatch, props.usuario]);
+  }, [dispatch, props.usuario, userDet]);
 
   return (
     <div className={cComponent.page}>

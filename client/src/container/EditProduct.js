@@ -62,7 +62,7 @@ export default function EditProduct(props) {
     dispatch(detailsProduct(props.producto));
     dispatch(listCategory());
     setProductInput(productDet);
-  }, [dispatch, props.producto]);
+  }, [dispatch, props.producto, productDet]);
 
   // Todo lo que voy a renderizar en la pagina
   return (

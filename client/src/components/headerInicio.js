@@ -30,6 +30,7 @@ function HeaderInicio() {
               <img
                 src={`/imagenes/carrito-de-compras.png`}
                 className={hInicio.cartbotonimg}
+                alt=" "
               />
             </button>
           </div>
