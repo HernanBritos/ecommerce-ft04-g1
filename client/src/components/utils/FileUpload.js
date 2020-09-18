@@ -7,19 +7,21 @@ function FileUpload(props) {
   const [Image, setImage] = useState({
     path: "",
   });
-
+  const [Loading, setLoading] = useState(false);
   const onDrop = (files) => {
+    setLoading(true);
     let formData = new FormData();
     const config = {
       header: { "content-type": "multipart/form-data" },
     };
     formData.append("file", files[0]);
-    axios
+    return axios
       .post("http://localhost:3001/product/upload", formData, config)
       .then((response) => {
-        if (response.data.success) {
-          setImage({ path: response.data.image });
-          props.refreshFunction(response.data.image);
+        if (response.data.success === true) {
+          setImage({ path: response.data.fileName });
+          props.refreshFunction(response.data.fileName);
+          setLoading(false);
         } else {
           alert("Failed to save the image in server");
         }
@@ -47,14 +49,17 @@ function FileUpload(props) {
             </div>
           )}
         </Dropzone>
-        {Image.path && (
+        {!Loading ? (
           <div>
             <img
               className={fUp.image}
-              src={`/imagenes/${Image.path}`}
-              alt={`productImg`}
+              src={`/imagenes/uploads/${Image.path}`}
+              alt={` `}
+              lazyload="true"
             />
           </div>
+        ) : (
+          <div className="alert alert-info">Cargando...</div>
         )}
       </div>
     </div>

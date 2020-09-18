@@ -40,7 +40,6 @@ export default function AddReviewContainer(props) {
     });
   };
 
-
   const handleSubmit = function (e) {
     e.preventDefault();
     dispatch(setReview(props.producto, input));
@@ -127,49 +126,53 @@ export default function AddReviewContainer(props) {
           </button>
         </form>
         <div className={cComponent.reviews}>
-          {loadingRev ? (
-            <div className="alert-info">Loading..</div>
-          ) : (
-            reviews.map((review) => {
-              const rating = review.star;
-              const rId = review.id;
-              const onDelete = () => {
-                dispatch(deleteReview(rId, props.producto));
-              };
+          {reviews.map((review) => {
+            const rating = review.star;
+            const rId = review.id;
+            const onDelete = () => {
+              dispatch(deleteReview(rId, props.producto));
+            };
 
-              return (
-                <div className={cComponent.review}>
-                  <div className={cComponent.botonDelete}>
-                    <button onClick={onDelete}>
-                      <DeleteIcon style={{ width: "20px", height: "20px" }} />
-                    </button>
-                  </div>
-                  <div className={cComponent.contenido}>
-                    <p>{review.title}</p>
-                    <p>{review.description}</p>
-                    <span>
-                      <ReactStars
-                        count={5}
-                        edit={false}
-                        value={rating}
-                        size={15}
-                      />
-                    </span>
-                  </div>
-                  <div className={cComponent.botonEdit}>
-                  <Link to={{
-                    pathname:("/products/" + `${props.producto}` + "/review/" + `${review.id}` + "/edit"),
+            return loadingRev ? (
+              <div className="alert-info">Loading..</div>
+            ) : (
+              <div className={cComponent.review}>
+                <div className={cComponent.botonDelete}>
+                  <button onClick={onDelete}>
+                    <DeleteIcon style={{ width: "20px", height: "20px" }} />
+                  </button>
+                </div>
+                <div className={cComponent.contenido}>
+                  <p>{review.title}</p>
+                  <p>{review.description}</p>
+                  <span>
+                    <ReactStars
+                      count={5}
+                      edit={false}
+                      value={rating}
+                      size={15}
+                    />
+                  </span>
+                </div>
+                <div className={cComponent.botonEdit}>
+                  <Link
+                    to={{
+                      pathname:
+                        "/products/" +
+                        `${props.producto}` +
+                        "/review/" +
+                        `${review.id}` +
+                        "/edit",
                     }}
-                    >
-                    <button >
+                  >
+                    <button>
                       <EditIcon style={{ width: "20px", height: "20px" }} />
                     </button>
                   </Link>
-                  </div>
                 </div>
-              );
-            })
-          )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
