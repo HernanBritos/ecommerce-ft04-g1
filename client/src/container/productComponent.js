@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { detailsProduct } from "../Redux/Products/Actions/productActions";
 import cComponent from "./css/productComponent.module.css";
-import { addToCart } from "../Redux/Cart/Actions/cartActions";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
-var placeholder = "/imagenes/Placeholder.png";
+import ReactStars from "react-rating-stars-component";
 
 function ProductComponent(props) {
   const [qty, setQty] = useState(1);
@@ -38,36 +36,56 @@ function ProductComponent(props) {
         ) : (
           <div className={`${cComponent.carritoPage}`}>
             <div className={`${cComponent.cards}`}>
-              <img
-                className={`${cComponent.cardImage}`}
-                src={`/imagenes/uploads/${productDet.img}`}
-                alt=""
-                lazyload="true"
-              />
-              <div className={cComponent.prodDet}>
-                <div className={`${cComponent.cardDet}`}>{productDet.name}</div>
-                <h4 className={cComponent.cardCat}>{productDet.category}</h4>
-                <div className={cComponent.cardDesc}>
-                  <p>
-                    <i>{productDet.description}</i>
-                  </p>
-                </div>
+              <div className={cComponent.stcolumn}>
+                <img
+                  className={`${cComponent.cardImage}`}
+                  src={`/imagenes/uploads/${productDet.img}`}
+                  alt=""
+                  lazyload="true"
+                />
 
-                <div className={`${cComponent.qty}`}>
-                  <label htmlFor="stock">Cantidad: </label>
-                  <input
-                    name="stock"
-                    type="number"
-                    className="form-control"
-                    id="stock"
-                    value={qty}
-                    onChange={(e) => {
-                      setQty(e.target.value);
-                    }}
+                <div className={`${cComponent.cardDet}`}>
+                  {productDet.name}
+                  <h4 className={cComponent.cardCat}>{productDet.category}</h4>
+                  <div className={cComponent.cardDesc}>
+                    <p>
+                      <i>{productDet.description}</i>
+                    </p>
+                  </div>
+                  <ReactStars
+                    count={5}
+                    value={productDet.rating}
+                    edit={false}
+                    size={15}
+                    isHalf={true}
                   />
+                  <div className={`${cComponent.qty}`}>
+                    <label htmlFor="stock">Cantidad: </label>
+                    <input
+                      name="stock"
+                      type="number"
+                      className="form-control"
+                      id="stock"
+                      value={qty}
+                      onChange={(e) => {
+                        setQty(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <Link
+                    to={{
+                      pathname: "/products/" + props.producto.id + "/review",
+                    }}
+                  >
+                    <button className={cComponent.addreview}>
+                      Dejá tu opinión
+                    </button>
+                  </Link>
                 </div>
+              </div>
+              <div className={cComponent.ndcolumn}>
                 <div className={`${cComponent.cardPrice}`}>
-                  <h4>Precio</h4>
+                  <h5>Precio</h5>
                   <span>$ {productDet.price}</span>
                 </div>
                 <button

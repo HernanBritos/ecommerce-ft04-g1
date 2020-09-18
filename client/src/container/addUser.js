@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import cComponent from "./css/formUser.module.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { addUser } from "../Redux/Users/actions/userActions";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function FormUser(props) {
   const [user, setUser] = useState({

@@ -12,14 +12,14 @@ import { useSelector, useDispatch } from "react-redux";
 export default function EditReviewContainer(props) {
   const [input, setInput] = useState({
     id: props.props.match.params.idreview,
-    title: "",
-    description: "",
-    star: "",
+    title: props.props.location.state.title,
+    description: props.props.location.state.description,
+    star: props.props.location.state.star,
   });
 
   const dispatch = useDispatch();
   const getReviews = useSelector((state) => state.getReviews);
-  const { loadingRev, reviews } = getReviews;
+  const { reviews } = getReviews;
 
   const handleInputChange = function (e) {
     setInput({
@@ -73,6 +73,7 @@ export default function EditReviewContainer(props) {
             <Select
               placeholder="Elija Puntaje"
               onChange={handleInputStarChange}
+              value={{ label: input.star, value: input.star }}
               options={[
                 {
                   label: 1,

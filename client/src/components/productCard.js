@@ -33,7 +33,6 @@ function ProductCard(props) {
             }}
           >
             <ReactStars
-              classNames={pCard.stars}
               count={5}
               value={props.producto.rating}
               edit={false}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import cComponent from "./css/formCategory.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 export default function FormCategory() {
   const [input, setInput] = useState({
@@ -13,12 +14,6 @@ export default function FormCategory() {
       ...input,
       [e.target.name]: e.target.value,
     });
-    // setErrors(
-    //   validate({
-    //     ...input,
-    //     [e.target.name]: e.target.value,
-    //   })
-    // );
   };
 
   const handleSubmit = function (e) {
@@ -34,31 +29,34 @@ export default function FormCategory() {
   };
 
   return (
-    <div className={cComponent.back}>
-      <Link to="/admin">
-        <button className="btn btn-primary">Volver al panel de admin</button>
-      </Link>
-      <form className={cComponent.form} onSubmit={handleSubmit}>
-        <h1 className={`my-3 ${cComponent.tituloForm}`}>
-          Añadir Categoria...{" "}
-        </h1>
-        <div className={cComponent.Fcontent}>
-          <div className="form-group">
-            <label htmlFor="name">Nombre de Categoria: </label>
+    <div className={cComponent.formPage}>
+      <div className={cComponent.container}>
+        <div className={cComponent.options}>
+          <Link to="/admin">
+            <button className={cComponent.botonBack}>
+              <ArrowBackIcon />
+            </button>
+          </Link>
+        </div>
+        <div className={cComponent.upload}>
+          <h3>Añadir Categoria</h3>
+        </div>
+        <form className={cComponent.form} onSubmit={handleSubmit}>
+          <div className={cComponent.name}>
+            <label htmlFor="name">Nombre de categoria: </label>
             <input
+              placeholder="Nombre"
               name="name"
               value={input.name}
               type="text"
               onChange={handleInputChange}
-              className="form-control"
-              id="Name"
             />
           </div>
-          <button type="submit" className="btn-success">
+          <button type="submit" className={cComponent.botonAdd}>
             Añadir a Categorias
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

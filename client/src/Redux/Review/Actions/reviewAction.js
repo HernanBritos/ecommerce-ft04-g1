@@ -5,7 +5,6 @@ import {
   DELETE_REVIEW,
   GET_REVIEWS_REQUEST,
 } from "../Constants/reviewConstants";
-import Cookie from "js-cookie";
 
 const addReview = (review) => {
   return {
@@ -55,12 +54,6 @@ const updateReview = (productId, review) => async (dispatch) => {
     });
   return (window.location = `http://localhost:3000/products/${productId}/review`);
 };
-
-
-
-
-
-
 
 const setRating = (productId, suma) => async (dispatch) => {
   await axios

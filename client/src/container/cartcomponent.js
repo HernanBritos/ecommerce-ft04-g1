@@ -21,7 +21,7 @@ function CartComponent(props) {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
-  }, []);
+  }, [dispatch, productId, qty]);
 
   const checkoutHandler = () => {
     props.c.history.push("/signin?redirect=shipping");
@@ -80,7 +80,7 @@ function CartComponent(props) {
         ))
       )}
       <div className={`${cComponent.footer}`}>
-        <a>
+        <a href="/">
           Subtotal: ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : ${" "}
           {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
         </a>

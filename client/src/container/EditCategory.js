@@ -36,7 +36,7 @@ export default function EditCategory(props) {
   useEffect(() => {
     dispatch(detailsCategory(props.category));
     setCategoryInput(categoryDet);
-  }, [dispatch, props.category]);
+  }, [dispatch, props.category, categoryDet]);
 
   // Todo lo que voy a renderizar en la pagina
   return (

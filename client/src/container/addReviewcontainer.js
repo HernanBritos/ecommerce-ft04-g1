@@ -25,8 +25,6 @@ export default function AddReviewContainer(props) {
   const getReviews = useSelector((state) => state.getReviews);
   const { loadingRev, reviews } = getReviews;
 
-  // const [categories, setCategories] = useState([]);
-
   const handleInputChange = function (e) {
     setInput({
       ...input,
@@ -43,6 +41,7 @@ export default function AddReviewContainer(props) {
   const handleSubmit = function (e) {
     e.preventDefault();
     dispatch(setReview(props.producto, input));
+    dispatch(fetchReviews(props.producto));
     var suma =
       reviews.reduce((acc, num) => {
         return acc + num.star;
@@ -54,7 +53,7 @@ export default function AddReviewContainer(props) {
     if (props.producto) {
       dispatch(fetchReviews(props.producto));
     }
-  }, []);
+  }, [dispatch, props.producto]);
 
   return (
     <div className={cComponent.formPage}>
@@ -131,6 +130,7 @@ export default function AddReviewContainer(props) {
             const rId = review.id;
             const onDelete = () => {
               dispatch(deleteReview(rId, props.producto));
+              return (window.location = `http://localhost:3000/products/${props.producto}/review`);
             };
 
             return loadingRev ? (
@@ -163,6 +163,7 @@ export default function AddReviewContainer(props) {
                         "/review/" +
                         `${review.id}` +
                         "/edit",
+                      state: review,
                     }}
                   >
                     <button>
