@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import pCard from "./css/productCard.module.css";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
-import AgregarReview from "../container/agregarreview";
 var placeholder = "/imagenes/Placeholder.png";
 
 function ProductCard(props) {
@@ -26,23 +25,19 @@ function ProductCard(props) {
         </div>
         <div className={pCard.productData}>
           <span className={pCard.name}>{props.producto.name}</span>
-          <span className={pCard.category}>{props.producto.category}</span>
 
-          <ReactStars
-            count={5}
-            value={props.producto.rating}
-            edit={false}
-            size={15}
-            isHalf={true}
-          />
           <Link
             to={{
               pathname: "/products/" + props.producto.id + "/review",
             }}
           >
-            <div className="AgregarReview">
-              <AgregarReview id={props.producto.id} />{" "}
-            </div>
+            <ReactStars
+              count={5}
+              value={props.producto.rating}
+              edit={false}
+              size={15}
+              isHalf={true}
+            />
           </Link>
           <span className={pCard.price}> $ {props.producto.price}</span>
           {props.producto.stock !== 0 ? (

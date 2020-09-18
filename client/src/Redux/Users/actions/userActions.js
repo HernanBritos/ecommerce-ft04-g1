@@ -40,6 +40,23 @@ const deleteUser = (userId) => async (dispatch) => {
   dispatch({ type: USER_DELETE_SUCCESS, payload: userId });
 };
 
+const addUser = (user) => {
+  axios
+  .post("http://localhost:3001/users", {
+    name: `${user.name}`,
+    lastname: `${user.lastname}`,
+    email: `${user.email}`,
+    password: `${user.password}`,
+    phone: `${user.phone}`,
+    address: `${user.address}`,
+  })
+  .then((data) => {
+    return data;
+  });
+return (window.location = "http://localhost:3000/");
+};
+
+
 const editUser = (user) => {
   axios
     .put(`http://localhost:3001/users/${user.id}`, {
@@ -56,4 +73,4 @@ const editUser = (user) => {
   return (window.location = "http://localhost:3000");
 };
 
-export { getUser, getUserDetails, deleteUser, editUser };
+export { getUser, getUserDetails, deleteUser, editUser, addUser };

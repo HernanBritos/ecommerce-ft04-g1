@@ -17,6 +17,7 @@ import CartComponent from "./container/cartcomponent";
 import EditCategory from "./container/EditCategory";
 import Login from "./components/loginComp"; 
 import AddReviewContainer from "./container/addReviewcontainer";
+import EditReviewContainer from "./container/editReview"
 
 function App() {
   return (
@@ -107,7 +108,13 @@ function App() {
               return <AddReviewContainer producto={p.match.params.id} />;
             }}
           />
-         
+         <Route
+            path="/products/:id/review/:idreview/edit"
+            exact={true}
+            render={(p) => {
+              return <EditReviewContainer props={p} />;
+            }}
+          />
 
         </div>
       </main>

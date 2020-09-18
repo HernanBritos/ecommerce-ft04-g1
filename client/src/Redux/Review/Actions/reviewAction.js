@@ -42,6 +42,26 @@ const setReview = (productId, review) => async (dispatch) => {
     });
   return (window.location = `http://localhost:3000/products/${productId}/review`);
 };
+
+const updateReview = (productId, review) => async (dispatch) => {
+  await axios
+    .put(`http://localhost:3001/products/${productId}/review/${review.id}`, {
+      title: `${review.title}`,
+      description: `${review.description}`,
+      star: `${review.star}`,
+    })
+    .then((data) => {
+      return data;
+    });
+  return (window.location = `http://localhost:3000/products/${productId}/review`);
+};
+
+
+
+
+
+
+
 const setRating = (productId, suma) => async (dispatch) => {
   await axios
     .put(`http://localhost:3001/products/${productId}`, {
@@ -72,4 +92,5 @@ export {
   fetchReviews,
   setRating,
   deleteReview,
+  updateReview,
 };

@@ -40,6 +40,7 @@ export default function AddReviewContainer(props) {
     });
   };
 
+
   const handleSubmit = function (e) {
     e.preventDefault();
     dispatch(setReview(props.producto, input));
@@ -60,7 +61,7 @@ export default function AddReviewContainer(props) {
     <div className={cComponent.formPage}>
       <div className={cComponent.container}>
         <div className={cComponent.options}>
-          <Link to="/admin">
+          <Link to="/">
             <button className={cComponent.botonBack}>
               <ArrowBackIcon />
             </button>
@@ -132,10 +133,6 @@ export default function AddReviewContainer(props) {
             reviews.map((review) => {
               const rating = review.star;
               const rId = review.id;
-              const onEdit = () => {
-                console.log("editar");
-              };
-
               const onDelete = () => {
                 dispatch(deleteReview(rId, props.producto));
               };
@@ -160,9 +157,14 @@ export default function AddReviewContainer(props) {
                     </span>
                   </div>
                   <div className={cComponent.botonEdit}>
-                    <button onClick={onEdit}>
+                  <Link to={{
+                    pathname:("/products/" + `${props.producto}` + "/review/" + `${review.id}` + "/edit"),
+                    }}
+                    >
+                    <button >
                       <EditIcon style={{ width: "20px", height: "20px" }} />
                     </button>
+                  </Link>
                   </div>
                 </div>
               );
