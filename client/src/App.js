@@ -18,6 +18,7 @@ import EditCategory from "./container/EditCategory";
 import Login from "./components/loginComp"; 
 import AddReviewContainer from "./container/addReviewcontainer";
 import EditReviewContainer from "./container/editReview"
+import OrderComponent from "./container/ordercomponent";
 
 function App() {
   return (
@@ -113,6 +114,13 @@ function App() {
             exact={true}
             render={(p) => {
               return <EditReviewContainer props={p} />;
+            }}
+          />
+           <Route
+            path="/users/:id/orders"
+            exact={true}
+            render={(p) => {
+              return <OrderComponent producto={p.match.params.id}/>;
             }}
           />
 

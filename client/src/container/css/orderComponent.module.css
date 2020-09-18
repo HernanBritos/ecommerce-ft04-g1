@@ -1,0 +1,20 @@
+.catalogo {
+    display: flex;
+}
+
+
+.catalogo2 {
+    margin-top: 20px;
+    border-bottom: 1px dotted #ccc;
+    cursor: pointer;
+    padding: 10px;
+    background: #fde195;
+    font-family: "Lato";
+    border-radius: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    margin-top: 150px;
+}
+
