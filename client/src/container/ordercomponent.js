@@ -3,7 +3,8 @@ import oComponent from './css/orderComponent.module.css';
 import { useSelector, useDispatch, usegetState } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchOrders } from "../Redux/Cart/Actions/cartActions";
-import store from "../Redux/Store/store"
+import store from "../Redux/Store/store";
+
 var placeholder = "/imagenes/Placeholder.png";
 
 function OrderComponent(props) {
@@ -23,13 +24,23 @@ const { orders } = getOrders;
 
 console.log(state);
 
+const ultimaorden = () => {
+    if(state.getOrders.orders) {
+      return state.getOrders.orders[orders.length - 1].id;
+    }
+}
+
+console.log(ultimaorden());
+
   return (
 
     <div className={oComponent.catalogo} >
         <div className={oComponent.catalogo2} >
+                        
             <table className= "table table-dark">
                 <thead>
                     <tr key="0">
+                    <th scope="col">Id Orden</th>   
                     <th scope="col">Id Producto</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Precio</th>
@@ -42,15 +53,18 @@ console.log(state);
                 <tbody>
                     {cartItems.map(prod=>
                         <tr key={prod.product}>
+                            <td>{ultimaorden()}</td>
                            <td>{prod.product}</td>
-                            <td><Link to={'/product/'+ prod.product}>{prod.name}</Link></td>
+                            <td>{prod.name}</td>
                             <td>${prod.price}</td>
                             <td>{prod.qty}</td>
-                        
-                           
-                        </tr>
+                            </tr>
                     )} 
                 </tbody>
+                </table>
+                </div>
+                <div className={oComponent.catalogo2}>
+                <table className= "table table-dark">
                 <thead>
                     <tr key="0">
                     <th scope="col">Id de Orden</th>
@@ -60,8 +74,7 @@ console.log(state);
                     <th scope="col">Forma de pago</th>
                     <th scope="col">Status</th>
                     <th scope="col">Precio Total</th>
-                    
-                    </tr>
+                   </tr>
                 </thead>
                 <tbody>
                     {orders && orders.map(order=>
