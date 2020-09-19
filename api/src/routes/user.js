@@ -1,8 +1,9 @@
 const server = require("express").Router();
 const { User } = require("../db.js");
 const { Op } = require("sequelize");
-const { ShoppingCart } = require("../db.js");
+const { Order } = require("../db.js");
 const OrderProduct = require("../models/OrderProduct.js");
+
 
 // GET /users
 server.get("/", (req, res, next) => {
@@ -78,7 +79,7 @@ server.delete("/:id", (req, res, next) => {
 
 server.get("/:id/cart", (req, res, next) => {
   const id = req.params.id;
-  ShoppingCart.findOne({
+  Order.findOne({
     where: { idUser: id },
   })
     .then((response) => {
@@ -93,7 +94,7 @@ server.get("/:id/cart", (req, res, next) => {
 
 server.post("/:id/cart", (req, res, next) => {
   const id = req.params.id;
-  ShoppingCart.create({
+  Order.create({
     idUser: id,
     date: req.body.date,
     priceTotal: req.body.priceTotal,
@@ -118,7 +119,7 @@ server.post("/:id/cart", (req, res, next) => {
 server.put("/:id/cart", (req, res, next) => {
   const id = req.params.id;
 
-  ShoppingCart.update(
+  Order.update(
     {
       date: req.body.date,
       priceTotal: req.body.priceTotal,
@@ -149,7 +150,7 @@ server.put("/:id/cart", (req, res, next) => {
 
 server.delete("/:id/cart", (req, res, next) => {
   const id = req.params.id;
-  ShoppingCart.destroy({
+  Order.destroy({
     where: { idUser: id },
   }).then((removed) => {
     if (removed) {
@@ -164,7 +165,7 @@ server.delete("/:id/cart", (req, res, next) => {
 
 server.get("/:id/orders", (req, res) => {
   const id = req.params.id;
-  ShoppingCart.findOne({
+  Order.findAll({
     where: { idUser: id },
   })
     .then((response) => {
@@ -185,4 +186,27 @@ server.get("/:id", (req, res) => {
     })
     .catch((err) => res.status(404).send(err));
 });
+
+server.post("/:id/orders", (req, res, next) => {
+  const id = req.params.id;
+  Order.create({
+    idUser: id,
+    date: Date.now(),
+    priceTotal: req.body.priceTotal,
+    status: req.body.status,
+    address: req.body.address,
+    description: req.body.description,
+    paymentmethod: req.body.paymentmethod,
+    shipping: req.body.shipping,
+  })
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) =>
+      res
+        .status(400)
+        .send(err, " WARNING! -> You can´t modificate the UserCart")
+    );
+});
+
 module.exports = server;

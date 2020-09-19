@@ -42,7 +42,7 @@ const { Product } = sequelize.models;
 const { Categories } = sequelize.models;
 const { Review } = sequelize.models;
 const { OrderProduct } = sequelize.models;
-const { ShoppingCart } = sequelize.models;
+const { Order } = sequelize.models;
 const { User } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -55,11 +55,11 @@ Review.belongsTo(Product, { as: 'product' });
 Review.belongsTo(User, { as: 'user' });
 Categories.hasMany(Product, { as: 'product' });
 User.hasMany(Review, { as: 'review' });
-User.hasMany(ShoppingCart, { as: 'ShoppingCart' });
-ShoppingCart.belongsTo(User, { as: 'user' });
-ShoppingCart.hasMany(OrderProduct, { as: 'OrderProduct' });
+User.hasMany(Order, { as: 'Order' });
+Order.belongsTo(User, { as: 'user' });
+Order.hasMany(OrderProduct, { as: 'OrderProduct' });
 OrderProduct.hasMany(Product, { as: 'product' });
-OrderProduct.belongsTo(ShoppingCart, { as: 'ShoppingCart' });
+OrderProduct.belongsTo(Order, { as: 'Order' });
 
 
 module.exports = {
