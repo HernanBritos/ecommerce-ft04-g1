@@ -37,15 +37,15 @@ server.put("/:id", (req, res) => {
   
     OrderProduct.update(
       {
-        idShoppingcart: req.body.idShoppingcart,
+        idOrder: req.body.idOrder,
         idProduct: req.body.idProduct,
         price: req.body.price,
         ammount: req.body.ammount,
-        status: req.body.status,    
+           
       },
       {
         where: {
-          idShoppingcart: id,
+          idOrder: id,
         },
         returning: true,
       }
@@ -58,5 +58,25 @@ server.put("/:id", (req, res) => {
       );
   });
 
+  server.post("/:id", (req, res) => {
+    const id = req.params.id;
+  
+    OrderProduct.create(
+      {
+        idOrder: id,
+        idProduct: req.body.idProduct,
+        price: req.body.price,
+        ammount: req.body.ammount,
+           
+      },
+       
+    )
+      .then((response) => {
+        res.status(200).json(response);
+      })
+      .catch((err) =>
+        res.status(400).send(err, " WARNING! -> You can´t modificate the Order")
+      );
+  });
 
 module.exports = server;
