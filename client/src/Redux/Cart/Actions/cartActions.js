@@ -52,18 +52,15 @@ const createOrder = (order) => {
 
 }
 
-  const fetchOrders = (userId) => async (dispatch, getState) => {
+  const fetchOrders = (id) => async (dispatch) => {
     try {
       dispatch({ type: ORDER_LIST_REQUEST });
-      const { data } = await axios.get(`http://localhost:3001/users/${userId}/orders`);
+      const { data } = await axios.get(`http://localhost:3001/users/${1}/orders`);
       dispatch({ 
         type: ORDER_LIST_SUCCESS, 
         payload: data, 
       });
-      const {
-        getOrders: { orders },
-      } = getState();
-      Cookie.set("orders", JSON.stringify(orders));
+      
     } catch (error) {}
   };
   
