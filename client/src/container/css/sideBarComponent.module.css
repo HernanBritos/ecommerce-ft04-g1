@@ -1,82 +1,79 @@
 /* BARRA LATERAL */
 .closeButton {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 15%;
   border-style: none;
-  padding: 0.1rem 0rem 2rem 0rem;
-  background: rgb(250, 250, 250);
-  font-size: 1.2rem;
+  background: #faba7a;
+  font-size: 0.9rem;
   right: 0.5rem;
   top: 0.5rem;
   cursor: pointer;
   position: absolute;
+  padding-bottom: 4px;
+  box-shadow: 0.3px 0.3px 0.6px rgb(0, 0, 0);
+  color: white;
 }
 .auth {
+  width: 150px;
   display: flex;
   flex-direction: column;
   margin-top: 35px;
+  margin-left: 35px;
 }
 .signIn {
-  width: 150px;
-  height: 35px;
+  width: 120px;
+  height: 45px;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0 0.6rem 2rem;
-  background: white;
+  background: #fde195;
+  margin: 7px;
   border-radius: 7px;
   border-style: none;
-  font-family: "Lato";
   font-size: 16px;
-  color: rgb(158, 156, 156);
+  box-shadow: 0.3px 0.3px 1.3px rgb(0, 0, 0);
+  color: rgb(83, 83, 83);
 }
 .signUp {
-  width: 150px;
-  height: 35px;
+  width: 120px;
+  height: 43px;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0 1rem 2rem;
-  background: rgb(248, 171, 94);
+  margin: 7px;
+  background: rgb(247, 161, 76);
   border-radius: 7px;
   border-style: none;
-  font-family: "Lato";
-  font-size: 16px;
-  color: rgb(255, 255, 255);
+  font-size: 17px;
+  box-shadow: 0.3px 0.3px 1.3px rgb(0, 0, 0);
+  color: white;
 }
 .admin {
-  display: flex;
-  justify-content: center;
+  margin: 50px;
 }
 .category {
-  border-style: solid;
-  background: rgb(248, 171, 94);
-  width: 90px;
-  height: 75%;
-  display: flex;
-  margin: 10px;
-  border-radius: 5px;
-  color: rgb(29, 27, 27);
-  font-weight: 400;
-  border-width: 0.5px;
-  border-color: rgb(114, 114, 114);
-}
-.category p {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: 0.3px 0.3px 3px rgb(0, 0, 0);
+  border-style: none;
+  border-radius: 10px;
+  background: #ffffff;
+  margin: 5px;
+  color: rgb(0, 0, 0);
 }
 .categories {
   display: flex;
+  width: 250px;
   flex-direction: row;
   flex-wrap: wrap;
   margin-left: 10px;
+  box-shadow: 0.3px 0.3px 0.3px rgb(0, 0, 0);
+  border-radius: 10px;
 }
 .filtro {
   margin-left: 20px;
   margin-top: 20px;
   font-size: 18px;
   font-weight: 400;
-  background: white;
 }

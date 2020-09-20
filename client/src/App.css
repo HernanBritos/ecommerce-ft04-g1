@@ -2,10 +2,11 @@
   position: fixed;
   transform: translateX(-17rem);
   width: 17rem;
-  background: rgb(255, 237, 189);
+  background: #f8e4ab;
   height: 100%;
   transition: all 0.5s;
-  margin-top: 100px;
+  margin-top: 101px;
+  box-shadow: 0.3px 2px 1px rgb(83, 83, 83);
 }
 .sidebar.open {
   transform: translateX(0);

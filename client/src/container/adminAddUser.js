@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import cComponent from "./css/adminAddProduct.module.css";
+import cComponent from "./css/adminAddUser.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser, deleteUser } from "../Redux/Users/actions/userActions";
@@ -57,9 +57,9 @@ export default function AdminAddUser() {
                       <td>{user.address}</td>
                       <td className={cComponent.botones}>
                         <Link to={`/users/edit/${user.id}`}>
-                          <button className="btn btn-primary">Editar</button>
+                          <button className={cComponent.editar}>Editar</button>
                         </Link>
-                        <button onClick={borrar} className="btn btn-danger">
+                        <button onClick={borrar} className={cComponent.borrar}>
                           Eliminar
                         </button>
                       </td>

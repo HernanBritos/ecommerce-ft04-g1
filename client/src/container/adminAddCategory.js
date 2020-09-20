@@ -20,7 +20,7 @@ export default function AdminAddCategory() {
       <md-content layout-padding>
         <div className={cComponent.actionpane}>
           <Link to="/admin/categories/add">
-            <button className="btn btn-success">Nueva Categoria</button>
+            <button className={cComponent.buttonNew}>Nueva Categoria</button>
           </Link>
           <center>
             <h2>Categorías</h2>
@@ -63,9 +63,9 @@ export default function AdminAddCategory() {
                       <td>{category.updatedAt}</td>
                       <td className={cComponent.botones}>
                         <Link to={`/admin/categories/edit/${category.id}`}>
-                          <button className="btn btn-primary">Editar</button>
+                          <button className={cComponent.editar}>Editar</button>
                         </Link>
-                        <button onClick={borrar} className="btn btn-danger">
+                        <button onClick={borrar} className={cComponent.borrar}>
                           Eliminar
                         </button>
                       </td>

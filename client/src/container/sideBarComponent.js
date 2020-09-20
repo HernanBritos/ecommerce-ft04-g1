@@ -3,6 +3,7 @@ import sBar from "./css/sideBarComponent.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listCategory } from "../Redux/Categories/Actions/categoryActions";
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 
 function SideBarComponent(props) {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ function SideBarComponent(props) {
             Iniciar Sesion
           </button>
         </Link>
+      <div className={sBar.auth}>
+        <button className={sBar.signIn} href="#">
+          Iniciar Sesión
+        </button>
         <Link to="/users/signup">
           <button className={sBar.signUp} href="#">
             Registrarse
@@ -30,11 +35,6 @@ function SideBarComponent(props) {
       <button className={sBar.closeButton} onClick={props.onclose}>
         x
       </button>
-      <Link to="/admin">
-        <div className={sBar.admin}>
-          <button className={`btn btn-secondary`}>Admin</button>
-        </div>
-      </Link>
       <label className={sBar.filtro}>Filtrar por categoria: </label>
       <div className={sBar.categories}>
         {loadingCat ? (
@@ -56,6 +56,13 @@ function SideBarComponent(props) {
           ))
         )}
       </div>
+      <Link to="/admin">
+        <div className={sBar.admin}>
+          <button className={`btn btn-secondary`}>
+            <SupervisorAccountIcon />
+          </button>
+        </div>
+      </Link>
     </div>
   );
 }
