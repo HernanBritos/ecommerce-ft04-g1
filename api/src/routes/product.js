@@ -23,10 +23,10 @@ server.get("/", (req, res, next) => {
 // Si pudo crear el producto retorna el status 201 y
 // retorna la información del producto.
 
-server.post("/", (req, res) => {
+server.post("/", async (req, res) => {
   const { category, name, description, stock, price, img } = req.body;
 
-  Product.create({
+  await Product.create({
     name: name,
     category: category,
     description: description,
