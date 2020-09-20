@@ -1,8 +1,7 @@
-  
 import React, { Component } from 'react';
 import Login from '../components/Login';
 import { connect } from 'react-redux';
-import { getUser } from '../Redux/Users/actions/userActions';
+import { getUserDetails } from './redux/User/actions/userActions';
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -38,8 +37,8 @@ class LoginContainer extends Component {
     e.preventDefault();
     delete this.state.error;
     this.setState(this.state);
-    //console.log(this.props.loginUser);
-    this.props.getUser(this.state.email, this.state.password).then(data => {
+    console.log(this.props.loginUser);
+    this.props.getUserDetails(this.state.email, this.state.password).then(data => {
       if (!data.success) {
         this.setState({ error: data.info.message });
       } else {
@@ -61,8 +60,8 @@ class LoginContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: (email, password) => {
-      return dispatch(loginUser(email, password));
+    getUserDetails: (email, password) => {
+      return dispatch(getUserDetails(email, password));
     },
   };
 };

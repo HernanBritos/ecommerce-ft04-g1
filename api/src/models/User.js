@@ -5,7 +5,7 @@ const crypto =require('crypto');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  var user =sequelize.define('user', {
+  var User =sequelize.define('user', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -27,11 +27,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
       set(value) {
-        const creatSalt = user.randomSalt();
-        this.setDataValue('salt', creatSalt)
-        this.setDataValue(
-          'password',
-          crypto
+      const rSalt = User.randomSalt();
+      this.setDataValue('salt', rSalt);
+      this.setDataValue(
+        'password',
+        crypto
           .createHmac('sha1', this.salt)
           .update(value)
           .digest('hex'),
@@ -53,19 +53,21 @@ module.exports = (sequelize) => {
     address: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   });
 
-  user.randomSalt = function() {
-    return crypto.randomBytes(32).toString('hex');
-  }
 
-  user.checkPassword = function(password) {
-    return (
-      crypto
-        .createHmac('sha1' , this.salt)
-        .update(password)
-        .digest('hex') === this.password
-    );
-  };
+User.randomSalt = function() {
+  return crypto.randomBytes(20).toString('hex');
+};
+
+User.prototype.checkPassword = function(password) {
+  return (
+    crypto
+      .createHmac('sha1', this.salt)
+      .update(password)
+      .digest('hex') === this.password
+  );
+};
+
 };

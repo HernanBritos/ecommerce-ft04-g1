@@ -3,6 +3,61 @@ const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const { ShoppingCart } = require("../db.js");
 const OrderProduct = require("../models/OrderProduct.js");
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+
+isAuthenticated = (req, res, next) => {
+  console.log(req.isAuthenticated());
+  if (req.user) return next();
+  else
+    return res.json({
+      loggedin: false,
+      isAdmin: false,
+      message: 'User not authenticated',
+    });
+};
+isAdmin = (req, res, next) => {
+  console.log(req.isAuthenticated());
+  if (req.user.rol === 'admin') return next();
+  else
+    return res.json({
+      loggedin: false,
+      isAdmin: false,
+      message: 'User is not admin',
+    });
+};
+
+server.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return json({
+        success: false,
+        message: err.message,
+        info,
+      });
+    }
+    if (!user) {
+      return res.json({
+        success: false,
+        info,
+      });
+    }
+    req.logIn(user, function(err) {
+      if (err) {
+        return res.json(err);
+      }
+      console.log(user)
+      return res.json({
+        success: true,
+        message: 'You have successfully logged in!',
+        info,
+        user,
+      });
+    });
+  })(req, res, next);
+});
+
+
 
 // GET /users
 server.get("/", (req, res, next) => {
@@ -13,23 +68,25 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
-// POST /users
-server.post("/", (req, res, next) => {
-  const { name, lastname, email, password, phone, address } = req.body;
+// POST /users 
 
-  User.create({
-    name: name,
-    lastname: lastname,
-    email: email,
-    password: password,
-    phone: phone,
-    address: address,
-  })
-    .then((newUser) => {
-      return res.send(newUser);
+server.post('/', async (req, res) => {
+  const {name,lastname,email,password,phone,address}=req.body;
+  
+      User.create({
+      name: name,
+      lastname: lastname,
+      email: email,
+      password: password,
+      phone: phone,
+      address: address,
     })
-    .catch((err) => res.status(400).send(err));
+    .then(newUser => {
+      res.json(newUser);
+    })
+    .catch(error => res.json(error));
 });
+
 
 // PUT /users/:id
 server.put("/:id", (req, res, next) => {

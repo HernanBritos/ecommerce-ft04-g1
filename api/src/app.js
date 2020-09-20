@@ -4,7 +4,10 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
 var cors = require("cors");
-
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+const { User } = require("./models/User" );
 require("./db.js");
 
 const server = express();
@@ -26,6 +29,58 @@ server.use((req, res, next) => {
 });
 server.use(cors());
 server.use("/", routes);
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+    function(email, password, done) {
+      console.log('email', email, 'password', password);
+      User.findOne({ where: { email: email } })
+        .then(user => {
+          if (!user) {
+            return done(null, false, {
+              message: 'El correo electrónico no existe.',
+            });
+          }
+          if (!user.checkPassword(password)) {
+            return done(null, false, {
+              message: 'La contraseña es incorrecta.',
+            });
+          }
+          return done(null, user);
+        })
+        .catch(err => {
+          if (err) {
+            return done(err);
+          }
+        });
+    },
+  ),
+);
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id)
+    .then(user => {
+      done(null, user);
+    })
+    .catch(err => done(err));
+});
+
+server.use(session({ 
+  secret: 'my secret string',
+  resave: false,
+  saveUninitialized: false,
+ }));
+server.use(passport.initialize());
+server.use(passport.session());
+
 
 // Error catching endware.
 server.use((err, req, res, next) => {
