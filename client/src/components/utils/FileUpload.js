@@ -8,14 +8,14 @@ function FileUpload(props) {
     path: "",
   });
   const [Loading, setLoading] = useState(false);
-  const onDrop = (files) => {
+  const onDrop = async (files) => {
     setLoading(true);
     let formData = new FormData();
     const config = {
       header: { "content-type": "multipart/form-data" },
     };
     formData.append("file", files[0]);
-    return axios
+    return await axios
       .post("http://localhost:3001/product/upload", formData, config)
       .then((response) => {
         if (response.data.success === true) {

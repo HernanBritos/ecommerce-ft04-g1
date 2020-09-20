@@ -1,4 +1,10 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, ORDER_LIST_FAIL, ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS } from "../constantes/cartConstant";
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  ORDER_LIST_FAIL,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+} from "../constantes/cartConstant";
 
 function cartReducer(state = { cartItems: [] }, action) {
   switch (action.type) {
@@ -33,7 +39,7 @@ function orderReducer(state = { orders: [] }, action) {
       return { orders: action.payload, loading: false };
     case ORDER_LIST_FAIL:
       return { loading: false, error: action.payload };
-     default:
+    default:
       return state;
   }
 }
