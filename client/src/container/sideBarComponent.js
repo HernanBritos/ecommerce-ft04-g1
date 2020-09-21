@@ -64,6 +64,7 @@ function SideBarComponent(props) {
         </div>
       </Link>
     </div>
+   </div> 
   );
 }
 

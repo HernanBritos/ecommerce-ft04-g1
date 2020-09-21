@@ -1,10 +1,10 @@
 import React from 'react';
 import {userForm} from '../container/css/userForm.module.css';
 
-export default function Login(onSubmit,onChange) {
+export default function Login(onSubmit, onChange) {
   return (
     <div style={{paddingTop: '120px'}} className={userForm}>
-      <form className="form-signin" onSubmit={onSubmit}>
+      <form className="form-signin" onSubmit={ () => onSubmit()}>
         <h1 className="h3 mb-3 font-weight-normal">Login</h1>
         <label htmlFor="inputEmail" className="sr-only">
           Email address
@@ -16,7 +16,7 @@ export default function Login(onSubmit,onChange) {
           className="form-control"
           placeholder="Email address"
           required
-          onChange={onChange}
+          onChange={ () => onChange()}
         />
         <label htmlFor="inputPassword" className="sr-only">
           Password
@@ -28,7 +28,7 @@ export default function Login(onSubmit,onChange) {
           className="form-control"
           placeholder="Password"
           required
-          onChange={onChange}
+          onChange={()=> onChange()}
         />
         <p className="text-danger mt-3"></p>
         <button

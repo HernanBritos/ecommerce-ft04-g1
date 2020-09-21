@@ -9,6 +9,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const { User } = require("./models/User" );
 require("./db.js");
+const flash = require('flash');
 
 const server = express();
 
@@ -81,13 +82,21 @@ server.use(session({
 server.use(passport.initialize());
 server.use(passport.session());
 
+server.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+
+  res.locals.user = req.user || null;
+  next();
+});
+
+
 
 // Error catching endware.
 server.use((err, req, res, next) => {
   // eslint-disable-line no-unused-vars
-  const status = err.status || 500;
-  const message = err.message || err;
-  console.error(err);
+
   res.status(status).send(message);
 });
 
