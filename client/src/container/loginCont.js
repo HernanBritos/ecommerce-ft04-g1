@@ -1,70 +1,27 @@
-  
-import React, { Component } from 'react';
-import Login from '../components/Login';
-import { connect } from 'react-redux';
-import { getUser } from '../Redux/Users/actions/userActions';
+import React, { useState } from "react";
+import Login from "../components/Login";
 
-class LoginContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      validForm: false,
-    };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+function LoginContainer(props) {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
-  onChange(event) {
-    const element = event.target;
-    const form = element.parentElement;
-
-    this.setState({
-      [element.name]: element.value,
-      validForm: form.checkValidity(),
+  const onChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    if (element.validity.valid) {
-      element.classList.add('is-valid');
-      element.classList.remove('is-invalid');
-    } else {
-      element.classList.remove('is-valid');
-      element.classList.add('is-invalid');
-    }
-  }
-
-  onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    delete this.state.error;
-    this.setState(this.state);
-    //console.log(this.props.loginUser);
-    this.props.getUser(this.state.email, this.state.password).then(data => {
-      if (!data.success) {
-        this.setState({ error: data.info.message });
-      } else {
-        this.props.history.push('/products');
-      }
+    await axios.get("http://localhost:3001/users/getuser").then((data) => {
+      console.log(data);
     });
-  }
+  };
 
-  render() {
-    return (
-      <Login
-        onChange={this.onChange}
-        state={this.state}
-        onSubmit={this.onSubmit}
-      />
-    );
-  }
+  return <Login onChange={onChange} state={user} onSubmit={onSubmit} />;
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loginUser: (email, password) => {
-      return dispatch(loginUser(email, password));
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default LoginContainer;

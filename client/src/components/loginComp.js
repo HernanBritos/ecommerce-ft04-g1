@@ -1,9 +1,9 @@
-import React from 'react';
-import {userForm} from '../container/css/userForm.module.css';
+import React from "react";
+import { userForm } from "../container/css/userForm.module.css";
 
-export default function Login(onSubmit,onChange) {
+export default function Login(onChange, onSubmit, state) {
   return (
-    <div style={{paddingTop: '120px'}} className={userForm}>
+    <div style={{ paddingTop: "120px" }} className={userForm}>
       <form className="form-signin" onSubmit={onSubmit}>
         <h1 className="h3 mb-3 font-weight-normal">Login</h1>
         <label htmlFor="inputEmail" className="sr-only">
@@ -31,13 +31,10 @@ export default function Login(onSubmit,onChange) {
           onChange={onChange}
         />
         <p className="text-danger mt-3"></p>
-        <button
-          className="btn btn-lg btn-primary btn-block mb-3"
-          type="submit"
-        >
+        <button className="btn btn-lg btn-primary btn-block mb-3" type="submit">
           Login
         </button>
       </form>
     </div>
   );
-};
+}

@@ -15,9 +15,9 @@ import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
 import CartComponent from "./container/cartcomponent";
 import EditCategory from "./container/EditCategory";
-import Login from "./components/loginComp"; 
+import Login from "./components/loginComp";
 import AddReviewContainer from "./container/addReviewcontainer";
-import EditReviewContainer from "./container/editReview"
+import EditReviewContainer from "./container/editReview";
 import OrderComponent from "./container/ordercomponent";
 import OrdenesCompra from "./container/ordenescompra";
 
@@ -78,7 +78,8 @@ function App() {
           <Route
             path="/users/signup"
             exact={true}
-            render={() => {
+            render={(p) => {
+              console.log(p);
               return <FormUser />;
             }}
           />
@@ -96,7 +97,7 @@ function App() {
               return <CartComponent c={c} />;
             }}
           />
-          <Route 
+          <Route
             path="/login"
             exact={true}
             render={(u) => {
@@ -110,28 +111,27 @@ function App() {
               return <AddReviewContainer producto={p.match.params.id} />;
             }}
           />
-         <Route
+          <Route
             path="/products/:id/review/:idreview/edit"
             exact={true}
             render={(p) => {
               return <EditReviewContainer props={p} />;
             }}
           />
-           <Route
+          <Route
             path="/users/:id/orders"
             exact={true}
             render={(p) => {
-              return <OrderComponent producto={p}/>;
+              return <OrderComponent producto={p} />;
             }}
           />
-           <Route
+          <Route
             path="/users/:id/orders/historial"
             exact={true}
             render={(p) => {
-              return <OrdenesCompra props={p}/>;
+              return <OrdenesCompra props={p} />;
             }}
           />
-
         </div>
       </main>
     </BrowserRouter>
