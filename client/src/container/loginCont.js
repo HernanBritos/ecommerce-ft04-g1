@@ -1,70 +1,82 @@
-  
-import React, { Component } from 'react';
-import Login from '../components/Login';
-import { connect } from 'react-redux';
-import { getUser } from '../Redux/Users/actions/userActions';
+import React, { useState } from "react";
+import { userForm } from "../container/css/userForm.module.css";
+import axios from "axios";
+function LoginContainer() {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
-class LoginContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      validForm: false,
-    };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onChange(event) {
-    const element = event.target;
-    const form = element.parentElement;
-
-    this.setState({
-      [element.name]: element.value,
-      validForm: form.checkValidity(),
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    if (element.validity.valid) {
-      element.classList.add('is-valid');
-      element.classList.remove('is-invalid');
-    } else {
-      element.classList.remove('is-valid');
-      element.classList.add('is-invalid');
-    }
-  }
+  const getUser = async () => {
+    await axios
+      .get("http://localhost:3001/users", {
+        withCredentials: true,
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
-  onSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    delete this.state.error;
-    this.setState(this.state);
-    //console.log(this.props.loginUser);
-    this.props.getUser(this.state.email, this.state.password).then(data => {
-      if (!data.success) {
-        this.setState({ error: data.info.message });
-      } else {
-        this.props.history.push('/products');
-      }
-    });
-  }
+    axios
+      .post("http://localhost:3001/users/signin", {
+        email: user.email,
+        password: user.password,
+        withCredentials: true,
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
-  render() {
-    return (
-      <Login
-        onChange={this.onChange}
-        state={this.state}
-        onSubmit={this.onSubmit}
-      />
-    );
-  }
+  return (
+    <div style={{ paddingTop: "170px" }} className={userForm}>
+      <form className="mx-auto form-signin col-md-3" onSubmit={handleSubmit}>
+        <h1 className="h3 mb-3 font-weight-normal">Login</h1>
+        <label htmlFor="inputEmail" className="sr-only">
+          Email address
+        </label>
+        <input
+          type="email"
+          id="inputEmail"
+          name="email"
+          className="form-control"
+          placeholder="Email address"
+          required
+          onChange={handleChange}
+        />
+        <label htmlFor="inputPassword" className="sr-only">
+          Password
+        </label>
+        <input
+          type="password"
+          id="inputPassword"
+          name="password"
+          className="form-control"
+          placeholder="Password"
+          required
+          onChange={handleChange}
+        />
+        <p className="text-danger mt-3"></p>
+        <button className="btn btn-lg btn-primary btn-block mb-3" type="submit">
+          Login
+        </button>
+      </form>
+      <form onSubmit={getUser}>
+        <button className="btn btn-lg btn-primary btn-block mb-3" type="submit">
+          Get User
+        </button>
+      </form>
+    </div>
+  );
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loginUser: (email, password) => {
-      return dispatch(loginUser(email, password));
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default LoginContainer;

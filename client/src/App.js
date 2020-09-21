@@ -15,9 +15,9 @@ import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
 import CartComponent from "./container/cartcomponent";
 import EditCategory from "./container/EditCategory";
-import Login from "./components/loginComp"; 
+import Login from "./container/loginCont";
 import AddReviewContainer from "./container/addReviewcontainer";
-import EditReviewContainer from "./container/editReview"
+import EditReviewContainer from "./container/editReview";
 import OrderComponent from "./container/ordercomponent";
 import OrdenesCompra from "./container/ordenescompra";
 
@@ -96,8 +96,8 @@ function App() {
               return <CartComponent c={c} />;
             }}
           />
-          <Route 
-            path="/login"
+          <Route
+            path="/users/signin"
             exact={true}
             render={(u) => {
               return <Login u={u} />;
@@ -110,28 +110,27 @@ function App() {
               return <AddReviewContainer producto={p.match.params.id} />;
             }}
           />
-         <Route
+          <Route
             path="/products/:id/review/:idreview/edit"
             exact={true}
             render={(p) => {
               return <EditReviewContainer props={p} />;
             }}
           />
-           <Route
+          <Route
             path="/users/:id/orders"
             exact={true}
             render={(p) => {
-              return <OrderComponent producto={p}/>;
+              return <OrderComponent producto={p} />;
             }}
           />
-           <Route
+          <Route
             path="/users/:id/orders/historial"
             exact={true}
             render={(p) => {
-              return <OrdenesCompra props={p}/>;
+              return <OrdenesCompra props={p} />;
             }}
           />
-
         </div>
       </main>
     </BrowserRouter>

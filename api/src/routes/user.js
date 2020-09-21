@@ -3,7 +3,7 @@ const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const { Order } = require("../db.js");
 const OrderProduct = require("../models/OrderProduct.js");
-
+const passport = require("passport");
 
 // GET /users
 server.get("/", (req, res, next) => {
@@ -207,6 +207,55 @@ server.post("/:id/orders", (req, res, next) => {
         .status(400)
         .send(err, " WARNING! -> You can´t modificate the UserCart")
     );
+});
+
+// Auth
+
+server.post("/signup", async (req, res) => {
+  const user = await User.findOne({
+    where: {
+      email: req.body.email,
+    },
+  });
+  if (user) {
+    console.log("Ya existe ese mail");
+    return res.json({ message: "Ya existe ese mail", success: false });
+  }
+  if (!user) {
+    await User.create({
+      name: req.body.name,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: req.body.password,
+      address: req.body.address,
+      phone: req.body.phone,
+    })
+      .then((response) => {
+        console.log("Usuario " + response.dataValues.email + " creado");
+        return res.json({
+          message: "Usuario creado correctamente",
+          success: true,
+        });
+      })
+      .catch((err) => res.send(err));
+  }
+});
+
+server.post("/signin", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (!user) {
+      res.send("No existe el email ingresado");
+    } else {
+      req.logIn(user, (err) => {
+        if (err) console.log(err);
+        res.send("Has iniciado sesión correctamente!");
+      });
+    }
+  });
+});
+
+server.get("/", (req, res) => {
+  res.json({ user: req.user });
 });
 
 module.exports = server;

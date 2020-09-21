@@ -42,20 +42,23 @@ const deleteUser = (userId) => async (dispatch) => {
 
 const addUser = (user) => {
   axios
-  .post("http://localhost:3001/users", {
-    name: `${user.name}`,
-    lastname: `${user.lastname}`,
-    email: `${user.email}`,
-    password: `${user.password}`,
-    phone: `${user.phone}`,
-    address: `${user.address}`,
-  })
-  .then((data) => {
-    return data;
-  });
-return (window.location = "http://localhost:3000/");
+    .post(
+      "http://localhost:3001/users",
+      {
+        name: `${user.name}`,
+        lastname: `${user.lastname}`,
+        email: `${user.email}`,
+        password: `${user.password}`,
+        phone: `${user.phone}`,
+        address: `${user.address}`,
+      },
+      { withCredentials: true }
+    )
+    .then((data) => {
+      console.log(data);
+    });
+  // return (window.location = "http://localhost:3000/");
 };
-
 
 const editUser = (user) => {
   axios
