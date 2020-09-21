@@ -271,10 +271,7 @@ server.post("/:id/review", (req, res) => {
   })
     .then((newReview) => {
       newReview.setProduct(id);
-      //      newReview.setUser(userId);
-    })
-    .then(() => {
-      res.sendStatus(200);
+      res.send(newReview);
     })
     .catch((err) => res.status(500).send(err));
 });
@@ -285,27 +282,22 @@ server.put("/:id/review/:idReview", (req, res) => {
   const idProduct = req.params.id;
   const idReview = req.params.idReview;
 
-  Product.findByPk(idProduct)
-    .then((product) => {
-      Review.update(
-        {
-          title: req.body.title,
-          description: req.body.description,
-          star: req.body.star,
-        },
-        {
-          where: {
-            id: idReview,
-          },
-          returning: true,
-        }
-      );
-    })
+  Review.update(
+    {
+      title: req.body.title,
+      description: req.body.description,
+      star: req.body.star,
+    },
+    {
+      where: {
+        id: idReview,
+      },
+      returning: true,
+    }
+  )
     .then((response) => {
-      const review = response;
-      return review;
+      res.send(response[1]);
     })
-    .then((review) => res.send(review))
     .catch((err) => res.send(err.message));
 });
 

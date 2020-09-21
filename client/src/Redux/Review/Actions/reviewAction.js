@@ -1,24 +1,12 @@
 import axios from "axios";
 import {
   ADD_REVIEW,
+  UPDATE_REVIEW,
   GET_REVIEWS,
   DELETE_REVIEW,
   GET_REVIEWS_REQUEST,
+  UPDATE_RATING,
 } from "../Constants/reviewConstants";
-
-const addReview = (review) => {
-  return {
-    type: ADD_REVIEW,
-    review,
-  };
-};
-
-const getReviews = (reviews) => {
-  return {
-    type: GET_REVIEWS,
-    reviews,
-  };
-};
 
 const deleteReview = (reviewId, productId) => async (dispatch) => {
   await axios
@@ -37,9 +25,9 @@ const setReview = (productId, review) => async (dispatch) => {
       star: `${review.star}`,
     })
     .then((data) => {
+      dispatch({ type: ADD_REVIEW, payload: data.data });
       return data;
     });
-  return (window.location = `http://localhost:3000/products/${productId}/review`);
 };
 
 const updateReview = (productId, review) => async (dispatch) => {
@@ -50,19 +38,15 @@ const updateReview = (productId, review) => async (dispatch) => {
       star: `${review.star}`,
     })
     .then((data) => {
+      console.log(data.data);
+      dispatch({ type: UPDATE_REVIEW, payload: data.data });
       return data;
     });
-  return (window.location = `http://localhost:3000/products/${productId}/review`);
+  return window.history.back();
 };
 
-const setRating = (productId, suma) => async (dispatch) => {
-  await axios
-    .put(`http://localhost:3001/products/${productId}`, {
-      rating: suma,
-    })
-    .then((data) => {
-      return data;
-    });
+const setRating = (productId) => async (dispatch) => {
+  dispatch({ type: UPDATE_RATING, payload: productId });
 };
 
 const fetchReviews = (productId) => async (dispatch, getState) => {
@@ -78,12 +62,4 @@ const fetchReviews = (productId) => async (dispatch, getState) => {
   } catch (error) {}
 };
 
-export {
-  addReview,
-  getReviews,
-  setReview,
-  fetchReviews,
-  setRating,
-  deleteReview,
-  updateReview,
-};
+export { setReview, fetchReviews, setRating, deleteReview, updateReview };

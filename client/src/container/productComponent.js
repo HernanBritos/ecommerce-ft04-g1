@@ -74,7 +74,10 @@ function ProductComponent(props) {
                   </div>
                   <Link
                     to={{
-                      pathname: "/products/" + props.producto.id + "/review",
+                      pathname:
+                        "/products/" +
+                        props.producto.match.params.id +
+                        "/review",
                     }}
                   >
                     <button className={cComponent.addreview}>

@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import cComponent from "./css/addUser.module.css";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { addUser } from "../Redux/Users/actions/userActions";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 
-function FormUser(props) {
+function FormUser() {
   const [user, setUser] = useState({
     name: "",
     lastname: "",
@@ -17,7 +15,6 @@ function FormUser(props) {
   });
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState(false);
-  const dispatch = useDispatch();
 
   const handleInputChange = function (e) {
     setUser({

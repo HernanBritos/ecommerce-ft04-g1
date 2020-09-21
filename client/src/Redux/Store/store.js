@@ -8,18 +8,18 @@ import {
   categoryDetailsReducer,
 } from "../Categories/reducers/categoryReducers";
 import Cookie from "js-cookie";
-import { cartReducer, orderReducer} from "../Cart/reducers/cartReducer";
+import { cartReducer, orderReducer } from "../Cart/reducers/cartReducer";
 import {
   userListReducer,
   userDetailsReducer,
 } from "../Users/reducers/userReducer";
 import thunk from "redux-thunk";
-import {addReviewReducer, getReviewReducer} from "../Review/Reducers/reviewReducer"
+import { getReviewReducer } from "../Review/Reducers/reviewReducer";
 
 const cartItems = Cookie.getJSON("cartItems") || [];
 const orders = Cookie.getJSON("orders") || [];
 
-const initialState = { cart: { cartItems }, getOrders: {orders } };
+const initialState = { cart: { cartItems }, getOrders: { orders } };
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
@@ -31,7 +31,6 @@ const reducer = combineReducers({
   categoryEdit: initialState,
   categoryDetails: categoryDetailsReducer,
   userEdit: initialState,
-  addReview: addReviewReducer,
   getReviews: getReviewReducer,
   getOrders: orderReducer,
 });

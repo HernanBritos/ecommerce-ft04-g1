@@ -7,7 +7,7 @@ import {
   setRating,
   updateReview,
 } from "../Redux/Review/Actions/reviewAction.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function EditReviewContainer(props) {
   const [input, setInput] = useState({
@@ -16,10 +16,7 @@ export default function EditReviewContainer(props) {
     description: props.props.location.state.description,
     star: props.props.location.state.star,
   });
-
   const dispatch = useDispatch();
-  const getReviews = useSelector((state) => state.getReviews);
-  const { reviews } = getReviews;
 
   const handleInputChange = function (e) {
     setInput({
@@ -37,11 +34,7 @@ export default function EditReviewContainer(props) {
   const handleSubmit = function (e) {
     e.preventDefault();
     dispatch(updateReview(props.props.match.params.id, input));
-    var suma =
-      reviews.reduce((acc, num) => {
-        return acc + num.star;
-      }, 0) / reviews.length;
-    dispatch(setRating(props.props.match.params.id, suma));
+    dispatch(setRating(props.props.match.params.id));
   };
 
   return (
