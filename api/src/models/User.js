@@ -1,11 +1,11 @@
-const { DataTypes } = require('sequelize');
-const crypto =require('crypto');
+const { DataTypes } = require("sequelize");
+const crypto = require("crypto");
 
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  var user =sequelize.define('user', {
+  var user = sequelize.define("user", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,13 +28,10 @@ module.exports = (sequelize) => {
       allowNull: true,
       set(value) {
         const creatSalt = user.randomSalt();
-        this.setDataValue('salt', creatSalt)
+        this.setDataValue("salt", creatSalt);
         this.setDataValue(
-          'password',
-          crypto
-          .createHmac('sha1', this.salt)
-          .update(value)
-          .digest('hex'),
+          "password",
+          crypto.createHmac("sha1", this.salt).update(value).digest("hex")
         );
       },
     },
@@ -43,8 +40,8 @@ module.exports = (sequelize) => {
     },
     rol: {
       type: DataTypes.ENUM,
-      values: ['user','admin'],
-      defaultValue: 'user',
+      values: ["user", "admin"],
+      defaultValue: "user",
     },
     phone: {
       type: DataTypes.STRING,
@@ -53,19 +50,17 @@ module.exports = (sequelize) => {
     address: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   });
 
-  user.randomSalt = function() {
-    return crypto.randomBytes(32).toString('hex');
-  }
+  user.randomSalt = function () {
+    return crypto.randomBytes(32).toString("hex");
+  };
 
-  user.checkPassword = function(password) {
+  user.prototype.checkPassword = function (password) {
     return (
-      crypto
-        .createHmac('sha1' , this.salt)
-        .update(password)
-        .digest('hex') === this.password
+      crypto.createHmac("sha1", this.salt).update(password).digest("hex") ===
+      this.password
     );
   };
 };

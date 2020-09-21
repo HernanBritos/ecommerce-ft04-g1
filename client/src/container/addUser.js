@@ -54,7 +54,7 @@ function FormUser(props) {
           if (!data.data.success) {
             setErrors([...errors, data.data.message]);
           }
-          if (data.success) {
+          if (data.data.success) {
             setSuccess(true);
           }
 
@@ -82,7 +82,14 @@ function FormUser(props) {
 
         <div className={cComponent.upload}>
           <h3>Registrarse</h3>
-          {success && <a href="/users/login">Iniciar sesión</a>}
+          {success && (
+            <div className={"mx-auto"}>
+              <div className={"alert alert-info"}>Registro exitoso!</div>
+              <a className={"mx-auto btn btn-success"} href="/users/signin">
+                Iniciar sesión
+              </a>
+            </div>
+          )}
         </div>
         <form className={cComponent.form} onSubmit={handleSubmit}>
           <div className={cComponent.name}>

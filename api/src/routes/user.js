@@ -3,6 +3,7 @@ const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const { Order } = require("../db.js");
 const OrderProduct = require("../models/OrderProduct.js");
+const passport = require("passport");
 
 // GET /users
 server.get("/", (req, res, next) => {
@@ -240,10 +241,21 @@ server.post("/signup", async (req, res) => {
   }
 });
 
-server.post("/signin", (req, res) => {
-  console.log(req.body);
+server.post("/signin", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (!user) {
+      res.send("No existe el email ingresado");
+    } else {
+      req.logIn(user, (err) => {
+        if (err) console.log(err);
+        res.send("Has iniciado sesión correctamente!");
+      });
+    }
+  });
 });
 
-server.get("/", (req, res) => {});
+server.get("/", (req, res) => {
+  res.json({ user: req.user });
+});
 
 module.exports = server;

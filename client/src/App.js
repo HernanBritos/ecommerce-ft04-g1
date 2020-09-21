@@ -15,7 +15,7 @@ import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
 import CartComponent from "./container/cartcomponent";
 import EditCategory from "./container/EditCategory";
-import Login from "./components/loginComp";
+import Login from "./container/loginCont";
 import AddReviewContainer from "./container/addReviewcontainer";
 import EditReviewContainer from "./container/editReview";
 import OrderComponent from "./container/ordercomponent";
@@ -78,8 +78,7 @@ function App() {
           <Route
             path="/users/signup"
             exact={true}
-            render={(p) => {
-              console.log(p);
+            render={() => {
               return <FormUser />;
             }}
           />
@@ -98,7 +97,7 @@ function App() {
             }}
           />
           <Route
-            path="/login"
+            path="/users/signin"
             exact={true}
             render={(u) => {
               return <Login u={u} />;
