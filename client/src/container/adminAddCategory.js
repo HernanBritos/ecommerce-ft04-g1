@@ -62,7 +62,12 @@ export default function AdminAddCategory() {
                       <td>{category.createdAt}</td>
                       <td>{category.updatedAt}</td>
                       <td className={cComponent.botones}>
-                        <Link to={`/admin/categories/edit/${category.id}`}>
+                        <Link
+                          to={{
+                            pathname: `/admin/categories/edit/${category.id}`,
+                            state: category,
+                          }}
+                        >
                           <button className={cComponent.editar}>Editar</button>
                         </Link>
                         <button onClick={borrar} className={cComponent.borrar}>

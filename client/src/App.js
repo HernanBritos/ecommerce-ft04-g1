@@ -65,7 +65,7 @@ function App() {
             path="/admin/categories/edit/:id"
             exact={true}
             render={(p) => {
-              return <EditCategory category={p.match.params.id} />;
+              return <EditCategory category={p} />;
             }}
           />
           <Route

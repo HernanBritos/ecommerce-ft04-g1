@@ -3,16 +3,11 @@ import {
   GET_REVIEWS,
   DELETE_REVIEW,
   GET_REVIEWS_REQUEST,
+  UPDATE_REVIEW,
+  UPDATE_RATING,
 } from "../Constants/reviewConstants";
 
-function addReviewReducer(state = {}, action) {
-  switch (action.type) {
-    case ADD_REVIEW:
-      return Object.assign({}, state, action.review);
-    default:
-      return state;
-  }
-}
+import axios from "axios";
 
 function getReviewReducer(state = { reviews: [] }, action) {
   const filter = (el) => {
@@ -33,9 +28,36 @@ function getReviewReducer(state = { reviews: [] }, action) {
       return (state = {
         reviews: state.reviews.filter(filter),
       });
+    case UPDATE_REVIEW:
+      const newReview = action.payload[0];
+      const oldReview = state.reviews.find(
+        (review) => review.id === newReview.id
+      );
+      return {
+        reviews: state.reviews.map((rev) => {
+          return rev.id === oldReview.id ? newReview : rev;
+        }),
+      };
+    case ADD_REVIEW:
+      return (state = {
+        reviews: [...state.reviews, action.payload],
+      });
+    case UPDATE_RATING:
+      axios
+        .put(`http://localhost:3001/products/${action.payload}`, {
+          rating:
+            state.reviews.reduce((acc, num) => {
+              return acc + num.star;
+            }, 0) / state.reviews.length,
+        })
+        .then((data) => {
+          console.log(data.data);
+          return data;
+        });
+      return;
     default:
       return state;
   }
 }
 
-export { addReviewReducer, getReviewReducer };
+export { getReviewReducer };

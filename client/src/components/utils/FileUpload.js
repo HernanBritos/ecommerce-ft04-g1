@@ -15,7 +15,7 @@ function FileUpload(props) {
       header: { "content-type": "multipart/form-data" },
     };
     formData.append("file", files[0]);
-    return await axios
+    await axios
       .post("http://localhost:3001/product/upload", formData, config)
       .then((response) => {
         if (response.data.success === true) {

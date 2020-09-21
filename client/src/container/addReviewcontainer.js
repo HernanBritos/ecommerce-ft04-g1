@@ -21,6 +21,8 @@ export default function AddReviewContainer(props) {
     star: "",
   });
 
+  const [firstRender, setFirstRender] = useState(true);
+
   const dispatch = useDispatch();
   const getReviews = useSelector((state) => state.getReviews);
   const { loadingRev, reviews } = getReviews;
@@ -40,20 +42,16 @@ export default function AddReviewContainer(props) {
 
   const handleSubmit = function (e) {
     e.preventDefault();
-    dispatch(setReview(props.producto, input));
-    dispatch(fetchReviews(props.producto));
-    var suma =
-      reviews.reduce((acc, num) => {
-        return acc + num.star;
-      }, 0) / reviews.length;
-    dispatch(setRating(props.producto, suma));
+    dispatch(setReview(props.producto, input, reviews));
+    dispatch(setRating(props.producto));
   };
 
   useEffect(() => {
-    if (props.producto) {
+    if (props.producto && firstRender) {
       dispatch(fetchReviews(props.producto));
+      setFirstRender(false);
     }
-  }, [dispatch, props.producto]);
+  }, [dispatch, props.producto, firstRender]);
 
   return (
     <div className={cComponent.formPage}>
@@ -130,13 +128,13 @@ export default function AddReviewContainer(props) {
             const rId = review.id;
             const onDelete = () => {
               dispatch(deleteReview(rId, props.producto));
-              return (window.location = `http://localhost:3000/products/${props.producto}/review`);
+              dispatch(setRating(props.producto));
             };
 
             return loadingRev ? (
               <div className="alert-info">Loading..</div>
             ) : (
-              <div className={cComponent.review}>
+              <div key={review.id} className={cComponent.review}>
                 <div className={cComponent.botonDelete}>
                   <button onClick={onDelete}>
                     <DeleteIcon style={{ width: "20px", height: "20px" }} />

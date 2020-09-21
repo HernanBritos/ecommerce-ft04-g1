@@ -19,12 +19,12 @@ function SideBarComponent(props) {
       <div>
         <div className={sBar.auth}>
           <Link to="/login">
-            <button className={sBar.signIn} href="#">
+            <button onClick={props.onclose} className={sBar.signIn} href="#">
               Iniciar Sesion
             </button>
           </Link>
           <Link to="/users/signup">
-            <button className={sBar.signUp} href="#">
+            <button onClick={props.onclose} className={sBar.signUp} href="#">
               Registrarse
             </button>
           </Link>
@@ -55,7 +55,7 @@ function SideBarComponent(props) {
         </div>
         <Link to="/admin">
           <div className={sBar.admin}>
-            <button className={`btn btn-secondary`}>
+            <button onClick={props.onclose} className={`btn btn-secondary`}>
               <SupervisorAccountIcon />
             </button>
           </div>

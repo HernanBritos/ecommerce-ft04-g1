@@ -34,12 +34,12 @@ const detailsCategory = (categoryId) => async (dispatch) => {
   }
 };
 
-const editCategory = (category) => async (dispatch) => {
+const editCategory = (category, id) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_EDIT_REQUEST, payload: category });
     axios
-      .put(`http://localhost:3001/categories/${category.id}`, {
-        name: `${category.name}`,
+      .put(`http://localhost:3001/categories/${id}`, {
+        name: `${category}`,
       })
       .then((data) => {
         return data;
