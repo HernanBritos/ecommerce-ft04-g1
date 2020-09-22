@@ -30,6 +30,12 @@ function CartComponent(props) {
 
   const dispatch = useDispatch();
 
+  const fetchUser = async () => {
+    var user = await axios.get("http://localhost:3001/users");
+
+    user.data[0] && setInput({ ...input, idUser: user.data[0].id });
+  };
+
   const removeFromCartHandler = (productId) => {
     dispatch(removeFromCart(productId));
   };
@@ -40,10 +46,10 @@ function CartComponent(props) {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
-
     if (input.idUser) {
       dispatch(fetchOrders(input.idUser));
     }
+    fetchUser();
   }, [dispatch, productId, qty, input.idUser]);
 
   const checkoutHandler = async () => {
@@ -126,7 +132,7 @@ function CartComponent(props) {
       )}
       <div className={`${cComponent.footer}`}>
         <form>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="idUser">Id User: </label>
             <input
               className="form-control"
@@ -136,7 +142,7 @@ function CartComponent(props) {
               type="number"
               onChange={handleInputChange}
             />
-          </div>
+          </div> */}
           <div className="form-group">
             <label htmlFor="address">Direccion: </label>
             <input

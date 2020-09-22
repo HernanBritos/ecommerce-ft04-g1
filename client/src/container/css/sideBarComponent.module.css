@@ -53,6 +53,12 @@
 }
 .admin {
   margin: 50px;
+  display: flex;
+  flex-direction: row;
+}
+.admin button {
+  margin: 10px;
+  width: 50px;
 }
 .category {
   box-shadow: 0.3px 0.3px 3px rgb(0, 0, 0);

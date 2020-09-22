@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listCategory } from "../Redux/Categories/Actions/categoryActions";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import axios from "axios";
 
 function SideBarComponent(props) {
   const dispatch = useDispatch();
@@ -14,11 +16,19 @@ function SideBarComponent(props) {
     dispatch(listCategory());
   }, [dispatch]);
 
+  const logout = (e) => {
+    e.preventDefault();
+    axios.get("http://localhost:3001/users/logout").then((data) => {
+      console.log(data);
+      return data;
+    });
+  };
+
   return (
     <div>
       <div>
         <div className={sBar.auth}>
-          <Link to="/login">
+          <Link to="/users/signin">
             <button onClick={props.onclose} className={sBar.signIn} href="#">
               Iniciar Sesion
             </button>
@@ -53,13 +63,17 @@ function SideBarComponent(props) {
             ))
           )}
         </div>
-        <Link to="/admin">
-          <div className={sBar.admin}>
+
+        <div className={`${sBar.admin}`}>
+          <Link to="/admin">
             <button onClick={props.onclose} className={`btn btn-secondary`}>
               <SupervisorAccountIcon />
             </button>
-          </div>
-        </Link>
+          </Link>
+          <button onClick={logout} className={`btn btn-secondary`}>
+            <ExitToAppIcon />
+          </button>
+        </div>
       </div>
     </div>
   );

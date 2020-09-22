@@ -3,9 +3,10 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-const { User } = require("./models/User");
+// const { User } = require("./models/User");
+const { User } = require("./db");
 const passport = require("passport");
-const passportLocal = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 var cors = require("cors");
@@ -29,43 +30,66 @@ server.use((req, res, next) => {
   );
   next();
 });
-server.use(
-  session({
-    secret: "secretcode",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+
 server.use(cors());
 passport.initialize();
 passport.session();
 server.use(cookieParser("secretcode"));
 
 passport.use(
-  new passportLocal(async (email, password, done) => {
-    await User.findOne({ where: { email: email } }, (err, user) => {
-      if (!user) return done(null, false);
-      if (user.checkPassword(password)) {
-        return done(null, user);
-      } else {
-        return done(null, false);
-      }
-    });
-  })
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+    },
+    function (email, password, done) {
+      console.log("email", email, "password", password);
+      User.findOne({ where: { email: email } })
+        .then((user) => {
+          if (!user) {
+            return done(null, false, {
+              message: "El correo electrónico no existe.",
+            });
+          }
+          if (!user.checkPassword(password)) {
+            return done(null, false, {
+              message: "La contraseña es incorrecta.",
+            });
+          }
+          return done(null, user);
+        })
+        .catch((err) => {
+          if (err) {
+            return done(err);
+          }
+        });
+    }
+  )
 );
 
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findOne({ where: { id: id } })
+    .then((user) => {
+      done(null, user);
+    })
+    .catch((err) => done(err));
+});
+
+server.use(
+  session({
+    secret: "secretcode",
+    saveUninitialized: false,
+    resave: false,
+  })
+);
+server.use(passport.initialize());
+server.use(passport.session());
+
 server.use("/", routes);
-
-passport.serializeUser((user, cb) => {
-  cb(null, user.id);
-});
-
-passport.deserializeUser(async (id, cb) => {
-  const user = await User.findOne({ where: { id: id } });
-  if (user) {
-    cb(user);
-  }
-});
 
 // Error catching endware.
 server.use((err, req, res, next) => {
