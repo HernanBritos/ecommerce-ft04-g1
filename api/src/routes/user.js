@@ -241,21 +241,67 @@ server.post("/signup", async (req, res) => {
   }
 });
 
-server.post("/signin", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (!user) {
-      res.send("No existe el email ingresado");
-    } else {
-      req.logIn(user, (err) => {
-        if (err) console.log(err);
-        res.send("Has iniciado sesión correctamente!");
-      });
-    }
+const isAuthenticated = (req, res, next) => {
+  console.log(req.isAuthenticated());
+  if (req.user) return next();
+  else
+    return res.json({
+      loggedin: false,
+      isAdmin: false,
+      message: "El usuario no está logueado",
+    });
+};
+
+server.get("/checkauth", isAuthenticated, function (req, res) {
+  res.status(200).json({
+    loggedin: true,
+    message: "El usuario está logueado",
+    user: req.user,
   });
 });
 
-server.get("/", (req, res) => {
-  res.json({ user: req.user });
+server.post("/signin", async (req, res, next) => {
+  await passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return res.json({
+        success: false,
+        message: err.message,
+        info,
+      });
+    }
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Usuario y/o contraseña incorrectos",
+        info,
+      });
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return res.json(err);
+      }
+      return res.json({
+        success: true,
+        message: "Te has logueado correctamente!",
+        info,
+        user,
+      });
+    });
+  })(req, res, next);
 });
 
+server.get("/", (req, res) => {
+  return res.json({ user: req.user });
+});
+
+server.get("/logout", (req, res, next) => {
+  req.logOut();
+  req.session.destroy(function (err) {
+    if (err) {
+      return next(err);
+    }
+    // The response should indicate that the user is no longer authenticated.
+    return res.send({ authenticated: req.isAuthenticated() });
+  });
+});
 module.exports = server;

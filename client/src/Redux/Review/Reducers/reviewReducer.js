@@ -54,7 +54,7 @@ function getReviewReducer(state = { reviews: [] }, action) {
           console.log(data.data);
           return data;
         });
-      return;
+      return state;
     default:
       return state;
   }

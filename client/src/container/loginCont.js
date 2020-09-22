@@ -6,6 +6,8 @@ function LoginContainer() {
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setUser({
@@ -14,31 +16,48 @@ function LoginContainer() {
     });
   };
 
-  const getUser = async () => {
-    await axios
-      .get("http://localhost:3001/users", {
-        withCredentials: true,
+  const getUser = (e) => {
+    e.preventDefault();
+    axios.get("http://localhost:3001/users").then((data) => {
+      console.log(data.data);
+      return data.data;
+    });
+  };
+
+  const loginUser = (email, password) => {
+    return axios
+      .post("http://localhost:3001/users/signin", {
+        email,
+        password,
       })
       .then((data) => {
-        console.log(data);
+        localStorage.clear();
+        return data;
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/users/signin", {
-        email: user.email,
-        password: user.password,
-        withCredentials: true,
-      })
-      .then((data) => {
-        console.log(data);
-      });
+    loginUser(user.email, user.password).then((data) => {
+      console.log(data);
+      if (!data.data.success) {
+        setError(data.data.message);
+        return data;
+      } else {
+        setMessage(data.data.message);
+        // return (window.location = "/");
+        return data;
+      }
+    });
   };
 
   return (
     <div style={{ paddingTop: "170px" }} className={userForm}>
+      {message ? (
+        <div className="alert alert-success">{message}</div>
+      ) : (
+        error && <div className="alert alert-danger">{error}</div>
+      )}
       <form className="mx-auto form-signin col-md-3" onSubmit={handleSubmit}>
         <h1 className="h3 mb-3 font-weight-normal">Login</h1>
         <label htmlFor="inputEmail" className="sr-only">
