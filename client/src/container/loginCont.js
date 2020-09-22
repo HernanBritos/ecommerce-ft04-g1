@@ -18,9 +18,9 @@ function LoginContainer() {
 
   const getUser = (e) => {
     e.preventDefault();
-    axios.get("http://localhost:3001/users").then((data) => {
-      console.log(data.data);
-      return data.data;
+    axios.get("http://localhost:3001/users/session").then((data) => {
+      console.log(data);
+      return data;
     });
   };
 

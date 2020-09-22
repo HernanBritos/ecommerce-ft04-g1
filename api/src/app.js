@@ -34,6 +34,11 @@ server.use((req, res, next) => {
 server.use(cors());
 passport.initialize();
 passport.session();
+server.use((req, res, next) => {
+  console.log(req.user);
+  res.locals.user = req.user || null;
+  next();
+});
 server.use(cookieParser("secretcode"));
 
 passport.use(
@@ -50,13 +55,13 @@ passport.use(
             return done(null, false, {
               message: "El correo electrónico no existe.",
             });
-          }
-          if (!user.checkPassword(password)) {
+          } else if (!user.checkPassword(password)) {
             return done(null, false, {
               message: "La contraseña es incorrecta.",
             });
+          } else {
+            return done(null, user.dataValues);
           }
-          return done(null, user);
         })
         .catch((err) => {
           if (err) {
@@ -68,26 +73,28 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
+  console.log(user.id, "Serialize");
   done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-  User.findOne({ where: { id: id } })
+  User.findByPk(id)
     .then((user) => {
       done(null, user);
     })
     .catch((err) => done(err));
 });
 
+server.use(passport.initialize());
+server.use(passport.session());
+
 server.use(
   session({
     secret: "secretcode",
-    saveUninitialized: false,
-    resave: false,
+    resave: true,
+    saveUninitialized: true,
   })
 );
-server.use(passport.initialize());
-server.use(passport.session());
 
 server.use("/", routes);
 

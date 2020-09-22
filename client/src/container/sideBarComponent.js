@@ -20,7 +20,6 @@ function SideBarComponent(props) {
     e.preventDefault();
     axios.get("http://localhost:3001/users/logout").then((data) => {
       console.log(data);
-      return data;
     });
   };
 
