@@ -14,25 +14,21 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
-server.post("/signin", (req, res, next) => {
+server.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    const auth = req.isAuthenticated();
     if (err) {
       res.json({
         success: false,
         message: err.message,
-        authenticated: auth,
       });
     }
     if (!user) {
       res.json({
         success: false,
         message: "Usuario y/o contraseña incorrectos",
-        authenticated: auth,
       });
     }
     req.logIn(user, (err) => {
-      const auth = req.isAuthenticated();
       if (err) {
         res.json(err);
       }
@@ -40,7 +36,6 @@ server.post("/signin", (req, res, next) => {
       res.json({
         success: true,
         message: "Te has logueado correctamente!",
-        authenticated: auth,
         user,
       });
     });
@@ -52,9 +47,9 @@ server.get("/logout", (req, res, next) => {
   res.json({ message: "Sesion cerrada" });
 });
 
-server.get("/session", (req, res, next) => {
-  res.json({ user: user });
-});
+// server.get("/session", (req, res, next) => {
+//   res.json({ user: req.user });
+// });
 
 // POST /users
 server.post("/", (req, res, next) => {
@@ -260,7 +255,6 @@ server.post("/signup", async (req, res) => {
     },
   });
   if (user) {
-    console.log("Ya existe ese mail");
     return res.json({ message: "Ya existe ese mail", success: false });
   }
   if (!user) {
@@ -284,7 +278,6 @@ server.post("/signup", async (req, res) => {
 });
 
 const isAuthenticated = (req, res, next) => {
-  console.log(req.isAuthenticated());
   if (req.user) return next();
   else
     return res.json({

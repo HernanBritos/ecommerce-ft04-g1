@@ -1,82 +1,76 @@
 const server = require("express").Router();
-const {OrderProduct} = require("../models/OrderProduct.js");
+const { OrderProduct } = require("../db");
 
 // GET /orders
 // Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status.
 server.get("/", (req, res) => {
-    const qstatus = req.query.status;
-    OrderProduct.findAll({
-        where: {status: qstatus},
-    }).then((response)=> {
-        res.status(200).json(response);
-    }).catch((err) =>
-    res.status(400).send(err, " WARNING! -> Order id does not exist")
+  const qstatus = req.query.status;
+  OrderProduct.findAll({
+    where: { status: qstatus },
+  })
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) =>
+      res.status(400).send(err, " WARNING! -> Order id does not exist")
     );
-    });
-
-
+});
 
 // GET /orders/:id
 
 server.get("/:id", (req, res) => {
-    
-const id = req.params.id;
-OrderProduct.findAll({
-    where: {idShoppingcart: id},
-}).then((response)=> {
-    res.status(200).json(response);
-}).catch((err) =>
-res.status(400).send(err, " WARNING! -> Order id does not exist")
-);
+  const id = req.params.id;
+  OrderProduct.findAll({
+    where: { idShoppingcart: id },
+  })
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) =>
+      res.status(400).send(err, " WARNING! -> Order id does not exist")
+    );
 });
 
 // PUT /orders/:id
 
 server.put("/:id", (req, res) => {
-    const id = req.params.id;
-  
-    OrderProduct.update(
-      {
-        idOrder: req.body.idOrder,
-        idProduct: req.body.idProduct,
-        price: req.body.price,
-        ammount: req.body.ammount,
-           
-      },
-      {
-        where: {
-          idOrder: id,
-        },
-        returning: true,
-      }
-    )
-      .then((response) => {
-        res.status(200).json(response);
-      })
-      .catch((err) =>
-        res.status(400).send(err, " WARNING! -> You can´t modificate the Order")
-      );
-  });
+  const id = req.params.id;
 
-  server.post("/:id", (req, res) => {
-    const id = req.params.id;
-  
-    OrderProduct.create(
-      {
+  OrderProduct.update(
+    {
+      idOrder: req.body.idOrder,
+      idProduct: req.body.idProduct,
+      price: req.body.price,
+      ammount: req.body.ammount,
+    },
+    {
+      where: {
         idOrder: id,
-        idProduct: req.body.idProduct,
-        price: req.body.price,
-        ammount: req.body.ammount,
-           
       },
-       
-    )
-      .then((response) => {
-        res.status(200).json(response);
-      })
-      .catch((err) =>
-        res.status(400).send(err, " WARNING! -> You can´t modificate the Order")
-      );
-  });
+      returning: true,
+    }
+  )
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) =>
+      res.status(400).send(err, " WARNING! -> You can´t modificate the Order")
+    );
+});
+
+server.post("/", (req, res) => {
+  OrderProduct.create({
+    idOrder: req.body.idOrder,
+    idProduct: req.body.idProduct,
+    price: req.body.price,
+    ammount: req.body.ammount,
+  })
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) =>
+      res.status(400).send(err, " WARNING! -> You can´t modificate the Order")
+    );
+});
 
 module.exports = server;

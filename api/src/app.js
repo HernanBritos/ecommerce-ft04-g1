@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-// const { User } = require("./models/User");
+const UserSchema = require("./models/User");
 const { User } = require("./db");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -14,13 +14,6 @@ var cors = require("cors");
 require("./db.js");
 
 const server = express();
-
-server.name = "API";
-server.use("/imagenes", express.static("imagenes"));
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
-
-server.use(morgan("dev"));
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
@@ -31,70 +24,94 @@ server.use((req, res, next) => {
   next();
 });
 
+server.name = "API";
+server.use("/imagenes", express.static("imagenes"));
+server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+server.use(bodyParser.json({ limit: "50mb" }));
+
+server.use(morgan("dev"));
 server.use(cors());
+
 passport.initialize();
 passport.session();
 server.use((req, res, next) => {
-  console.log(req.user);
   res.locals.user = req.user || null;
   next();
 });
-server.use(cookieParser("secretcode"));
-
-passport.use(
-  new LocalStrategy(
-    {
-      usernameField: "email",
-      passwordField: "password",
-    },
-    function (email, password, done) {
-      console.log("email", email, "password", password);
-      User.findOne({ where: { email: email } })
-        .then((user) => {
-          if (!user) {
-            return done(null, false, {
-              message: "El correo electrónico no existe.",
-            });
-          } else if (!user.checkPassword(password)) {
-            return done(null, false, {
-              message: "La contraseña es incorrecta.",
-            });
-          } else {
-            return done(null, user.dataValues);
-          }
-        })
-        .catch((err) => {
-          if (err) {
-            return done(err);
-          }
-        });
-    }
-  )
-);
-
-passport.serializeUser(function (user, done) {
-  console.log(user.id, "Serialize");
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.findByPk(id)
-    .then((user) => {
-      done(null, user);
-    })
-    .catch((err) => done(err));
-});
-
 server.use(passport.initialize());
 server.use(passport.session());
+server.use(cookieParser("secretcode"));
 
 server.use(
   session({
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      secure: false,
+      httpOnly: false,
+      maxAge: 600000,
+    },
   })
 );
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      session: true,
+    },
+    async (email, password, done) => {
+      try {
+        const user = await User.findOne({
+          where: {
+            email: email,
+          },
+        });
+
+        if (!user) {
+          done(null, false, {
+            message: "Incorrect credentials.",
+          });
+        }
+        if (user.checkPassword(password)) {
+          done(null, user);
+        }
+
+        done(null, false, {
+          message: "Incorrect credentials.",
+        });
+      } catch (err) {
+        done(null, false, {
+          message: "Failed",
+        });
+      }
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  return done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!user) {
+      return done(null, false, { message: "User does not exist" });
+    }
+
+    return done(null, user);
+  } catch (err) {
+    return done(null, false, { message: "Failed" });
+  }
+});
 
 server.use("/", routes);
 

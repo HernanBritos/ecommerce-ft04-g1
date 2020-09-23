@@ -27,19 +27,14 @@ function ProductCard(props) {
         <div className={pCard.productData}>
           <span className={pCard.name}>{props.producto.name}</span>
 
-          <Link
-            to={{
-              pathname: "/products/" + props.producto.id + "/review",
-            }}
-          >
-            <ReactStars
-              count={5}
-              value={props.producto.rating}
-              edit={false}
-              size={15}
-              isHalf={true}
-            />
-          </Link>
+          <ReactStars
+            count={5}
+            value={props.producto.rating}
+            edit={false}
+            size={15}
+            isHalf={true}
+          />
+
           <span className={pCard.price}> $ {props.producto.price}</span>
           {props.producto.stock !== 0 ? (
             <span className={pCard.carrito}>

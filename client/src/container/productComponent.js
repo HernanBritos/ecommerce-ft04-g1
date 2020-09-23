@@ -72,18 +72,30 @@ function ProductComponent(props) {
                       }}
                     />
                   </div>
-                  <Link
-                    to={{
-                      pathname:
-                        "/products/" +
-                        props.producto.match.params.id +
-                        "/review",
-                    }}
-                  >
-                    <button className={cComponent.addreview}>
-                      Dejá tu opinión
-                    </button>
-                  </Link>
+                  {!JSON.parse(localStorage.getItem("user")) ? (
+                    <Link
+                      to={{
+                        pathname: "/users/login",
+                      }}
+                    >
+                      <button className={cComponent.addreview}>
+                        Dejá tu opinión
+                      </button>
+                    </Link>
+                  ) : (
+                    <Link
+                      to={{
+                        pathname:
+                          "/products/" +
+                          props.producto.match.params.id +
+                          "/review",
+                      }}
+                    >
+                      <button className={cComponent.addreview}>
+                        Dejá tu opinión
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
               <div className={cComponent.ndcolumn}>

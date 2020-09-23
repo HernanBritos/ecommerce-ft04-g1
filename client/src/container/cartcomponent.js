@@ -30,10 +30,10 @@ function CartComponent(props) {
 
   const dispatch = useDispatch();
 
-  const fetchUser = async () => {
-    var user = await axios.get("http://localhost:3001/users");
+  const fetchUser = () => {
+    var user = JSON.parse(localStorage.getItem("user"));
 
-    user.data[0] && setInput({ ...input, idUser: user.data[0].id });
+    user && setInput({ ...input, idUser: user.id });
   };
 
   const removeFromCartHandler = (productId) => {
@@ -65,10 +65,21 @@ function CartComponent(props) {
         shipping: input.shipping,
       })
       .then((data) => {
+        console.log(data.data.id);
+        cartItems.map(async (product) => {
+          await axios
+            .post(`http://localhost:3001/orders`, {
+              idOrder: data.data.id,
+              idProduct: product.product,
+              price: product.price,
+              ammount: product.qty,
+            })
+            .then((res) => console.log(res));
+        });
         return data;
       });
-
-    return (window.location = `http://localhost:3000/users/${input.idUser}/orders`);
+    return null;
+    // return (window.location = `http://localhost:3000/users/${input.idUser}/orders`);
   };
 
   const handleInputChange = function (e) {
@@ -191,20 +202,41 @@ function CartComponent(props) {
         <h4>
           Subtotal: ({cantidad} items) : $ {subtotal}
         </h4>
-        <Link
-          to={{
-            pathname: `/users/${input.idUser}/orders`,
-            state: { cartItems },
-          }}
-        >
-          <button
-            onClick={checkoutHandler}
-            className="btn btn-success"
-            disabled={cartItems.length === 0}
+        {JSON.parse(localStorage.getItem("user")) ? (
+          <Link
+            to={{
+              pathname: `/users/${input.idUser}/orders`,
+              state: { cartItems },
+            }}
           >
-            Continuar con la compra
-          </button>
-        </Link>
+            <button
+              onClick={checkoutHandler}
+              className="btn btn-success"
+              disabled={cartItems.length === 0}
+            >
+              Continuar con la compra
+            </button>
+          </Link>
+        ) : (
+          <Link
+            to={{
+              pathname: `/users/login`,
+              state: {
+                redCart: true,
+                formCart: input,
+                cartItems: cartItems,
+                subtotal: subtotal,
+              },
+            }}
+          >
+            <button
+              className="btn btn-success"
+              disabled={cartItems.length === 0}
+            >
+              Continuar con la compra
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
