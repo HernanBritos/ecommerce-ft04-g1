@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { userForm } from "../container/css/userForm.module.css";
 import axios from "axios";
-function LoginContainer() {
+function LoginContainer(props) {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -18,37 +18,65 @@ function LoginContainer() {
 
   const getUser = (e) => {
     e.preventDefault();
-    axios.get("http://localhost:3001/users").then((data) => {
-      console.log(data.data);
-      return data.data;
-    });
+    console.log(JSON.parse(localStorage.getItem("user")));
+    return JSON.parse(localStorage.getItem("user"));
   };
 
   const loginUser = (email, password) => {
     return axios
-      .post("http://localhost:3001/users/signin", {
+      .post("http://localhost:3001/users/login", {
         email,
         password,
       })
       .then((data) => {
-        localStorage.clear();
+        console.log(data);
+        if (data.data.user) {
+          localStorage.setItem("user", JSON.stringify(data.data.user));
+        }
+        return data;
+      })
+      .catch((err) => err);
+  };
+
+  const checkoutHandler = async () => {
+    await axios
+      .post(
+        `http://localhost:3001/users/${props.u.location.state.formCart.idUser}/orders`,
+        {
+          idUser: props.u.location.state.formCart.idUser,
+          date: props.u.location.state.formCart.date,
+          priceTotal: props.u.location.state.subtotal,
+          status: props.u.location.state.formCart.status,
+          address: props.u.location.state.formCart.address,
+          description: props.u.location.state.formCart.description,
+          paymentmethod: props.u.location.state.formCart.paymentmethod,
+          shipping: props.u.location.state.formCart.shipping,
+        }
+      )
+      .then((data) => {
         return data;
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginUser(user.email, user.password).then((data) => {
-      console.log(data);
-      if (!data.data.success) {
-        setError(data.data.message);
-        return data;
-      } else {
-        setMessage(data.data.message);
-        // return (window.location = "/");
-        return data;
-      }
-    });
+    loginUser(user.email, user.password)
+      .then((data) => {
+        console.log(data);
+        if (!data.data.success) {
+          setError(data.data.message);
+        } else {
+          setMessage(data.data.message);
+          if (props.u.location.state.redCart) {
+            checkoutHandler();
+            return (window.location = `/users/${
+              JSON.parse(localStorage.getItem("user")).id
+            }/orders`);
+          }
+          return (window.location = "/");
+        }
+      })
+      .catch((err) => err);
   };
 
   return (

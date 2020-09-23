@@ -136,9 +136,12 @@ export default function AddReviewContainer(props) {
             ) : (
               <div key={review.id} className={cComponent.review}>
                 <div className={cComponent.botonDelete}>
-                  <button onClick={onDelete}>
-                    <DeleteIcon style={{ width: "20px", height: "20px" }} />
-                  </button>
+                  {JSON.parse(localStorage.getItem("user")).id ===
+                    review.idUser && (
+                    <button onClick={onDelete}>
+                      <DeleteIcon style={{ width: "20px", height: "20px" }} />
+                    </button>
+                  )}
                 </div>
                 <div className={cComponent.contenido}>
                   <p>{review.title}</p>
@@ -164,9 +167,12 @@ export default function AddReviewContainer(props) {
                       state: review,
                     }}
                   >
-                    <button>
-                      <EditIcon style={{ width: "20px", height: "20px" }} />
-                    </button>
+                    {JSON.parse(localStorage.getItem("user")).id ===
+                      review.idUser && (
+                      <button>
+                        <EditIcon style={{ width: "20px", height: "20px" }} />
+                      </button>
+                    )}
                   </Link>
                 </div>
               </div>

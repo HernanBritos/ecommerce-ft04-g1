@@ -18,27 +18,32 @@ function SideBarComponent(props) {
 
   const logout = (e) => {
     e.preventDefault();
-    axios.get("http://localhost:3001/users/logout").then((data) => {
-      console.log(data);
-      return data;
-    });
+    localStorage.removeItem("user");
+    return (window.location = "/");
+    // axios.get("http://localhost:3001/users/logout").then((data) => {
+    //   console.log(data);
+    // });
   };
 
   return (
     <div>
       <div>
-        <div className={sBar.auth}>
-          <Link to="/users/signin">
-            <button onClick={props.onclose} className={sBar.signIn} href="#">
-              Iniciar Sesion
-            </button>
-          </Link>
-          <Link to="/users/signup">
-            <button onClick={props.onclose} className={sBar.signUp} href="#">
-              Registrarse
-            </button>
-          </Link>
-        </div>
+        {JSON.parse(localStorage.getItem("user")) ? (
+          <h4>Hola,{JSON.parse(localStorage.getItem("user")).name}</h4>
+        ) : (
+          <div className={sBar.auth}>
+            <Link to="/users/login">
+              <button onClick={props.onclose} className={sBar.signIn} href="#">
+                Iniciar Sesion
+              </button>
+            </Link>
+            <Link to="/users/signup">
+              <button onClick={props.onclose} className={sBar.signUp} href="#">
+                Registrarse
+              </button>
+            </Link>
+          </div>
+        )}
         <button className={sBar.closeButton} onClick={props.onclose}>
           x
         </button>

@@ -97,7 +97,7 @@ function App() {
             }}
           />
           <Route
-            path="/users/signin"
+            path="/users/login"
             exact={true}
             render={(u) => {
               return <Login u={u} />;

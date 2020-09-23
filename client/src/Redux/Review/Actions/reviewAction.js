@@ -23,6 +23,7 @@ const setReview = (productId, review) => async (dispatch) => {
       title: `${review.title}`,
       description: `${review.description}`,
       star: `${review.star}`,
+      idUser: JSON.parse(localStorage.getItem("user")).id,
     })
     .then((data) => {
       dispatch({ type: ADD_REVIEW, payload: data.data });

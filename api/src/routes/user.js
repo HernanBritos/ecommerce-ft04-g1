@@ -14,6 +14,43 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
+server.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: err.message,
+      });
+    }
+    if (!user) {
+      res.json({
+        success: false,
+        message: "Usuario y/o contraseña incorrectos",
+      });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        res.json(err);
+      }
+
+      res.json({
+        success: true,
+        message: "Te has logueado correctamente!",
+        user,
+      });
+    });
+  })(req, res, next);
+});
+
+server.get("/logout", (req, res, next) => {
+  req.logout();
+  res.json({ message: "Sesion cerrada" });
+});
+
+// server.get("/session", (req, res, next) => {
+//   res.json({ user: req.user });
+// });
+
 // POST /users
 server.post("/", (req, res, next) => {
   const { name, lastname, email, password, phone, address } = req.body;
@@ -27,7 +64,7 @@ server.post("/", (req, res, next) => {
     address: address,
   })
     .then((newUser) => {
-      return res.send(newUser);
+      res.send(newUser);
     })
     .catch((err) => res.status(400).send(err));
 });
@@ -218,7 +255,6 @@ server.post("/signup", async (req, res) => {
     },
   });
   if (user) {
-    console.log("Ya existe ese mail");
     return res.json({ message: "Ya existe ese mail", success: false });
   }
   if (!user) {
@@ -242,7 +278,6 @@ server.post("/signup", async (req, res) => {
 });
 
 const isAuthenticated = (req, res, next) => {
-  console.log(req.isAuthenticated());
   if (req.user) return next();
   else
     return res.json({
@@ -260,48 +295,4 @@ server.get("/checkauth", isAuthenticated, function (req, res) {
   });
 });
 
-server.post("/signin", async (req, res, next) => {
-  await passport.authenticate("local", (err, user, info) => {
-    if (err) {
-      return res.json({
-        success: false,
-        message: err.message,
-        info,
-      });
-    }
-    if (!user) {
-      return res.json({
-        success: false,
-        message: "Usuario y/o contraseña incorrectos",
-        info,
-      });
-    }
-    req.logIn(user, function (err) {
-      if (err) {
-        return res.json(err);
-      }
-      return res.json({
-        success: true,
-        message: "Te has logueado correctamente!",
-        info,
-        user,
-      });
-    });
-  })(req, res, next);
-});
-
-server.get("/", (req, res) => {
-  return res.json({ user: req.user });
-});
-
-server.get("/logout", (req, res, next) => {
-  req.logOut();
-  req.session.destroy(function (err) {
-    if (err) {
-      return next(err);
-    }
-    // The response should indicate that the user is no longer authenticated.
-    return res.send({ authenticated: req.isAuthenticated() });
-  });
-});
 module.exports = server;

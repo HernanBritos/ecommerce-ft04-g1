@@ -256,18 +256,20 @@ server.get("/:id/review", (req, res) => {
 
 //------------------------------------------------------------------------------------------------------------//
 
-// POST /product/:id/review
+// POST /products/:id/review
 
 server.post("/:id/review", (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
   const star = req.body.star;
   const id = req.params.id;
+  const idUser = req.body.idUser;
   // const userId = req.body.userId;
   Review.create({
     title,
     description: description,
     star: star,
+    idUser: idUser,
   })
     .then((newReview) => {
       newReview.setProduct(id);

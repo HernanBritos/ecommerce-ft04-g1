@@ -82,7 +82,7 @@ function FormUser() {
           {success && (
             <div className={"mx-auto"}>
               <div className={"alert alert-info"}>Registro exitoso!</div>
-              <a className={"mx-auto btn btn-success"} href="/users/signin">
+              <a className={"mx-auto btn btn-success"} href="/users/login">
                 Iniciar sesión
               </a>
             </div>
