@@ -41,9 +41,11 @@ function LoginContainer(props) {
   const checkoutHandler = async () => {
     await axios
       .post(
-        `http://localhost:3001/users/${props.u.location.state.formCart.idUser}/orders`,
+        `http://localhost:3001/users/${
+          JSON.parse(localStorage.getItem("user")).id
+        }/orders`,
         {
-          idUser: props.u.location.state.formCart.idUser,
+          idUser: JSON.parse(localStorage.getItem("user")).id,
           date: props.u.location.state.formCart.date,
           priceTotal: props.u.location.state.subtotal,
           status: props.u.location.state.formCart.status,
@@ -54,8 +56,20 @@ function LoginContainer(props) {
         }
       )
       .then((data) => {
+        console.log(data.data.id);
+        props.u.location.state.cartItems.map(async (product) => {
+          await axios
+            .post(`http://localhost:3001/orders`, {
+              idOrder: data.data.id,
+              idProduct: product.product,
+              price: product.price,
+              ammount: product.qty,
+            })
+            .then((res) => console.log(res));
+        });
         return data;
       });
+    return null;
   };
 
   const handleSubmit = (e) => {

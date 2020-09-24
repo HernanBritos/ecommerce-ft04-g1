@@ -70,11 +70,14 @@ function SideBarComponent(props) {
         </div>
 
         <div className={`${sBar.admin}`}>
-          <Link to="/admin">
-            <button onClick={props.onclose} className={`btn btn-secondary`}>
-              <SupervisorAccountIcon />
-            </button>
-          </Link>
+          {JSON.parse(localStorage.getItem("user")) &&
+            JSON.parse(localStorage.getItem("user")).rol === "admin" && (
+              <Link to="/admin">
+                <button onClick={props.onclose} className={`btn btn-secondary`}>
+                  <SupervisorAccountIcon />
+                </button>
+              </Link>
+            )}
           <button onClick={logout} className={`btn btn-secondary`}>
             <ExitToAppIcon />
           </button>

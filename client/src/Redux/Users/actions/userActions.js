@@ -6,6 +6,7 @@ import {
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DELETE_SUCCESS,
+  USER_MAKE_ADMIN,
 } from "../constantes/userConstants";
 import axios from "axios";
 
@@ -76,4 +77,8 @@ const editUser = (user) => {
   return (window.location = "http://localhost:3000");
 };
 
-export { getUser, getUserDetails, deleteUser, editUser, addUser };
+const makeAdmin = (userId) => (dispatch) => {
+  dispatch({ type: USER_MAKE_ADMIN, payload: userId });
+};
+
+export { getUser, getUserDetails, deleteUser, editUser, addUser, makeAdmin };

@@ -214,7 +214,7 @@ function CartComponent(props) {
               className="btn btn-success"
               disabled={cartItems.length === 0}
             >
-              Continuar con la compra
+              Finalizar compra
             </button>
           </Link>
         ) : (
@@ -233,7 +233,7 @@ function CartComponent(props) {
               className="btn btn-success"
               disabled={cartItems.length === 0}
             >
-              Continuar con la compra
+              Finalizar compra
             </button>
           </Link>
         )}
