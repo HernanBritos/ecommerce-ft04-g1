@@ -117,4 +117,4 @@ dist
 
 # Subidas
 
-imagenes/uploads
+/public/imagenes/uploads/
