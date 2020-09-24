@@ -6,6 +6,7 @@ import {
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DELETE_SUCCESS,
+  USER_MAKE_ADMIN,
 } from "../constantes/userConstants";
 
 function userListReducer(state = { users: [] }, action) {
@@ -21,6 +22,15 @@ function userListReducer(state = { users: [] }, action) {
       return { loading: false, error: action.payload };
     case USER_DELETE_SUCCESS:
       return (state = { users: state.users.filter(filter) });
+    case USER_MAKE_ADMIN:
+      const oldUser = state.users.find((user) => user.id === action.payload);
+      const newUser = oldUser;
+      newUser.rol = "admin";
+      return {
+        users: state.users.map((user) => {
+          return user.id === oldUser.id ? newUser : user;
+        }),
+      };
     default:
       return state;
   }

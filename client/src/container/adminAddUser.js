@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import cComponent from "./css/adminAddUser.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getUser, deleteUser } from "../Redux/Users/actions/userActions";
+import {
+  getUser,
+  deleteUser,
+  makeAdmin,
+} from "../Redux/Users/actions/userActions";
+import axios from "axios";
 
 export default function AdminAddUser() {
   const userList = useSelector((state) => state.userList);
@@ -36,6 +41,7 @@ export default function AdminAddUser() {
                   <th>Email</th>
                   <th>Telefono</th>
                   <th>Direccion</th>
+                  <th>Rol</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -44,6 +50,15 @@ export default function AdminAddUser() {
                   var uId = user.id;
                   const borrar = () => {
                     dispatch(deleteUser(uId));
+                  };
+                  const hacerAdmin = () => {
+                    axios
+                      .put(`http://localhost:3001/users/${uId}`, {
+                        rol: "admin",
+                      })
+                      .then((data) => {
+                        dispatch(makeAdmin(uId));
+                      });
                   };
                   return (
                     <tr key={user.id}>
@@ -55,12 +70,19 @@ export default function AdminAddUser() {
                       <td>{user.email}</td>
                       <td>{user.phone}</td>
                       <td>{user.address}</td>
+                      <td>{user.rol}</td>
                       <td className={cComponent.botones}>
-                        <Link to={`/users/edit/${user.id}`}>
+                        {/* <Link to={`/users/edit/${user.id}`}>
                           <button className={cComponent.editar}>Editar</button>
-                        </Link>
+                        </Link> */}
                         <button onClick={borrar} className={cComponent.borrar}>
                           Eliminar
+                        </button>
+                        <button
+                          onClick={hacerAdmin}
+                          className={cComponent.editar}
+                        >
+                          MakeAdmin
                         </button>
                       </td>
                     </tr>

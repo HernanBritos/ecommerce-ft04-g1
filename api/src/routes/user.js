@@ -81,6 +81,7 @@ server.put("/:id", (req, res, next) => {
       password: req.body.password,
       phone: req.body.phone,
       address: req.body.address,
+      rol: req.body.rol,
     },
     {
       where: {
