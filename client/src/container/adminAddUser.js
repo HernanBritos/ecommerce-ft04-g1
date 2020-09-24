@@ -52,13 +52,25 @@ export default function AdminAddUser() {
                     dispatch(deleteUser(uId));
                   };
                   const hacerAdmin = () => {
-                    axios
+                    if(user.rol === "user") {
+                      axios
                       .put(`http://localhost:3001/users/${uId}`, {
-                        rol: "admin",
+                         rol: "admin",
                       })
                       .then((data) => {
                         dispatch(makeAdmin(uId));
                       });
+                     } else {
+                      axios
+                      .put(`http://localhost:3001/users/${uId}`, {
+                         rol: "user",
+                      })
+                      .then((data) => {
+                        dispatch(makeAdmin(uId));
+                      }); 
+                      
+                     }
+                     return (window.location = "http://localhost:3000/admin");
                   };
                   return (
                     <tr key={user.id}>
@@ -82,7 +94,7 @@ export default function AdminAddUser() {
                           onClick={hacerAdmin}
                           className={cComponent.editar}
                         >
-                          MakeAdmin
+                          Admin/User
                         </button>
                       </td>
                     </tr>

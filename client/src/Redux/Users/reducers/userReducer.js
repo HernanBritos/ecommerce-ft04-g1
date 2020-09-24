@@ -25,15 +25,19 @@ function userListReducer(state = { users: [] }, action) {
     case USER_MAKE_ADMIN:
       const oldUser = state.users.find((user) => user.id === action.payload);
       const newUser = oldUser;
-      newUser.rol = "admin";
-      return {
+   return {
         users: state.users.map((user) => {
+          if(oldUser.rol === "user"){
+            newUser.rol = "admin";
+          } else {
+            newUser.rol = "user"
+          }
           return user.id === oldUser.id ? newUser : user;
-        }),
-      };
+        }), 
+      }; 
     default:
       return state;
-  }
+  } 
 }
 
 function userDetailsReducer(state = { userDet: [] }, action) {

@@ -32,10 +32,13 @@ function LoginContainer(props) {
         console.log(data);
         if (data.data.user) {
           localStorage.setItem("user", JSON.stringify(data.data.user));
+          return (window.location = `/`);
         }
         return data;
+        
       })
       .catch((err) => err);
+
   };
 
   const checkoutHandler = async () => {
@@ -87,8 +90,8 @@ function LoginContainer(props) {
               JSON.parse(localStorage.getItem("user")).id
             }/orders`);
           }
-          return (window.location = "/");
-        }
+          return (window.location = `/`);
+        } 
       })
       .catch((err) => err);
   };
@@ -131,11 +134,11 @@ function LoginContainer(props) {
           Login
         </button>
       </form>
-      <form onSubmit={getUser}>
+      {/* <form onSubmit={getUser}>
         <button className="btn btn-lg btn-primary btn-block mb-3" type="submit">
           Get User
         </button>
-      </form>
+      </form> */}
     </div>
   );
 }
