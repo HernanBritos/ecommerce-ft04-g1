@@ -3,6 +3,8 @@ import hInicio from "../components/css/headerInicio.module.css";
 import SearchBarComponent from "../container/searchBarComponent";
 import SideBar from "../container/sideBarComponent.js";
 import { Link } from "react-router-dom";
+import navBar from './navBar'
+import CnavBar from './css/navBar.module.css'
 
 function HeaderInicio() {
   const openMenu = () => {
@@ -20,6 +22,16 @@ function HeaderInicio() {
         <a className={hInicio.brand} href="/">
           Asia Pilar Shoes
         </a>
+        <div  className= {navBar}>
+        <navBar >
+          <div style={{ left: "0px",display: "flex", top: "90px", justifyContent: 'center' }} className={CnavBar.navbar}>
+            <a className={CnavBar.navbar_a} href="http://localhost:3000/">Inicio</a>
+            <a className={CnavBar.navbar_a}  href="http://localhost:3000/products">Productos</a>
+            <a className={CnavBar.navbar_a}  href="http://localhost:3000/categories">Categorias</a>
+            <a className={CnavBar.navbar_a} href="http://localhost:3000/contact">Contacto</a> {/* Falta hacer */}
+          </div>
+          </navBar>
+        </div>
         <Link
           to={{
             pathname: "/users/cart",

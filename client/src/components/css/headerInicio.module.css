@@ -1,12 +1,12 @@
 .header {
-  height: 100px;
+  height: 90px;
   width: 100%;
   background: #fcb064;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  box-shadow: 0.3px 0.3px 1.2px rgb(119, 118, 118);
+  box-shadow: 0.px 0.3px 1.2px rgb(119, 118, 118);
 }
 .searchbar {
   margin-right: 20px;

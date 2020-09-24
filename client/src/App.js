@@ -25,7 +25,6 @@ function App() {
   return (
     <BrowserRouter>
       <Route path="/" render={() => <HeaderInicio />} />
-
       <main className="main">
         <div className="content">
           <Route path="/" exact={true} render={() => <CatalogComponent />} />
@@ -167,6 +166,7 @@ function App() {
             }}
           />
         </div>
+
       </main>
     </BrowserRouter>
   );
