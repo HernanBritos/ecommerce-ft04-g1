@@ -1,24 +1,28 @@
 import React from "react";
 import oComponent from "./css/orderComponent.module.css";
+import cComponent from "./css/adminAddCategory.module.css";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
 
 function OrdenesCompra(props) {
   const getOrders = useSelector((state) => state.getOrders);
   const { orders } = getOrders;
 
   return (
-    <div>
-      <div className={oComponent.options}>
+    <div >
+      <div className={oComponent.catalogo2}>
         <Link to="/">
           <button className={oComponent.botonBack}>
             <ArrowBackIcon />
           </button>
         </Link>
       </div>
-      <div className={oComponent.catalogo2}>
-        <table className="table table-dark">
+     <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
+      <md-content layout-padding>
+        <div className="tables">
+          <table className="table  table-striped table-bordered table-hover table-checkable order-column dataTable">
           <thead>
             <tr key="0">
               <th scope="col">Id de Orden</th>
@@ -46,6 +50,8 @@ function OrdenesCompra(props) {
           </tbody>
         </table>
       </div>
+      </md-content>
+    </div>
     </div>
   );
 }

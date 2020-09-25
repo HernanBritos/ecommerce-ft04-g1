@@ -4,6 +4,8 @@ import {
   CART_REMOVE_ITEM,
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
+  ORDERPRODUCT_LIST_REQUEST,
+  ORDERPRODUCT_LIST_SUCCESS
 } from "../constantes/cartConstant";
 import Cookie from "js-cookie";
 
@@ -52,6 +54,19 @@ const fetchOrders = (id) => async (dispatch) => {
   } catch (error) {}
 };
 
+const fetchOrderProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: ORDERPRODUCT_LIST_REQUEST});
+    const {data } = await axios.get(
+      `http://localhost:3001/orders/`
+      );
+      dispatch({
+        type: ORDERPRODUCT_LIST_SUCCESS,
+        payload: data,
+      });
+  } catch (error) {}
+};
+
 const getOrders = (orders) => {
   return {
     type: ORDER_LIST_SUCCESS,
@@ -59,4 +74,4 @@ const getOrders = (orders) => {
   };
 };
 
-export { addToCart, removeFromCart, getOrders, fetchOrders };
+export { addToCart, removeFromCart, getOrders, fetchOrders, fetchOrderProducts };

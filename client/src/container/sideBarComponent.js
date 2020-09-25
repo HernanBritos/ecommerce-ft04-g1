@@ -60,8 +60,8 @@ function SideBarComponent(props) {
             categories.map((cat) => (
               <div key={cat.id}>
                 <Link to={"/products/categoria/" + cat.name}>
-                  <button className={`${sBar.category}`}>
-                    <p>{cat.name}</p>
+                  <button className={sBar.category}>
+                    <p className={sBar.botoncat} >{cat.name}</p>
                   </button>
                 </Link>
               </div>

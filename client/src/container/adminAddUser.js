@@ -22,6 +22,9 @@ export default function AdminAddUser() {
     <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
       <md-content layout-padding>
         <div className={cComponent.actionpane}>
+        <Link to="/admin/products/add">
+            <button className={cComponent.buttonNew}>Historial Ordenes</button>
+          </Link>
           <center>
             <h2>Usuarios</h2>
           </center>
@@ -87,15 +90,20 @@ export default function AdminAddUser() {
                         {/* <Link to={`/users/edit/${user.id}`}>
                           <button className={cComponent.editar}>Editar</button>
                         </Link> */}
+                    
                         <button onClick={borrar} className={cComponent.borrar}>
                           Eliminar
                         </button>
+                       
+                        <div className={cComponent.editar}>
                         <button
                           onClick={hacerAdmin}
                           className={cComponent.editar}
                         >
                           Admin/User
                         </button>
+                       
+                        </div>
                       </td>
                     </tr>
                   );

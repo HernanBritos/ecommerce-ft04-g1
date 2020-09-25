@@ -7,6 +7,7 @@
   transition: all 0.5s;
   margin-top: 101px;
   box-shadow: 0.3px 2px 1px rgb(83, 83, 83);
+  z-index: 1;
 }
 .sidebar.open {
   transform: translateX(0);
