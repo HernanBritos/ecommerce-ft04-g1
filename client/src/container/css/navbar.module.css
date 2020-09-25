@@ -1,0 +1,32 @@
+.navbar {
+    height: 38px;
+    width: 100%;
+    background:rgb(255, 237, 189);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-left:  100px;
+    position: fixed;
+    box-shadow: 0.px 0.3px 1.2px rgb(119, 118, 118);  
+    top: 70px;
+    font-family: "Grandstander", sans-serif;
+}
+
+  .navbar_a {
+    position: relative;
+    bottom: 0;
+    float: left;
+    display: block;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    align-items: center;
+  }
+  .navbar_a.active {
+    padding-right: 20px;
+    position: fixed;
+    bottom: 0;
+    background-color: #4CAF50;
+    color: white;
+  }
