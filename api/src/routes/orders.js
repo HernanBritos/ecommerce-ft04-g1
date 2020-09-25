@@ -3,25 +3,31 @@ const { OrderProduct } = require("../db");
 
 // GET /orders
 // Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status.
-server.get("/", (req, res) => {
-  const qstatus = req.query.status;
-  OrderProduct.findAll({
-    where: { status: qstatus },
+server.get("/", (req, res, next) => {
+//   const qstatus = req.query.status;
+//   OrderProduct.findAll({
+//     where: { status: qstatus },
+//   })
+//     .then((response) => {
+//       res.status(200).json(response);
+//     })
+//     .catch((err) =>
+//       res.status(400).send(err, " WARNING! -> Order id does not exist")
+//     );
+// });
+  OrderProduct.findAll()
+  .then((orderproducts) => {
+    res.send(orderproducts);
   })
-    .then((response) => {
-      res.status(200).json(response);
-    })
-    .catch((err) =>
-      res.status(400).send(err, " WARNING! -> Order id does not exist")
-    );
-});
+  .catch(next);
+  });
 
 // GET /orders/:id
 
 server.get("/:id", (req, res) => {
   const id = req.params.id;
   OrderProduct.findAll({
-    where: { idShoppingcart: id },
+    where: { idOrder: id },
   })
     .then((response) => {
       res.status(200).json(response);
