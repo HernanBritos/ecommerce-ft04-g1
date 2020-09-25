@@ -3,6 +3,8 @@ import hInicio from "../components/css/headerInicio.module.css";
 import SearchBarComponent from "../container/searchBarComponent";
 import SideBar from "../container/sideBarComponent.js";
 import { Link } from "react-router-dom";
+import navBar from './navBar'
+import CnavBar from './css/navBar.module.css'
 import { useSelector } from "react-redux";
 
 function HeaderInicio() {
@@ -50,7 +52,7 @@ function HeaderInicio() {
           <SearchBarComponent />
         </div>
       </div>
-      <aside className="sidebar">
+      <aside style= {{zIndex: 1}}className="sidebar">
         <SideBar onclose={closeMenu} />
       </aside>
     </div>

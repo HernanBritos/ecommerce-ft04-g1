@@ -20,12 +20,13 @@ import AddReviewContainer from "./container/addReviewcontainer";
 import EditReviewContainer from "./container/editReview";
 import OrderComponent from "./container/ordercomponent";
 import OrdenesCompra from "./container/ordenescompra";
+import Navbar from './components/navBar'
 
 function App() {
   return (
     <BrowserRouter>
       <Route path="/" render={() => <HeaderInicio />} />
-
+      <Route path="/" render={() => <Navbar />} />
       <main className="main">
         <div className="content">
           <Route path="/" exact={true} render={() => <CatalogComponent />} />
@@ -145,6 +146,7 @@ function App() {
             }}
           />
         </div>
+
       </main>
     </BrowserRouter>
   );
