@@ -32,15 +32,13 @@ function App() {
           <Route
             path="/admin"
             exact={true}
-            render={
-              () => (
-                // JSON.parse(localStorage.getItem("user")) &&
-                // JSON.parse(localStorage.getItem("user")).rol === "admin" ? (
+            render={() =>
+              JSON.parse(localStorage.getItem("user")) &&
+              JSON.parse(localStorage.getItem("user")).rol === "admin" ? (
                 <AdminPanel />
+              ) : (
+                (window.location = "/")
               )
-              // ) : (
-              //   (window.location = "/")
-              // )
             }
           />
           <Route
@@ -53,12 +51,26 @@ function App() {
           <Route
             path="/admin/products/add"
             exact={true}
-            render={() => <FormProduct />}
+            render={() =>
+              JSON.parse(localStorage.getItem("user")) &&
+              JSON.parse(localStorage.getItem("user")).rol === "admin" ? (
+                <FormProduct />
+              ) : (
+                (window.location = "/")
+              )
+            }
           />
           <Route
             path="/admin/categories/add"
             exact={true}
-            render={() => <FormCategory />}
+            render={() =>
+              JSON.parse(localStorage.getItem("user")) &&
+              JSON.parse(localStorage.getItem("user")).rol === "admin" ? (
+                <FormCategory />
+              ) : (
+                (window.location = "/")
+              )
+            }
           />
           <Route
             path="/product/:id"
@@ -71,14 +83,24 @@ function App() {
             path="/admin/products/edit/:id"
             exact={true}
             render={(p) => {
-              return <EditProduct producto={p.match.params.id} />;
+              return JSON.parse(localStorage.getItem("user")) &&
+                JSON.parse(localStorage.getItem("user")).rol === "admin" ? (
+                <EditProduct producto={p} />
+              ) : (
+                (window.location = "/")
+              );
             }}
           />
           <Route
             path="/admin/categories/edit/:id"
             exact={true}
             render={(p) => {
-              return <EditCategory category={p} />;
+              return JSON.parse(localStorage.getItem("user")) &&
+                JSON.parse(localStorage.getItem("user")).rol === "admin" ? (
+                <EditCategory category={p} />
+              ) : (
+                (window.location = "/")
+              );
             }}
           />
           <Route

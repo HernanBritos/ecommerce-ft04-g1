@@ -4,9 +4,10 @@ const { Op } = require("sequelize");
 const { Order } = require("../db.js");
 const OrderProduct = require("../models/OrderProduct.js");
 const passport = require("passport");
+const { isAdmin } = require("../auth");
 
 // GET /users
-server.get("/", (req, res, next) => {
+server.get("/", isAdmin, (req, res, next) => {
   User.findAll()
     .then((users) => {
       res.send(users);
