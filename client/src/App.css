@@ -1,5 +1,6 @@
 .sidebar {
   position: fixed;
+  z-index: 1;
   transform: translateX(-17rem);
   width: 17rem;
   background: #f8e4ab;
@@ -7,6 +8,7 @@
   transition: all 0.5s;
   margin-top: 101px;
   box-shadow: 0.3px 2px 1px rgb(83, 83, 83);
+  z-index: 1;
 }
 .sidebar.open {
   transform: translateX(0);

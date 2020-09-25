@@ -18,11 +18,12 @@ function SideBarComponent(props) {
 
   const logout = (e) => {
     e.preventDefault();
-    localStorage.removeItem("user");
-    return (window.location = "/");
-    // axios.get("http://localhost:3001/users/logout").then((data) => {
-    //   console.log(data);
-    // });
+    axios.get("http://localhost:3001/users/logout").then((data) => {
+      localStorage.removeItem("user");
+      if (data.data.logout) {
+        return (window.location = "/users/login");
+      }
+    });
   };
 
   return (
@@ -60,8 +61,8 @@ function SideBarComponent(props) {
             categories.map((cat) => (
               <div key={cat.id}>
                 <Link to={"/products/categoria/" + cat.name}>
-                  <button className={`${sBar.category}`}>
-                    <p>{cat.name}</p>
+                  <button className={sBar.category}>
+                    <p className={sBar.botoncat} >{cat.name}</p>
                   </button>
                 </Link>
               </div>
@@ -70,8 +71,8 @@ function SideBarComponent(props) {
         </div>
 
         <div className={`${sBar.admin}`}>
-           {JSON.parse(localStorage.getItem("user")) &&
-            JSON.parse(localStorage.getItem("user")).rol === "admin" && ( 
+          {JSON.parse(localStorage.getItem("user")) &&
+            JSON.parse(localStorage.getItem("user")).rol === "admin" && (
               <Link to="/admin">
                 <button onClick={props.onclose} className={`btn btn-secondary`}>
                   <SupervisorAccountIcon />

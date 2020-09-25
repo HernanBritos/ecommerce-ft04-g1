@@ -68,6 +68,7 @@
   background: #ffffff;
   margin: 5px;
   color: rgb(0, 0, 0);
+  
 }
 .categories {
   display: flex;
@@ -77,6 +78,9 @@
   margin-left: 10px;
   box-shadow: 0.3px 0.3px 0.3px rgb(0, 0, 0);
   border-radius: 10px;
+  
+  
+ 
 }
 .filtro {
   margin-left: 20px;
@@ -84,3 +88,11 @@
   font-size: 18px;
   font-weight: 400;
 }
+ .botoncat {
+  border-style: none;
+  border-radius: 10px;
+  background: #ffffff;
+  margin: 5px;
+  color: rgb(0, 0, 0);
+  
+} 

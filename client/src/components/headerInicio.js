@@ -5,6 +5,7 @@ import SideBar from "../container/sideBarComponent.js";
 import { Link } from "react-router-dom";
 import navBar from './navBar'
 import CnavBar from './css/navBar.module.css'
+import { useSelector } from "react-redux";
 
 function HeaderInicio() {
   const openMenu = () => {
@@ -13,6 +14,11 @@ function HeaderInicio() {
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open");
   };
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+
   return (
     <div>
       <div className={hInicio.header}>
@@ -29,11 +35,15 @@ function HeaderInicio() {
         >
           <div className={`${hInicio.botoncart}`}>
             <button className={hInicio.cartboton} type="submit">
+            
               <img
                 src={`/imagenes/carrito-de-compras.png`}
                 className={hInicio.cartbotonimg}
                 alt=" "
               />
+              { cartItems.length !== 0 ?  (
+              <span className={hInicio.badge}>{cartItems.length}</span>): (null) 
+            }
             </button>
           </div>
         </Link>
