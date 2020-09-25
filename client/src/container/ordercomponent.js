@@ -1,21 +1,36 @@
 import React, { useEffect } from "react";
 import oComponent from "./css/orderComponent.module.css";
-import cComponent from "./css/cartComponent.module.css";
+
+import cComponent from "./css/adminAddCategory.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchOrders } from "../Redux/Cart/Actions/cartActions";
+import { fetchOrders, fetchOrderProducts,  removeFromCart} from "../Redux/Cart/Actions/cartActions";
+
 
 function OrderComponent(props) {
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
-  const getOrders = useSelector((state) => state.getOrders);
-  const { orders } = getOrders;
 
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
+const cart = useSelector((state) => state.cart);
+const { cartItems } = cart;
+const items = cartItems;
+const getOrders = useSelector((state) => state.getOrders);
+const { orders } = getOrders;
 
-  useEffect(() => {
+const getOrderProduct = useSelector((state) => state.getOrderProduct);
+const { orderproducts } = getOrderProduct;
+  
+useEffect(() =>  {
     dispatch(fetchOrders(props.producto.match.params.id));
-  }, [dispatch, props.producto.match.params.id]);
+  dispatch(fetchOrderProducts())
+  }, [dispatch]);
+
+const handleSubmit = () => {
+cartItems.map((el) => dispatch(removeFromCart(el.product)));
+
+};
+
+console.log(orderproducts);
+
   return (
     <div className={cComponent.actionpane}>
       <div className={cComponent.actionpane}>
@@ -27,10 +42,10 @@ function OrderComponent(props) {
         </center>
       </div>
 
-      {cartItems.length === 0 ? (
+      {items.length === 0 ? (
         <div className="alert alert-info">El carrito está vacío</div>
       ) : (
-        cartItems.map((el) => (
+       items && items.map((el) => (
           <div key={el.product} className={`${cComponent.carritoPage}`}>
             <div className={`${cComponent.cards}`}>
               <img
@@ -54,14 +69,16 @@ function OrderComponent(props) {
       )}
       <div className={oComponent.footer}>
         <h4>
-          Total: ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : ${" "}
-          {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+          Total: ({items.reduce((a, c) => a + c.qty, 0)} item) : ${" "}
+          {items.reduce((a, c) => a + c.price * c.qty, 0)}
         </h4>
       </div>
-      <div className={oComponent.catalogo2}>
-        <table className="table table-dark">
-          <thead>
-            <tr key="0">
+      <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
+      <md-content layout-padding>
+        <div className="tables">
+          <table className="table  table-striped table-bordered table-hover table-checkable order-column dataTable">
+            <thead>
+              <tr>
               <th scope="col">Id de Orden</th>
               <th scope="col">Fecha</th>
               <th scope="col">Direccion</th>
@@ -69,12 +86,12 @@ function OrderComponent(props) {
               <th scope="col">Forma de pago</th>
               <th scope="col">Status</th>
               <th scope="col">Precio Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders &&
+              </tr>
+            </thead>
+            <tbody>
+                    {orders &&
               orders
-                .filter((order) => order.id === orders.length)
+                .filter((order) => order.id === orders.length+1)
                 .map((order) => (
                   <tr key={order.id}>
                     <td>{order.id} </td>
@@ -86,12 +103,25 @@ function OrderComponent(props) {
                     <td>${order.priceTotal}</td>
                   </tr>
                 ))}
-          </tbody>
-        </table>
-      </div>
-      <div className={oComponent.catalogo2}>
-        <table className="table table-dark"></table>
-        <div className={oComponent.catalogo2}>
+                   
+            </tbody>
+          </table>
+        </div>
+      </md-content>
+    </div>
+      <div className={cComponent.footer}>
+          <Link
+            to={{
+              pathname: `/`,
+            }}
+          >
+            <button 
+            type="button" className="btn btn-primary btn-lg btn-block"
+            onClick={handleSubmit}
+            >Confirmar Pedido</button>
+          </Link>
+        </div>
+        <div className={oComponent.footer}>
           <Link
             to={{
               pathname: `/users/${props.producto.match.params.id}/orders/historial`,
@@ -100,8 +130,7 @@ function OrderComponent(props) {
             <button className="btn btn-success">Historial de Ordenes</button>
           </Link>
         </div>
-      </div>
-    </div>
+     </div>
   );
 }
 

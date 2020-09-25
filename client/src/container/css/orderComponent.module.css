@@ -1,5 +1,6 @@
 .products {
     background-color: #fcb064;
+    
   }
   .carritoPage {
     width: 100%;
@@ -73,13 +74,22 @@
     font-weight: 300;
   }
   .catalogo2 {
-      margin-top: 40px;
+    display: flex;
+    
+    font-size: 25px;
+    font-weight: 300;
   }
-
   .botonBack {
-    width: 70px;
+    border-style: none;
+    border-radius: 10px;
     height: 30px;
-    text-align: center;
+    box-shadow: 0.3px 0.3px 1px rgb(61, 61, 61);
+    background: white;
+    margin-left: 10px;
     margin-top: 120px;
-    margin-left: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
   }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { userForm } from "../container/css/userForm.module.css";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 function LoginContainer(props) {
   const [user, setUser] = useState({
     email: "",
@@ -22,8 +23,8 @@ function LoginContainer(props) {
     return JSON.parse(localStorage.getItem("user"));
   };
 
-  const loginUser = (email, password) => {
-    return axios
+  const loginUser = async (email, password) => {
+    return await axios
       .post("http://localhost:3001/users/login", {
         email,
         password,
@@ -35,10 +36,7 @@ function LoginContainer(props) {
           return (window.location = `/`);
         }
         return data;
-        
-      })
-      .catch((err) => err);
-
+      });
   };
 
   const checkoutHandler = async () => {
@@ -91,7 +89,7 @@ function LoginContainer(props) {
             }/orders`);
           }
           return (window.location = `/`);
-        } 
+        }
       })
       .catch((err) => err);
   };

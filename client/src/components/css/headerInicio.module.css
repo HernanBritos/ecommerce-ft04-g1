@@ -1,5 +1,5 @@
 .header {
-  height: 90px;
+  height: 96px;
   width: 100%;
   background: #fcb064;
   display: flex;
@@ -42,12 +42,9 @@
 
 .botoncart {
   position: absolute;
-  margin-left: 8%;
+  margin-left: 19%;
   bottom: 26%;
 }
-/* .cartboton:hover {
-  box-shadow: 0.8px 0.8px rgb(102, 102, 101);
-} */
 .cartboton {
   width: 45px;
   height: 45px;
@@ -55,8 +52,24 @@
   border-radius: 6px;
   border-style: none;
   box-shadow: 0.3px 0.3px 1px rgb(83, 83, 83);
+ 
+  
 }
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 800;
+
+}
+
 .cartbotonimg {
   width: 25px;
   height: 25px;
+  
 }
