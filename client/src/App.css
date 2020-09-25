@@ -1,5 +1,6 @@
 .sidebar {
   position: fixed;
+  z-index: 1;
   transform: translateX(-17rem);
   width: 17rem;
   background: #f8e4ab;

@@ -15,24 +15,14 @@ server.get("/", (req, res, next) => {
 });
 
 server.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) {
-      res.json({
-        success: false,
-        message: err.message,
-      });
-    }
+  passport.authenticate("local", async (err, user, info) => {
     if (!user) {
       res.json({
         success: false,
         message: "Usuario y/o contraseña incorrectos",
       });
     }
-    req.logIn(user, (err) => {
-      if (err) {
-        res.json(err);
-      }
-
+    await req.logIn(user, (err) => {
       res.json({
         success: true,
         message: "Te has logueado correctamente!",
@@ -44,12 +34,12 @@ server.post("/login", (req, res, next) => {
 
 server.get("/logout", (req, res, next) => {
   req.logout();
-  res.json({ message: "Sesion cerrada" });
+  res.json({ logout: true, message: "Has cerrado sesión correctamente!" });
 });
 
-// server.get("/session", (req, res, next) => {
-//   res.json({ user: req.user });
-// });
+server.get("/session", (req, res, next) => {
+  res.json({ user: req.user });
+});
 
 // POST /users
 server.post("/", (req, res, next) => {
@@ -276,24 +266,6 @@ server.post("/signup", async (req, res) => {
       })
       .catch((err) => res.send(err));
   }
-});
-
-const isAuthenticated = (req, res, next) => {
-  if (req.user) return next();
-  else
-    return res.json({
-      loggedin: false,
-      isAdmin: false,
-      message: "El usuario no está logueado",
-    });
-};
-
-server.get("/checkauth", isAuthenticated, function (req, res) {
-  res.status(200).json({
-    loggedin: true,
-    message: "El usuario está logueado",
-    user: req.user,
-  });
 });
 
 module.exports = server;
