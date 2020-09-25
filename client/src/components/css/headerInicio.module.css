@@ -7,6 +7,7 @@
   justify-content: space-between;
   position: fixed;
   box-shadow: 0.3px 0.3px 1.2px rgb(119, 118, 118);
+  z-index: 1;
 }
 .searchbar {
   margin-right: 20px;
