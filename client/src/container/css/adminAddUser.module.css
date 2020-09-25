@@ -17,19 +17,21 @@
 .botones {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  
+  justify-content: space-evenly;
   align-items: center;
   padding-top: 6px;
+  
 }
 .editar {
-  width: 70px;
+  width: 100px;
   height: 30px;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #fde195;
-  margin-right: 7px;
+  
   border-radius: 7px;
   border-style: none;
   font-size: 16px;
@@ -48,5 +50,11 @@
   border-style: none;
   font-size: 17px;
   box-shadow: 0.3px 0.3px 1.3px rgb(0, 0, 0);
+  color: white;
+}
+.buttonNew {
+  background: #fcb064;
+  border-style: none;
+  border-radius: 10px;
   color: white;
 }

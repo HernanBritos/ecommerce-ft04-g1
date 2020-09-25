@@ -4,6 +4,8 @@ import {
   ORDER_LIST_FAIL,
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
+  ORDERPRODUCT_LIST_REQUEST,
+  ORDERPRODUCT_LIST_SUCCESS
 } from "../constantes/cartConstant";
 
 function cartReducer(state = { cartItems: [] }, action) {
@@ -44,4 +46,15 @@ function orderReducer(state = { orders: [] }, action) {
   }
 }
 
-export { cartReducer, orderReducer };
+function orderproductReducer(state = { orderproducts: []}, action) {
+  switch (action.type) {
+    case ORDERPRODUCT_LIST_REQUEST:
+      return { loading: true };
+    case ORDERPRODUCT_LIST_SUCCESS:
+      return {orderproducts: action.payload, loading: false};  
+      default:
+        return state;
+  }
+}
+
+export { cartReducer, orderReducer, orderproductReducer };

@@ -5,15 +5,18 @@ import axios from "axios";
 import {
   addToCart,
   removeFromCart,
-  fetchOrders,
+  fetchOrders, 
+  
 } from "../Redux/Cart/Actions/cartActions";
 import cComponent from "./css/cartComponent.module.css";
 
 function CartComponent(props) {
   const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  var { cartItems } = cart;
   const productId = props.c.match.params.id;
   const qty = props.c.location.search.split("=")[1] || 1;
+
+  var items = cartItems;
 
   const [input, setInput] = useState({
     idUser: "",
@@ -65,7 +68,6 @@ function CartComponent(props) {
         shipping: input.shipping,
       })
       .then((data) => {
-        console.log(data.data.id);
         cartItems.map(async (product) => {
           await axios
             .post(`http://localhost:3001/orders`, {
@@ -74,10 +76,13 @@ function CartComponent(props) {
               price: product.price,
               ammount: product.qty,
             })
-            .then((res) => console.log(res));
+            
         });
+        
         return data;
+
       });
+      
     return null;
     // return (window.location = `http://localhost:3000/users/${input.idUser}/orders`);
   };
@@ -202,11 +207,12 @@ function CartComponent(props) {
         <h4>
           Subtotal: ({cantidad} items) : $ {subtotal}
         </h4>
+
         {JSON.parse(localStorage.getItem("user")) ? (
           <Link
             to={{
               pathname: `/users/${input.idUser}/orders`,
-              state: { cartItems },
+              state: { items: items },
             }}
           >
             <button
@@ -214,7 +220,7 @@ function CartComponent(props) {
               className="btn btn-success"
               disabled={cartItems.length === 0}
             >
-              Finalizar compra
+              Continuar con la compra
             </button>
           </Link>
         ) : (
@@ -233,11 +239,27 @@ function CartComponent(props) {
               className="btn btn-success"
               disabled={cartItems.length === 0}
             >
-              Finalizar compra
+              Finalizar la compra
             </button>
           </Link>
         )}
+         <Link
+            to={{
+              pathname: "/users/signup",
+          }}
+          >
+            <button
+              type="button" 
+              class="btn btn-light"
+              data-toggle="button" 
+              aria-pressed="false" 
+              autocomplete="off"
+             >
+              Regístrese
+            </button>
+          </Link>
       </div>
+      
     </div>
   );
 }

@@ -62,6 +62,7 @@ a {
   border-width: 0.2px;
   border-color: grey;
   border-radius: 10px;
+  
 }
 .carrito:hover {
   box-shadow: 0.5px 0.5px 0.5px 0.5px grey;
@@ -69,4 +70,11 @@ a {
 .carrito img {
   width: 20px;
   height: 20px;
+  
+    
+}
+.carrito button {
+    border: none;
+    outline-style: none;
+    background: white;
 }
