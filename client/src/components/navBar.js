@@ -1,17 +1,21 @@
 import React from 'react'
-import CnavBar from './css/navBar.module.css'
-function navBar(props)  {
+import navbar from './css/navBar.module.css'
+
+    class Navbar extends React.Component {
+        render() {
+            return (
+                <div class="topnav" className={navbar.navbar} id="myTopnav">
+                <a href="http://localhost:3000/" class="active">Inicio</a>
+                <a href="#">Quines somos</a>
+                <a href="#">Historia</a>
+                <a href="#">Historia</a>
+                <a href="#">Contacto</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+                </a>
+            </div>
+            )
+        }
+    }
     
-
-    return (
-    <div className={CnavBar.navBar}>
-        <a className={CnavBar.navBar_a} href="http://localhost:3001/">Home</a>
-        <a className={CnavBar.navBar_a}  href="http://localhost:3001/products">Products</a>
-        <a className={CnavBar.navBar_a}  href="http://localhost:3001/categories">Categories</a>
-        <a className={CnavBar.navBar_a} href="http://localhost:3001/contact">About</a> {/* Falta hacer */}
-    </div>
-    );
-  
-}
-
-export default navBar;
+export default Navbar;

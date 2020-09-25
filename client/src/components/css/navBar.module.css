@@ -1,43 +1,32 @@
-/* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
-    height: 38px;
-    width: 100%;
-    background:rgb(255, 237, 189);
-    display: flex;
-    position: relative;
-    bottom: 0;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    box-shadow: 0.px 0.3px 1.2px rgb(119, 118, 118);
-  }
-  
-  /* Style the links inside the navigation bar */
-  .navbar_a {
-    position: relative;
-    bottom: 0;
-    float: left;
-    display: block;
-    color: #000;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    align-items: center;
+  height: 38px;
+  width: 100%;
+  background:rgb(255, 237, 189);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left:  100px;
+  position: fixed;
+  box-shadow: 0.px 0.3px 1.2px rgb(119, 118, 118);
+  top: 70px;
+  font-family: "Grandstander", sans-serif;
+}
 
-  }
-  
-  /* Change the color of links on hover */
-
-  
-  /* Add a color to the active/current link */
-  .navbar_a.active {
-    padding-right: 20px;
-    position: fixed;
-    bottom: 0;
-    background-color: #4CAF50;
-    color: white;
-  }
-
-
-  
+.navbar_a {
+  position: relative;
+  bottom: 0;
+  float: left;
+  display: block;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  align-items: center;
+}
+.navbar_a.active {
+  padding-right: 20px;
+  position: fixed;
+  bottom: 0;
+  background-color: #4CAF50;
+  color: white;
+}

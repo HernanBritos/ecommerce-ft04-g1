@@ -22,16 +22,6 @@ function HeaderInicio() {
         <a className={hInicio.brand} href="/">
           Asia Pilar Shoes
         </a>
-        <div  className= {navBar}>
-        <navBar >
-          <div style={{ left: "0px",display: "flex", top: "90px", justifyContent: 'center' }} className={CnavBar.navbar}>
-            <a className={CnavBar.navbar_a} href="http://localhost:3000/">Inicio</a>
-            <a className={CnavBar.navbar_a}  href="http://localhost:3000/products">Productos</a>
-            <a className={CnavBar.navbar_a}  href="http://localhost:3000/categories">Categorias</a>
-            <a className={CnavBar.navbar_a} href="http://localhost:3000/contact">Contacto</a> {/* Falta hacer */}
-          </div>
-          </navBar>
-        </div>
         <Link
           to={{
             pathname: "/users/cart",
@@ -52,7 +42,7 @@ function HeaderInicio() {
           <SearchBarComponent />
         </div>
       </div>
-      <aside className="sidebar">
+      <aside style= {{zIndex: 1}}className="sidebar">
         <SideBar onclose={closeMenu} />
       </aside>
     </div>

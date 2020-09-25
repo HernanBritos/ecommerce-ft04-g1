@@ -13,6 +13,7 @@
   padding-bottom: 4px;
   box-shadow: 0.3px 0.3px 0.6px rgb(0, 0, 0);
   color: white;
+  z-index: 1;
 }
 .auth {
   width: 150px;
