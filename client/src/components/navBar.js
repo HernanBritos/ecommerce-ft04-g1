@@ -6,8 +6,7 @@ import navbar from './css/navBar.module.css'
             return (
                 <div class="topnav" className={navbar.navbar} id="myTopnav">
                 <a href="http://localhost:3000/" class="active">Inicio</a>
-                <a href="#">Quines somos</a>
-                <a href="#">Historia</a>
+                <a href="#">Quienes somos</a>
                 <a href="#">Historia</a>
                 <a href="#">Contacto</a>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">

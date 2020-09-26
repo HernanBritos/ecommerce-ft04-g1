@@ -55,7 +55,6 @@ function FileUpload(props) {
               className={fUp.image}
               src={`/imagenes/uploads/${Image.path}`}
               alt={` `}
-              lazyload="true"
             />
           </div>
         ) : (
