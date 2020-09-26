@@ -73,7 +73,12 @@ export default function AdminAddProduct() {
                       )}
                     </td>
                     <td className={cComponent.botones}>
-                      <Link to={`/admin/products/edit/${product.id}`}>
+                      <Link
+                        to={{
+                          pathname: `/admin/products/edit/${product.id}`,
+                          state: product,
+                        }}
+                      >
                         <button className={cComponent.editar}>Editar</button>
                       </Link>
                       <button onClick={borrar} className={cComponent.borrar}>
