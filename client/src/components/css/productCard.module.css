@@ -27,9 +27,9 @@ a {
 }
 .productData span:first-of-type {
   padding-top: 3px;
-  font-size: 22px;
-  font-weight: 300;
-  font-family: "Grandstander", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   color: rgb(17, 17, 17);
 }
 .stockIcon {
@@ -62,7 +62,6 @@ a {
   border-width: 0.2px;
   border-color: grey;
   border-radius: 10px;
-  
 }
 .carrito:hover {
   box-shadow: 0.5px 0.5px 0.5px 0.5px grey;
@@ -70,11 +69,9 @@ a {
 .carrito img {
   width: 20px;
   height: 20px;
-  
-    
 }
 .carrito button {
-    border: none;
-    outline-style: none;
-    background: white;
+  border: none;
+  outline-style: none;
+  background: white;
 }

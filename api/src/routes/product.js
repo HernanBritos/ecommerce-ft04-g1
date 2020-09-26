@@ -3,7 +3,7 @@ const { Product } = require("../db.js");
 const { Categories } = require("../db.js");
 const { Op } = require("sequelize");
 const { Review } = require("../db.js");
-const { isAuthenticated, isAdmin } = require("../auth");
+const { isAdmin, isAuthenticated } = require("../auth");
 
 //--------------------------------------------------------------------------//
 // GET Muestra todos los productos
@@ -24,7 +24,7 @@ server.get("/", (req, res, next) => {
 // Si pudo crear el producto retorna el status 201 y
 // retorna la información del producto.
 
-server.post("/", isAdmin, (req, res) => {
+server.post("/", isAdmin, async (req, res) => {
   const { category, name, description, stock, price, img } = req.body;
 
   Product.create({

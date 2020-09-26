@@ -21,10 +21,6 @@
   margin-left: 200px;
   letter-spacing: 0.25rem;
 }
-/* .brand:hover {
-  text-shadow: 0.5px 0.4px 0.5px 0.5px rgb(83, 83, 83);
-  color: white;
-} */
 .brandButton {
   font-size: 2.5rem;
   padding: 0.5rem;
@@ -42,10 +38,9 @@
 }
 
 .botoncart {
-  margin-left: 8%;
-  top: 4%;
-  position: fixed;
-  
+  position: absolute;
+  margin-left: 110px;
+  bottom: 26%;
 }
 .cartboton {
   width: 45px;
@@ -54,8 +49,6 @@
   border-radius: 6px;
   border-style: none;
   box-shadow: 0.3px 0.3px 1px rgb(83, 83, 83);
-  
-  
 }
 .badge {
   position: absolute;

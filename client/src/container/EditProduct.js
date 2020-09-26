@@ -96,7 +96,10 @@ export default function EditProduct(props) {
               </div>
             ) : categories.length > 0 ? (
               <Select
-                placeholder={productInput.category}
+                defaultValue={{
+                  label: productInput.category,
+                  value: productInput.category,
+                }}
                 onChange={handleCategoryInputChange}
                 options={categories.map((opt) => ({
                   label: opt.name,
@@ -118,6 +121,7 @@ export default function EditProduct(props) {
               />
             )}
           </div>
+
           <button className={cComponent.botonAdd} type="submit">
             Editar producto
           </button>

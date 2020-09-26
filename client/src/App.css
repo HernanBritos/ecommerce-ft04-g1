@@ -3,7 +3,7 @@
   z-index: 1;
   transform: translateX(-17rem);
   width: 17rem;
-  background: #f8e4ab;
+  background: #ffbe7e;
   height: 100%;
   transition: all 0.5s;
   margin-top: 129px;
@@ -12,4 +12,17 @@
 }
 .sidebar.open {
   transform: translateX(0);
+}
+.scrollable-menu {
+  height: auto;
+  max-height: 130px;
+  width: 187px;
+  overflow-x: hidden;
+}
+.dropdown {
+  background: #f8e4ab;
+  box-shadow: 0.3px 0.3px 1px black;
+  height: 200px;
+  margin: 10px;
+  border-radius: 10px;
 }

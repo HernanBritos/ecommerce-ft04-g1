@@ -22,6 +22,7 @@ import OrdenesCompra from "./container/ordenescompra";
 import OrdersTotal from "./container/orderstotal";
 import OrderDetail from "./container/orderdetail";
 import Navbar from "./components/navBar";
+import UserProfile from "./components/userProfile";
 
 
 function App() {
@@ -121,6 +122,13 @@ function App() {
             exact={true}
             render={() => {
               return <FormUser />;
+            }}
+          />
+          <Route
+            path="/users/profile"
+            exact={true}
+            render={() => {
+              return <UserProfile />;
             }}
           />
           <Route
