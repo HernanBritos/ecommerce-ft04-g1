@@ -19,8 +19,11 @@ import AddReviewContainer from "./container/addReviewcontainer";
 import EditReviewContainer from "./container/editReview";
 import OrderComponent from "./container/ordercomponent";
 import OrdenesCompra from "./container/ordenescompra";
+import OrdersTotal from "./container/orderstotal";
+import OrderDetail from "./container/orderdetail";
 import Navbar from "./components/navBar";
 import UserProfile from "./components/userProfile";
+
 
 function App() {
   return (
@@ -65,6 +68,16 @@ function App() {
                 (window.location = "/")
               )
             }
+          />
+          <Route
+            path="/admin/orders"
+            exact={true}
+            render={() => <OrdersTotal />}
+          />
+          <Route
+            path="/admin/orders/:id/detail"
+            exact={true}
+            render={(i) => <OrderDetail id={i} />}
           />
           <Route
             path="/product/:id"

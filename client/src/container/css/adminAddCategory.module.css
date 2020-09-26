@@ -1,5 +1,5 @@
 .products {
-  margin-top: 20px;
+  margin-top: 50px;
   border-bottom: 1px dotted #ccc;
   cursor: pointer;
   padding: 10px;
@@ -44,7 +44,7 @@
   color: rgb(83, 83, 83);
 }
 .borrar {
-  width: 70px;
+  width: 85px;
   height: 30px;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
@@ -128,4 +128,13 @@
 }
 .footer button {
   width: 180px;
+}
+
+.footerdos {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+  font-size: 25px;
+  font-weight: 300;
 }

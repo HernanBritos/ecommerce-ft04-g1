@@ -22,7 +22,7 @@ export default function AdminAddUser() {
     <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
       <md-content layout-padding>
         <div className={cComponent.actionpane}>
-        <Link to="/admin/products/add">
+        <Link to="/admin/orders">
             <button className={cComponent.buttonNew}>Historial Ordenes</button>
           </Link>
           <center>

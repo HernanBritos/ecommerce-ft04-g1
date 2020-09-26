@@ -205,6 +205,75 @@ server.get("/:id/orders", (req, res) => {
     );
 });
 
+server.put("/:id/orders/:idOrder", (req, res) => {
+  
+  const idOrder = req.params.idOrder;
+
+  Order.update(
+    {
+      date: req.body.date,
+      priceTotal: req.body.priceTotal,
+      status: req.body.status,
+      address: req.body.address,
+      description: req.body.description,
+      paymentmethod: req.body.paymentmethod,
+      shipping: req.body.shipping
+    },
+    {
+      where: {
+        id: idOrder,
+      },
+      returning: true,
+    }
+  )
+    .then((response) => {
+    
+      res.send(response);
+     
+    })
+    .catch((err) => res.send(err.message));
+});
+
+server.delete("/:id/orders/:idOrder", (req, res, next) => {
+  const idOrder = req.params.idOrder;
+  Order.destroy({
+    where: { id: idOrder },
+  }).then((removed) => {
+    if (removed) {
+      res.status(200).end();
+    } else {
+      res.status(404).json({ message: "Not found" });
+    }
+  });
+});
+
+server.get("/orders", (req, res) => {
+  
+  Order.findAll()
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) =>
+      res.status(400).send(err, " WARNING! -> Order does not exist")
+    );
+});
+
+server.get("/orders/search", (req, res) => {
+  const valor = req.query.query
+  Order.findAll({
+    where: {
+      [Op.or]: [
+        {status: valor}
+      ],
+    },
+  })
+   .then((orders) => {
+     res.send(orders);
+   })
+   .catch((err) => res.send(err));
+});
+
+
 server.get("/:id", (req, res) => {
   const id = req.params.id;
   User.findOne({
@@ -215,6 +284,8 @@ server.get("/:id", (req, res) => {
     })
     .catch((err) => res.status(404).send(err));
 });
+
+
 
 server.post("/:id/orders", (req, res, next) => {
   const id = req.params.id;

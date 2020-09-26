@@ -5,7 +5,10 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDERPRODUCT_LIST_REQUEST,
-  ORDERPRODUCT_LIST_SUCCESS
+  ORDERPRODUCT_LIST_SUCCESS,
+  ORDER_LIST_ALL_REQUEST,
+  ORDER_LIST_ALL_SUCCESS,
+  ORDER_STATUS
 } from "../constantes/cartConstant";
 import Cookie from "js-cookie";
 
@@ -42,7 +45,7 @@ const removeFromCart = (productId) => (dispatch, getState) => {
 };
 
 const fetchOrders = (id) => async (dispatch) => {
-  try {
+ 
     dispatch({ type: ORDER_LIST_REQUEST });
     const { data } = await axios.get(
       `http://localhost:3001/users/${id}/orders`
@@ -51,11 +54,44 @@ const fetchOrders = (id) => async (dispatch) => {
       type: ORDER_LIST_SUCCESS,
       payload: data,
     });
-  } catch (error) {}
+  
+};
+
+const fetchAllOrders = (status) => async (dispatch) => {
+  if (status === "todos") {
+   dispatch({ type: ORDER_LIST_ALL_REQUEST });
+    const { data } = await axios.get(
+      `http://localhost:3001/users/orders`
+    );
+    dispatch({
+      type: ORDER_LIST_ALL_SUCCESS,
+      payload: data,
+    });}
+    if(status === "pendiente") {
+      dispatch({ type: ORDER_LIST_ALL_REQUEST });
+    const { data } = await axios.get(
+      `http://localhost:3001/users/orders/search?query=${status}`
+    );
+    dispatch({
+      type: ORDER_LIST_ALL_SUCCESS,
+      payload: data,
+    });
+    } 
+    if (status === "confirmado"){
+      dispatch({ type: ORDER_LIST_ALL_REQUEST });
+    const { data } = await axios.get(
+      `http://localhost:3001/users/orders/search?query=${status}`
+    );
+    dispatch({
+      type: ORDER_LIST_ALL_SUCCESS,
+      payload: data,
+    });
+    } 
+    
 };
 
 const fetchOrderProducts = () => async (dispatch) => {
-  try {
+
     dispatch({ type: ORDERPRODUCT_LIST_REQUEST});
     const {data } = await axios.get(
       `http://localhost:3001/orders/`
@@ -64,7 +100,7 @@ const fetchOrderProducts = () => async (dispatch) => {
         type: ORDERPRODUCT_LIST_SUCCESS,
         payload: data,
       });
-  } catch (error) {}
+  
 };
 
 const getOrders = (orders) => {
@@ -74,4 +110,19 @@ const getOrders = (orders) => {
   };
 };
 
-export { addToCart, removeFromCart, getOrders, fetchOrders, fetchOrderProducts };
+const statusconfirm = (orderId) => (dispatch) => {
+  dispatch({ type: ORDER_STATUS, payload: orderId });
+};
+
+const cancelOrder = (user, order) => async (dispatch) => {
+  await axios
+    .delete(`http://localhost:3001/users/${user}/orders/${order}`, {
+     
+    })
+    .then((res) => {
+      return res;
+    });
+
+};
+
+export { addToCart, removeFromCart, getOrders, fetchOrders, fetchOrderProducts, fetchAllOrders, statusconfirm, cancelOrder };

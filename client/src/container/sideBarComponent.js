@@ -6,11 +6,15 @@ import { listCategory } from "../Redux/Categories/Actions/categoryActions";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import axios from "axios";
+import { removeFromCart } from "../Redux/Cart/Actions/cartActions";
+
 
 function SideBarComponent(props) {
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categoryList);
   const { categories, loadingCat, errorCat } = categoryList;
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   useEffect(() => {
     dispatch(listCategory());
@@ -18,6 +22,7 @@ function SideBarComponent(props) {
 
   const logout = (e) => {
     e.preventDefault();
+    cartItems.map((el) => dispatch(removeFromCart(el.product)));
     axios.get("http://localhost:3001/users/logout").then((data) => {
       localStorage.removeItem("user");
       if (data.data.logout) {
