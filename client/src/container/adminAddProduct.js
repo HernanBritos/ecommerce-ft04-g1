@@ -63,7 +63,15 @@ export default function AdminAddProduct() {
                     <td>{product.category}</td>
                     <td>{product.price}</td>
                     <td>{product.stock}</td>
-                    <td>{product.img}</td>
+                    <td>
+                      {product.img && (
+                        <img
+                          className={cComponent.image}
+                          src={`/imagenes/uploads/${product.img}`}
+                          alt=" "
+                        ></img>
+                      )}
+                    </td>
                     <td className={cComponent.botones}>
                       <Link to={`/admin/products/edit/${product.id}`}>
                         <button className={cComponent.editar}>Editar</button>

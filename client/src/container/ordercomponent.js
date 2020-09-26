@@ -4,32 +4,33 @@ import oComponent from "./css/orderComponent.module.css";
 import cComponent from "./css/adminAddCategory.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchOrders, fetchOrderProducts,  removeFromCart} from "../Redux/Cart/Actions/cartActions";
-
+import {
+  fetchOrders,
+  fetchOrderProducts,
+  removeFromCart,
+} from "../Redux/Cart/Actions/cartActions";
 
 function OrderComponent(props) {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  const items = cartItems;
+  const getOrders = useSelector((state) => state.getOrders);
+  const { orders } = getOrders;
 
-const dispatch = useDispatch();
-const cart = useSelector((state) => state.cart);
-const { cartItems } = cart;
-const items = cartItems;
-const getOrders = useSelector((state) => state.getOrders);
-const { orders } = getOrders;
+  const getOrderProduct = useSelector((state) => state.getOrderProduct);
+  const { orderproducts } = getOrderProduct;
 
-const getOrderProduct = useSelector((state) => state.getOrderProduct);
-const { orderproducts } = getOrderProduct;
-  
-useEffect(() =>  {
+  useEffect(() => {
     dispatch(fetchOrders(props.producto.match.params.id));
-  dispatch(fetchOrderProducts())
-  }, [dispatch]);
+    dispatch(fetchOrderProducts());
+  }, [dispatch, props.producto.match.params.id]);
 
-const handleSubmit = () => {
-cartItems.map((el) => dispatch(removeFromCart(el.product)));
+  const handleSubmit = () => {
+    cartItems.map((el) => dispatch(removeFromCart(el.product)));
+  };
 
-};
-
-console.log(orderproducts);
+  console.log(orderproducts);
 
   return (
     <div className={cComponent.actionpane}>
@@ -45,7 +46,8 @@ console.log(orderproducts);
       {items.length === 0 ? (
         <div className="alert alert-info">El carrito está vacío</div>
       ) : (
-       items && items.map((el) => (
+        items &&
+        items.map((el) => (
           <div key={el.product} className={`${cComponent.carritoPage}`}>
             <div className={`${cComponent.cards}`}>
               <img
@@ -69,68 +71,73 @@ console.log(orderproducts);
       )}
       <div className={oComponent.footer}>
         <h4>
-          Total: ({items.reduce((a, c) => a + c.qty, 0)} item) : ${" "}
-          {items.reduce((a, c) => a + c.price * c.qty, 0)}
+          Total: ({items.reduce((a, c) => a + Number(c.qty), 0)} items) : ${" "}
+          {items.reduce((a, c) => a + c.price * Number(c.qty), 0)}
         </h4>
       </div>
       <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
-      <md-content layout-padding>
-        <div className="tables">
-          <table className="table  table-striped table-bordered table-hover table-checkable order-column dataTable">
-            <thead>
-              <tr>
-              <th scope="col">Id de Orden</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Direccion</th>
-              <th scope="col">Envio</th>
-              <th scope="col">Forma de pago</th>
-              <th scope="col">Status</th>
-              <th scope="col">Precio Total</th>
-              </tr>
-            </thead>
-            <tbody>
-                    {orders &&
-              orders
-                .filter((order) => order.id === orders.length+1)
-                .map((order) => (
-                  <tr key={order.id}>
-                    <td>{order.id} </td>
-                    <td>{order.date}</td>
-                    <td>{order.address} </td>
-                    <td>{order.shipping}</td>
-                    <td>{order.paymentmethod}</td>
-                    <td>{order.status}</td>
-                    <td>${order.priceTotal}</td>
-                  </tr>
-                ))}
-                   
-            </tbody>
-          </table>
-        </div>
-      </md-content>
-    </div>
+        <md-content layout-padding>
+          <div className="tables">
+            <table className="table  table-striped table-bordered table-hover table-checkable order-column dataTable">
+              <thead>
+                <tr>
+                  <th scope="col">Id de Orden</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Direccion</th>
+                  <th scope="col">Envio</th>
+                  <th scope="col">Forma de pago</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Precio Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {console.log(orders)}
+                {orders &&
+                  orders
+                    .filter(
+                      (order) => order.id === orders[orders.length - 1].id
+                    )
+                    .map((order) => (
+                      <tr key={order.id}>
+                        <td>{order.id} </td>
+                        <td>{order.date}</td>
+                        <td>{order.address} </td>
+                        <td>{order.shipping}</td>
+                        <td>{order.paymentmethod}</td>
+                        <td>{order.status}</td>
+                        <td>${order.priceTotal}</td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
+          </div>
+        </md-content>
+      </div>
       <div className={cComponent.footer}>
-          <Link
-            to={{
-              pathname: `/`,
-            }}
-          >
-            <button 
-            type="button" className="btn btn-primary btn-lg btn-block"
+        <Link
+          to={{
+            pathname: `/`,
+          }}
+        >
+          <button
+            type="button"
+            className="btn btn-primary btn-lg btn-block"
             onClick={handleSubmit}
-            >Confirmar Pedido</button>
-          </Link>
-        </div>
-        <div className={oComponent.footer}>
-          <Link
-            to={{
-              pathname: `/users/${props.producto.match.params.id}/orders/historial`,
-            }}
           >
-            <button className="btn btn-success">Historial de Ordenes</button>
-          </Link>
-        </div>
-     </div>
+            Confirmar Pedido
+          </button>
+        </Link>
+      </div>
+      <div className={oComponent.footer}>
+        <Link
+          to={{
+            pathname: `/users/${props.producto.match.params.id}/orders/historial`,
+          }}
+        >
+          <button className="btn btn-success">Historial de Ordenes</button>
+        </Link>
+      </div>
+    </div>
   );
 }
 

@@ -10,7 +10,6 @@ import AdminPanel from "./container/adminPanel";
 import EditProduct from "./container/EditProduct";
 import "./bootstrap.min.css";
 import ProductCategory from "./container/productCategory";
-import SearchComponent from "./container/SearchComponent";
 import FormUser from "./container/addUser";
 import EditUserForm from "./container/EditUser";
 import CartComponent from "./container/cartcomponent";
@@ -20,7 +19,7 @@ import AddReviewContainer from "./container/addReviewcontainer";
 import EditReviewContainer from "./container/editReview";
 import OrderComponent from "./container/ordercomponent";
 import OrdenesCompra from "./container/ordenescompra";
-import Navbar from './components/navBar'
+import Navbar from "./components/navBar";
 
 function App() {
   return (
@@ -33,23 +32,14 @@ function App() {
           <Route
             path="/admin"
             exact={true}
-            render={
-              () => (
-                // JSON.parse(localStorage.getItem("user")) &&
-                // JSON.parse(localStorage.getItem("user")).rol === "admin" ? (
+            render={() =>
+              JSON.parse(localStorage.getItem("user")) &&
+              JSON.parse(localStorage.getItem("user")).rol === "admin" ? (
                 <AdminPanel />
+              ) : (
+                (window.location = "/")
               )
-              // ) : (
-              //   (window.location = "/")
-              // )
             }
-          />
-          <Route
-            path="/products/search"
-            exact={true}
-            render={(p) => {
-              return <SearchComponent producto={p.location.state} />;
-            }}
           />
           <Route
             path="/admin/products/add"
@@ -146,7 +136,6 @@ function App() {
             }}
           />
         </div>
-
       </main>
     </BrowserRouter>
   );

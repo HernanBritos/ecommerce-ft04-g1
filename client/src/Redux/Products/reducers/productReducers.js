@@ -5,6 +5,7 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_LIST_FILTER,
 } from "../constantes/productConstants";
 
 function productListReducer(state = { products: [] }, action) {
@@ -12,9 +13,23 @@ function productListReducer(state = { products: [] }, action) {
     case PRODUCT_LIST_REQUEST:
       return { loading: true };
     case PRODUCT_LIST_SUCCESS:
-      return { loading: false, products: action.payload };
+      return {
+        loading: false,
+        products: action.payload,
+      };
     case PRODUCT_LIST_FAIL:
-      return { loading: false, error: action.payload };
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case PRODUCT_LIST_FILTER:
+      return {
+        products: state.products.filter(
+          (product) =>
+            product.name.includes(action.payload) ||
+            product.description.includes(action.payload)
+        ),
+      };
     default:
       return state;
   }
