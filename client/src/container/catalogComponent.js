@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { listProduct } from "../Redux/Products/Actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 
-function CatalogComponent(props) {
+function CatalogComponent() {
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
   const dispatch = useDispatch();

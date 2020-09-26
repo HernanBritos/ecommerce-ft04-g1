@@ -1,5 +1,8 @@
 .products {
   background-color: #fcb064;
+  padding-top: 30px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .carritoPage {
   width: 100%;

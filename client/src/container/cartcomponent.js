@@ -5,8 +5,7 @@ import axios from "axios";
 import {
   addToCart,
   removeFromCart,
-  fetchOrders, 
-  
+  fetchOrders,
 } from "../Redux/Cart/Actions/cartActions";
 import cComponent from "./css/cartComponent.module.css";
 
@@ -14,7 +13,7 @@ function CartComponent(props) {
   const cart = useSelector((state) => state.cart);
   var { cartItems } = cart;
   const productId = props.c.match.params.id;
-  const qty = props.c.location.search.split("=")[1] || 1;
+  const qty = Number(props.c.location.search.split("=")[1]) || 1;
 
   var items = cartItems;
 
@@ -43,8 +42,8 @@ function CartComponent(props) {
     dispatch(removeFromCart(productId));
   };
 
-  var subtotal = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-  var cantidad = cartItems.reduce((a, c) => a + c.qty, 0);
+  var subtotal = cartItems.reduce((a, c) => a + c.price * Number(c.qty), 0);
+  var cantidad = cartItems.reduce((a, c) => a + Number(c.qty), 0);
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
@@ -69,20 +68,17 @@ function CartComponent(props) {
       })
       .then((data) => {
         cartItems.map(async (product) => {
-          await axios
-            .post(`http://localhost:3001/orders`, {
-              idOrder: data.data.id,
-              idProduct: product.product,
-              price: product.price,
-              ammount: product.qty,
-            })
-            
+          await axios.post(`http://localhost:3001/orders`, {
+            idOrder: data.data.id,
+            idProduct: product.product,
+            price: product.price,
+            ammount: product.qty,
+          });
         });
-        
-        return data;
 
+        return data;
       });
-      
+
     return null;
     // return (window.location = `http://localhost:3000/users/${input.idUser}/orders`);
   };
@@ -243,23 +239,22 @@ function CartComponent(props) {
             </button>
           </Link>
         )}
-         <Link
-            to={{
-              pathname: "/users/signup",
+        <Link
+          to={{
+            pathname: "/users/signup",
           }}
+        >
+          <button
+            type="button"
+            class="btn btn-light"
+            data-toggle="button"
+            aria-pressed="false"
+            autocomplete="off"
           >
-            <button
-              type="button" 
-              class="btn btn-light"
-              data-toggle="button" 
-              aria-pressed="false" 
-              autocomplete="off"
-             >
-              Regístrese
-            </button>
-          </Link>
+            Regístrese
+          </button>
+        </Link>
       </div>
-      
     </div>
   );
 }

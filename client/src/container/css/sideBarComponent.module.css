@@ -68,7 +68,6 @@
   background: #ffffff;
   margin: 5px;
   color: rgb(0, 0, 0);
-  
 }
 .categories {
   display: flex;
@@ -78,9 +77,6 @@
   margin-left: 10px;
   box-shadow: 0.3px 0.3px 0.3px rgb(0, 0, 0);
   border-radius: 10px;
-  
-  
- 
 }
 .filtro {
   margin-left: 20px;
@@ -88,11 +84,22 @@
   font-size: 18px;
   font-weight: 400;
 }
- .botoncat {
+.botoncat {
   border-style: none;
   border-radius: 10px;
   background: #ffffff;
   margin: 5px;
   color: rgb(0, 0, 0);
-  
-} 
+}
+.boton {
+  background: #444444;
+  box-shadow: 0.3px 0.3px 0.6px rgb(255, 254, 254);
+  border-style: none;
+  padding: 7px;
+  color: white;
+  border-radius: 8px;
+  transition: 0.5s;
+}
+.boton:hover {
+  box-shadow: 0.3px 0.3px 1px rgb(44, 44, 44);
+}
