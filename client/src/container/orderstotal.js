@@ -6,6 +6,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import React, { useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
+
 import { fetchOrderProducts, fetchAllOrders, statusconfirm} from "../Redux/Cart/Actions/cartActions";
 
 function OrdenesCompra(props) {
@@ -21,14 +22,13 @@ useEffect(() =>  {
   }, [dispatch]);
 
   const handleStatusInputChange = (e) => {
+    
     if(e && e.value) {
       dispatch(fetchAllOrders(e.value)) 
     }
-   
-     
-  }
+}
 
-  console.log(handleStatusInputChange)
+  console.log(allorders)
 
   return (
     <div className={oComponent.options} >
@@ -53,7 +53,9 @@ useEffect(() =>  {
               <th scope="col">Forma de pago</th>
               <th scope="col">
                 Status 
-                <Select placeholder="FIlter Status"
+                <Select 
+               
+                placeholder="FIlter Status"
                  onChange={handleStatusInputChange}
                 options={[
                   {label: "confirmado", value: "confirmado"}, 

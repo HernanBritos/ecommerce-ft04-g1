@@ -53,6 +53,7 @@ function CartComponent(props) {
       dispatch(fetchOrders(input.idUser));
     }
     fetchUser();
+    
   }, [dispatch, productId, qty, input.idUser]);
 
   const checkoutHandler = async () => {
@@ -78,7 +79,7 @@ function CartComponent(props) {
             })
             
         });
-        
+        dispatch(fetchOrders(input.idUser));
         return data;
 
       });

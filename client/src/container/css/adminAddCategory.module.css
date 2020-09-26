@@ -132,3 +132,11 @@
 .footer button {
   width: 180px;
 }
+.footerdos {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+  font-size: 25px;
+  font-weight: 300;
+}

@@ -3,7 +3,7 @@ import oComponent from "./css/orderComponent.module.css";
 import cComponent from "./css/adminAddCategory.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchOrders, fetchOrderProducts,  removeFromCart} from "../Redux/Cart/Actions/cartActions";
+import { fetchOrders, fetchOrderProducts,  removeFromCart, cancelOrder} from "../Redux/Cart/Actions/cartActions";
 
 
 function OrderComponent(props) {
@@ -15,20 +15,29 @@ const items = cartItems;
 const getOrders = useSelector((state) => state.getOrders);
 const { orders } = getOrders;
 
-const getOrderProduct = useSelector((state) => state.getOrderProduct);
-const { orderproducts } = getOrderProduct;
   
 useEffect(() =>  {
     dispatch(fetchOrders(props.producto.match.params.id));
   dispatch(fetchOrderProducts())
-  }, [dispatch]);
+  dispatch(fetchOrders(props.producto.match.params.id));
+  }, []);
 
 const handleSubmit = () => {
 cartItems.map((el) => dispatch(removeFromCart(el.product)));
 
 };
 
-console.log(orderproducts)
+const handleCancelSubmit = (e) => {
+  if(orders && orders.length) {
+    const idUser = orders[orders.length-1].idUser;
+    const idOrder = orders[orders.length-1].id
+    dispatch(cancelOrder(idUser, idOrder));
+    cartItems.map((el) => dispatch(removeFromCart(el.product)));
+    dispatch(fetchOrders(idUser));
+  } 
+  };
+
+console.log(orders)
 
   return (
     <div className={cComponent.actionpane}>
@@ -108,7 +117,7 @@ console.log(orderproducts)
         </div>
       </md-content>
     </div>
-      <div className={cComponent.footer}>
+      <div className={cComponent.footerdos}>
           <Link
             to={{
               pathname: `/`,
@@ -118,6 +127,17 @@ console.log(orderproducts)
             type="button" className="btn btn-primary btn-lg btn-block"
             onClick={handleSubmit}
             >Confirmar Pedido</button>
+          </Link>
+          <Link
+            to={{
+              pathname: `/`,
+            }}
+          >
+            <button 
+            type="button" className="btn btn-secondary btn-lg btn-block"
+            onClick={handleCancelSubmit}
+            
+            >Cancelar Pedido</button>
           </Link>
         </div>
         <div className={oComponent.footer}>

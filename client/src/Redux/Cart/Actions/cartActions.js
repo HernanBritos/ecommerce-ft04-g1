@@ -45,7 +45,7 @@ const removeFromCart = (productId) => (dispatch, getState) => {
 };
 
 const fetchOrders = (id) => async (dispatch) => {
-  try {
+ 
     dispatch({ type: ORDER_LIST_REQUEST });
     const { data } = await axios.get(
       `http://localhost:3001/users/${id}/orders`
@@ -54,7 +54,7 @@ const fetchOrders = (id) => async (dispatch) => {
       type: ORDER_LIST_SUCCESS,
       payload: data,
     });
-  } catch (error) {}
+  
 };
 
 const fetchAllOrders = (status) => async (dispatch) => {
@@ -91,7 +91,7 @@ const fetchAllOrders = (status) => async (dispatch) => {
 };
 
 const fetchOrderProducts = () => async (dispatch) => {
-  try {
+
     dispatch({ type: ORDERPRODUCT_LIST_REQUEST});
     const {data } = await axios.get(
       `http://localhost:3001/orders/`
@@ -100,7 +100,7 @@ const fetchOrderProducts = () => async (dispatch) => {
         type: ORDERPRODUCT_LIST_SUCCESS,
         payload: data,
       });
-  } catch (error) {}
+  
 };
 
 const getOrders = (orders) => {
@@ -114,4 +114,15 @@ const statusconfirm = (orderId) => (dispatch) => {
   dispatch({ type: ORDER_STATUS, payload: orderId });
 };
 
-export { addToCart, removeFromCart, getOrders, fetchOrders, fetchOrderProducts, fetchAllOrders, statusconfirm };
+const cancelOrder = (user, order) => async (dispatch) => {
+  await axios
+    .delete(`http://localhost:3001/users/${user}/orders/${order}`, {
+     
+    })
+    .then((res) => {
+      return res;
+    });
+
+};
+
+export { addToCart, removeFromCart, getOrders, fetchOrders, fetchOrderProducts, fetchAllOrders, statusconfirm, cancelOrder };
