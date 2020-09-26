@@ -1,5 +1,5 @@
 .header {
-  height: 90px;
+  height: 96px;
   width: 100%;
   background: #fcb064;
   display: flex;
@@ -43,7 +43,7 @@
 
 .botoncart {
   position: absolute;
-  margin-left: 8%;
+  margin-left: 110px;
   bottom: 26%;
 }
 .cartboton {
@@ -53,7 +53,6 @@
   border-radius: 6px;
   border-style: none;
   box-shadow: 0.3px 0.3px 1px rgb(83, 83, 83);
-  
 }
 .badge {
   position: absolute;
@@ -65,11 +64,9 @@
   color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 800;
-
 }
 
 .cartbotonimg {
   width: 25px;
   height: 25px;
-  
 }

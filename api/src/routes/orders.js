@@ -1,5 +1,6 @@
 const server = require("express").Router();
 const { OrderProduct } = require("../db");
+const { isAdmin } = require("../auth");
 
 // GET /orders
 // Esta ruta puede recibir el query string status y deberá devolver sólo las ordenes con ese status.
@@ -39,7 +40,7 @@ server.get("/:id", (req, res) => {
 
 // PUT /orders/:id
 
-server.put("/:id", (req, res) => {
+server.put("/:id", isAdmin, (req, res) => {
   const id = req.params.id;
 
   OrderProduct.update(

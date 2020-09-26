@@ -27,7 +27,7 @@ server.get("/", (req, res, next) => {
 server.post("/", isAdmin, async (req, res) => {
   const { category, name, description, stock, price, img } = req.body;
 
-  await Product.create({
+  Product.create({
     name: name,
     category: category,
     description: description,
