@@ -1,6 +1,7 @@
 const server = require("express").Router();
 const { Product } = require("../db.js");
 const { Categories } = require("../db.js");
+const { isAdmin } = require("../auth");
 
 server.get("/", (req, res, next) => {
   Categories.findAll()
@@ -10,7 +11,7 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
-server.post("/", (req, res) => {
+server.post("/", isAdmin, (req, res) => {
   Categories.create({
     name: req.body.name,
   })
@@ -20,7 +21,7 @@ server.post("/", (req, res) => {
     .catch((err) => res.send(err));
 });
 
-server.put("/:id", (req, res, next) => {
+server.put("/:id", isAdmin, (req, res, next) => {
   const id = req.params.id;
 
   Categories.update(
@@ -42,7 +43,7 @@ server.put("/:id", (req, res, next) => {
     );
 });
 
-server.delete("/:id", (req, res, next) => {
+server.delete("/:id", isAdmin, (req, res, next) => {
   const id = req.params.id;
   Categories.destroy({
     where: { id: id },

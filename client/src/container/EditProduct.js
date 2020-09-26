@@ -3,7 +3,6 @@ import cComponent from "./css/editProduct.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editProduct } from "../Redux/Products/Actions/productActions";
-import { detailsProduct } from "../Redux/Products/Actions/productActions";
 import { listCategory } from "../Redux/Categories/Actions/categoryActions";
 import FileUpload from "../components/utils/FileUpload";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -13,8 +12,6 @@ import Select from "react-select";
 
 export default function EditProduct(props) {
   // Estados locales
-  const productDetails = useSelector((state) => state.productDetails);
-  const { productDet, loadingDet, errorDet } = productDetails;
   const categoryList = useSelector((state) => state.categoryList);
   const { categories, loadingCat, errorCat } = categoryList;
   const dispatch = useDispatch();
@@ -59,10 +56,9 @@ export default function EditProduct(props) {
 
   // Peticion de producto y categoria
   useEffect(() => {
-    dispatch(detailsProduct(props.producto));
     dispatch(listCategory());
-    setProductInput(productDet);
-  }, [dispatch, props.producto, productDet]);
+    setProductInput(props.producto.location.state);
+  }, [dispatch, props.producto.location.state]);
 
   // Todo lo que voy a renderizar en la pagina
   return (
@@ -79,96 +75,86 @@ export default function EditProduct(props) {
           <h3>Modificar Producto</h3>
           <FileUpload refreshFunction={UpdateImages} />
         </div>
-        {loadingDet ? (
-          <div className="alert alert-success">Cargando...</div>
-        ) : errorDet ? (
-          <div className="alert alert-danger">
-            Se produjo un error, por favor inténtelo de nuevo más tarde.
+        <form className={cComponent.form} onSubmit={handleSubmit}>
+          <div className={cComponent.name}>
+            <label htmlFor="name">Nombre de producto: </label>
+            <input
+              placeholder="Nombre"
+              name="name"
+              value={productInput.name}
+              type="text"
+              onChange={handleProductInputChange}
+            />
           </div>
-        ) : (
-          productDet !== {} && (
-            <form className={cComponent.form} onSubmit={handleSubmit}>
-              <div className={cComponent.name}>
-                <label htmlFor="name">Nombre de producto: </label>
-                <input
-                  placeholder="Nombre"
-                  name="name"
-                  value={productInput.name}
-                  type="text"
-                  onChange={handleProductInputChange}
-                />
+          <div className={cComponent.categories}>
+            <span>Categoria: </span>
+            {loadingCat ? (
+              <div className="alert alert-success">Cargando...</div>
+            ) : errorCat ? (
+              <div className="alert alert-danger">
+                Se produjo un error, por favor inténtelo de nuevo más tarde.
               </div>
-              <div className={cComponent.categories}>
-                <span>Categoria: </span>
-                {loadingCat ? (
-                  <div className="alert alert-success">Cargando...</div>
-                ) : errorCat ? (
-                  <div className="alert alert-danger">
-                    Se produjo un error, por favor inténtelo de nuevo más tarde.
-                  </div>
-                ) : categories.length > 0 ? (
-                  <Select
-                    placeholder={productInput.category}
-                    onChange={handleCategoryInputChange}
-                    options={categories.map((opt) => ({
-                      label: opt.name,
-                      value: opt.name,
-                    }))}
-                  />
-                ) : (
-                  <Select
-                    placeholder="Selecciona"
-                    onChange={handleCategoryInputChange}
-                    options={[
-                      {
-                        label:
-                          "Oops! Parece que no hay categorías, intenta creando una.",
-                        value:
-                          "Oops! Parece que no hay categorías, intenta creando una.",
-                      },
-                    ]}
-                  />
-                )}
-              </div>
-              <button className={cComponent.botonAdd} type="submit">
-                Editar producto
-              </button>
-              <div className={cComponent.description}>
-                <span>Descripcion: </span>
-                <textarea
-                  placeholder="Ingrese descripcion"
-                  rows="2"
-                  name="description"
-                  value={productInput.description}
-                  onChange={handleProductInputChange}
-                  id="Description"
-                ></textarea>
-              </div>
-              <div className={cComponent.price}>
-                <span>Precio: </span>
-                <input
-                  placeholder="Diga un precio"
-                  name="price"
-                  value={productInput.price}
-                  type="real"
-                  onChange={handleProductInputChange}
-                  id="price"
-                />
-              </div>
-              <div className={cComponent.stock}>
-                <span>Cantidad: </span>
-                <input
-                  placeholder="Especifique stock"
-                  name="stock"
-                  value={productInput.stock}
-                  type="number"
-                  onChange={handleProductInputChange}
-                  id="stock"
-                />
-              </div>
-            </form>
-          )
-        )}
+            ) : categories.length > 0 ? (
+              <Select
+                placeholder={productInput.category}
+                onChange={handleCategoryInputChange}
+                options={categories.map((opt) => ({
+                  label: opt.name,
+                  value: opt.name,
+                }))}
+              />
+            ) : (
+              <Select
+                placeholder="Selecciona"
+                onChange={handleCategoryInputChange}
+                options={[
+                  {
+                    label:
+                      "Oops! Parece que no hay categorías, intenta creando una.",
+                    value:
+                      "Oops! Parece que no hay categorías, intenta creando una.",
+                  },
+                ]}
+              />
+            )}
+          </div>
+          <button className={cComponent.botonAdd} type="submit">
+            Editar producto
+          </button>
+          <div className={cComponent.description}>
+            <span>Descripcion: </span>
+            <textarea
+              placeholder="Ingrese descripcion"
+              rows="2"
+              name="description"
+              value={productInput.description}
+              onChange={handleProductInputChange}
+              id="Description"
+            ></textarea>
+          </div>
+          <div className={cComponent.price}>
+            <span>Precio: </span>
+            <input
+              placeholder="Diga un precio"
+              name="price"
+              value={productInput.price}
+              type="real"
+              onChange={handleProductInputChange}
+              id="price"
+            />
+          </div>
+          <div className={cComponent.stock}>
+            <span>Cantidad: </span>
+            <input
+              placeholder="Especifique stock"
+              name="stock"
+              value={productInput.stock}
+              type="number"
+              onChange={handleProductInputChange}
+              id="stock"
+            />
+          </div>
+        </form>
       </div>
     </div>
   );

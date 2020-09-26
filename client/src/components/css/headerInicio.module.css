@@ -1,5 +1,5 @@
 .header {
-  height: 90px;
+  height: 96px;
   width: 100%;
   background: #fcb064;
   display: flex;
@@ -8,8 +8,7 @@
   position: fixed;
   box-shadow: 0.3px 0.3px 1.2px rgb(119, 118, 118);
   z-index: 1;
-  
-}
+ }
 .searchbar {
   margin-right: 20px;
 }
@@ -44,7 +43,7 @@
 
 .botoncart {
   position: absolute;
-  margin-left: 8%;
+  margin-left: 19%;
   bottom: 26%;
 }
 .cartboton {
@@ -54,6 +53,7 @@
   border-radius: 6px;
   border-style: none;
   box-shadow: 0.3px 0.3px 1px rgb(83, 83, 83);
+ 
   
 }
 .badge {
