@@ -3,17 +3,15 @@ import pCard from "./css/productCard.module.css";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import { useDispatch } from "react-redux";
-import {addToCart} from "../Redux/Cart/Actions/cartActions";
-import hInicio from "../components/css/headerInicio.module.css";
+import { addToCart } from "../Redux/Cart/Actions/cartActions";
 var placeholder = "/imagenes/Placeholder.png";
 
 function ProductCard(props) {
   const dispatch = useDispatch();
 
   const agregarCarrito = (props) => {
-   dispatch(addToCart(props.id, 1));
-   
-}; 
+    dispatch(addToCart(props.id, 1));
+  };
 
   return (
     <Link
@@ -48,22 +46,19 @@ function ProductCard(props) {
           <span className={pCard.price}> $ {props.producto.price}</span>
           {props.producto.stock !== 0 ? (
             <span className={pCard.carrito}>
-              
-             <Link
+              <Link
                 to={{
-                 pathname: "/",
-                  }}
+                  pathname: "/",
+                }}
               >
-             <button type="button" >
-             <img
-                src={`/imagenes/carrito-de-compras.png`}
-                alt="carrito"
-                onClick={() => agregarCarrito(props.producto)}
-                
-                
-              />
-             </button>
-            </Link>
+                <button type="button">
+                  <img
+                    src={`/imagenes/carrito-de-compras.png`}
+                    alt="carrito"
+                    onClick={() => agregarCarrito(props.producto)}
+                  />
+                </button>
+              </Link>
             </span>
           ) : (
             <div className="alert-danger"> Sin Stock!</div>

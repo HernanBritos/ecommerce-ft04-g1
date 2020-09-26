@@ -4,7 +4,8 @@
   cursor: pointer;
   padding: 10px;
   background: #fde195;
-  font-family: "Lato";
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   border-radius: 10px;
   margin-right: 10px;
 }
@@ -55,9 +56,6 @@
   font-size: 17px;
   box-shadow: 0.3px 0.3px 1.3px rgb(0, 0, 0);
   color: white;
-}
-.products {
-  background-color: #fcb064;
 }
 .carritoPage {
   width: 100%;
@@ -127,11 +125,11 @@
 .catalogo {
   display: flex;
   justify-content: center;
-
 }
 .footer button {
   width: 180px;
 }
+
 .footerdos {
   display: flex;
   align-items: center;

@@ -17,12 +17,6 @@ function LoginContainer(props) {
     });
   };
 
-  const getUser = (e) => {
-    e.preventDefault();
-    console.log(JSON.parse(localStorage.getItem("user")));
-    return JSON.parse(localStorage.getItem("user"));
-  };
-
   const loginUser = async (email, password) => {
     return await axios
       .post("http://localhost:3001/users/login", {

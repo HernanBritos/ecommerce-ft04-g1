@@ -3,17 +3,25 @@ import oComponent from "./css/orderComponent.module.css";
 import cComponent from "./css/adminAddCategory.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchOrders, fetchOrderProducts,  removeFromCart, cancelOrder} from "../Redux/Cart/Actions/cartActions";
+import {
+  fetchOrders,
+  fetchOrderProducts,
+  removeFromCart,
+  cancelOrder
+} from "../Redux/Cart/Actions/cartActions";
 
 
 function OrderComponent(props) {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  const items = cartItems;
+  const getOrders = useSelector((state) => state.getOrders);
+  const { orders } = getOrders;
 
-const dispatch = useDispatch();
-const cart = useSelector((state) => state.cart);
-const { cartItems } = cart;
-const items = cartItems;
-const getOrders = useSelector((state) => state.getOrders);
-const { orders } = getOrders;
+  const getOrderProduct = useSelector((state) => state.getOrderProduct);
+  const { orderproducts } = getOrderProduct;
+
 
   
 useEffect(() =>  {
@@ -37,7 +45,6 @@ const handleCancelSubmit = (e) => {
   } 
   };
 
-console.log(orders)
 
   return (
     <div className={cComponent.actionpane}>
@@ -53,7 +60,8 @@ console.log(orders)
       {items.length === 0 ? (
         <div className="alert alert-info">El carrito está vacío</div>
       ) : (
-       items && items.map((el) => (
+        items &&
+        items.map((el) => (
           <div key={el.product} className={`${cComponent.carritoPage}`}>
             <div className={`${cComponent.cards}`}>
               <img
@@ -77,8 +85,8 @@ console.log(orders)
       )}
       <div className={oComponent.footer}>
         <h4>
-          Total: ({items.reduce((a, c) => a + c.qty, 0)} item) : ${" "}
-          {items.reduce((a, c) => a + c.price * c.qty, 0)}
+          Total: ({items.reduce((a, c) => a + Number(c.qty), 0)} items) : ${" "}
+          {items.reduce((a, c) => a + c.price * Number(c.qty), 0)}
         </h4>
       </div>
       <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
@@ -117,6 +125,7 @@ console.log(orders)
         </div>
       </md-content>
     </div>
+
       <div className={cComponent.footerdos}>
           <Link
             to={{
@@ -140,16 +149,17 @@ console.log(orders)
             >Cancelar Pedido</button>
           </Link>
         </div>
-        <div className={oComponent.footer}>
-          <Link
-            to={{
-              pathname: `/users/${props.producto.match.params.id}/orders/historial`,
-            }}
-          >
-            <button className="btn btn-success">Historial de Ordenes</button>
-          </Link>
-        </div>
-     </div>
+        
+      <div className={oComponent.footer}>
+        <Link
+          to={{
+            pathname: `/users/${props.producto.match.params.id}/orders/historial`,
+          }}
+        >
+          <button className="btn btn-success">Historial de Ordenes</button>
+        </Link>
+      </div>
+    </div>
   );
 }
 

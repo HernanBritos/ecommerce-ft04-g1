@@ -67,7 +67,7 @@ function SideBarComponent(props) {
               <div key={cat.id}>
                 <Link to={"/products/categoria/" + cat.name}>
                   <button className={sBar.category}>
-                    <p className={sBar.botoncat} >{cat.name}</p>
+                    <p className={sBar.botoncat}>{cat.name}</p>
                   </button>
                 </Link>
               </div>
@@ -79,12 +79,12 @@ function SideBarComponent(props) {
           {JSON.parse(localStorage.getItem("user")) &&
             JSON.parse(localStorage.getItem("user")).rol === "admin" && (
               <Link to="/admin">
-                <button onClick={props.onclose} className={`btn btn-secondary`}>
+                <button onClick={props.onclose} className={` ${sBar.boton} `}>
                   <SupervisorAccountIcon />
                 </button>
               </Link>
             )}
-          <button onClick={logout} className={`btn btn-secondary`}>
+          <button onClick={logout} className={`${sBar.boton}`}>
             <ExitToAppIcon />
           </button>
         </div>
