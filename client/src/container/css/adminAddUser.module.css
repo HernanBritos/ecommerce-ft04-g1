@@ -4,7 +4,8 @@
   cursor: pointer;
   padding: 10px;
   background: #fde195;
-  font-family: "Lato";
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   border-radius: 10px;
   margin-right: 10px;
 }
@@ -17,11 +18,10 @@
 .botones {
   display: flex;
   flex-direction: row;
-  
+
   justify-content: space-evenly;
   align-items: center;
   padding-top: 6px;
-  
 }
 .editar {
   width: 100px;
@@ -31,7 +31,7 @@
   justify-content: center;
   align-items: center;
   background: #fde195;
-  
+
   border-radius: 7px;
   border-style: none;
   font-size: 16px;

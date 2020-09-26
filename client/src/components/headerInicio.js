@@ -3,8 +3,6 @@ import hInicio from "../components/css/headerInicio.module.css";
 import SearchBarComponent from "../container/searchBarComponent";
 import SideBar from "../container/sideBarComponent.js";
 import { Link } from "react-router-dom";
-import navBar from './navBar'
-import CnavBar from './css/navBar.module.css'
 import { useSelector } from "react-redux";
 
 function HeaderInicio() {
@@ -17,7 +15,6 @@ function HeaderInicio() {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-
 
   return (
     <div>
@@ -35,15 +32,14 @@ function HeaderInicio() {
         >
           <div className={`${hInicio.botoncart}`}>
             <button className={hInicio.cartboton} type="submit">
-            
               <img
                 src={`/imagenes/carrito-de-compras.png`}
                 className={hInicio.cartbotonimg}
                 alt=" "
               />
-              { cartItems.length !== 0 ?  (
-              <span className={hInicio.badge}>{cartItems.length}</span>): (null) 
-            }
+              {cartItems.length !== 0 ? (
+                <span className={hInicio.badge}>{cartItems.length}</span>
+              ) : null}
             </button>
           </div>
         </Link>
@@ -52,7 +48,7 @@ function HeaderInicio() {
           <SearchBarComponent />
         </div>
       </div>
-      <aside style= {{zIndex: 1}}className="sidebar">
+      <aside style={{ zIndex: 1 }} className="sidebar">
         <SideBar onclose={closeMenu} />
       </aside>
     </div>
