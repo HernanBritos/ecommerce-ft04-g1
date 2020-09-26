@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import oComponent from "./css/orderComponent.module.css";
-
 import cComponent from "./css/adminAddCategory.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -29,8 +28,6 @@ function OrderComponent(props) {
   const handleSubmit = () => {
     cartItems.map((el) => dispatch(removeFromCart(el.product)));
   };
-
-  console.log(orderproducts);
 
   return (
     <div className={cComponent.actionpane}>
@@ -76,6 +73,41 @@ function OrderComponent(props) {
         </h4>
       </div>
       <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
+      <md-content layout-padding>
+        <div className="tables">
+          <table className="table  table-striped table-bordered table-hover table-checkable order-column dataTable">
+            <thead>
+              <tr>
+              <th scope="col">Id de Orden</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">Envio</th>
+              <th scope="col">Forma de pago</th>
+              <th scope="col">Status</th>
+              <th scope="col">Precio Total</th>
+              </tr>
+            </thead>
+            <tbody>
+                    {orders &&
+              orders
+                .filter((order) => order === orders[orders.length-1])
+                .map((order) => (
+                  <tr key={order.id}>
+                    <td>{order.id} </td>
+                    <td>{order.date}</td>
+                    <td>{order.address} </td>
+                    <td>{order.shipping}</td>
+                    <td>{order.paymentmethod}</td>
+                    <td>{order.status}</td>
+                    <td>${order.priceTotal}</td>
+                  </tr>
+                ))}
+                   
+            </tbody>
+          </table>
+        </div>
+      </md-content>
+    </div>
         <md-content layout-padding>
           <div className="tables">
             <table className="table  table-striped table-bordered table-hover table-checkable order-column dataTable">

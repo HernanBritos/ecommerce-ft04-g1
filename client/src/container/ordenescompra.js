@@ -9,6 +9,8 @@ function OrdenesCompra(props) {
   const { orders } = getOrders;
 
   return (
+
+    <div className={oComponent.options} >
     <div>
       <div className={oComponent.catalogo2}>
         <button
