@@ -8,10 +8,12 @@ function OrdenesCompra(props) {
   const getOrders = useSelector((state) => state.getOrders);
   const { orders } = getOrders;
 
+  console.log(props)
+
   return (
 
     <div className={oComponent.options} >
-    <div>
+    
       <div className={oComponent.catalogo2}>
         <button
           onClick={() => window.history.back()}
@@ -19,6 +21,7 @@ function OrdenesCompra(props) {
         >
           <ArrowBackIcon />
         </button>
+
       </div>
       <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
         <md-content layout-padding>

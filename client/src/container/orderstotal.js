@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import React, { useEffect } from "react";
 import axios from "axios";
+import Select from "react-select";
+
 import { fetchOrderProducts, fetchAllOrders, statusconfirm} from "../Redux/Cart/Actions/cartActions";
 
 function OrdenesCompra(props) {
@@ -16,11 +18,17 @@ const { allorders } = getAllOrders;
 
 useEffect(() =>  {
   dispatch(fetchOrderProducts())
-  dispatch(fetchAllOrders());
+  dispatch(fetchAllOrders("todos"));
   }, [dispatch]);
-console.log(allorders)
 
+  const handleStatusInputChange = (e) => {
+    
+    if(e && e.value) {
+      dispatch(fetchAllOrders(e.value)) 
+    }
+}
 
+  console.log(allorders)
 
   return (
     <div className={oComponent.options} >
@@ -43,12 +51,29 @@ console.log(allorders)
               <th scope="col">Direccion</th>
               <th scope="col">Envio</th>
               <th scope="col">Forma de pago</th>
-              <th scope="col">Status</th>
+              <th scope="col">
+                Status 
+                <Select 
+               
+                placeholder="FIlter Status"
+                 onChange={handleStatusInputChange}
+                options={[
+                  {label: "confirmado", value: "confirmado"}, 
+                  {label: "pendiente", value: "pendiente"},
+                  {label: "todos", value: "todos"}
+                ]}
+                // {allorders && Array.from(new Set(allorders.map((allorder) => allorder.status))).map((opt) => ({
+                //   label: opt,
+                //   value: opt,
+                // }))} 
+                />
+                  </th>
               <th scope="col">Precio Total</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
+          {/* .filter((allorder) => allorder.status && {handleStatusInputChange}) */}
             {allorders &&
             allorders.sort((a, b) => (a.id > b.id ? 1 : a.id < b.id ? -1 : 0))
             .map((allorder) => {
@@ -89,6 +114,7 @@ console.log(allorders)
                  }
                  return (window.location = "http://localhost:3000/admin/orders");
               };
+           
               return (
                 <tr key={allorder.id}>
                   <td>{allorder.id} </td>

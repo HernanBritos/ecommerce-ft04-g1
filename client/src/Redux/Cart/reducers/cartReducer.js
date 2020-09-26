@@ -60,7 +60,6 @@ function allOrderReducer(state = { allorders: [] }, action) {
       return { allorders: action.payload, loading: false };
     case ORDER_STATUS:
       const oldOrder = state.allorders.find((allorder) => allorder.id === action.payload);
-      console.log(oldOrder);
       const newOrder = oldOrder;
    return {
         allorders: state.allorders.map((allorder) => {

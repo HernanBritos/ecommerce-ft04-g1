@@ -234,6 +234,19 @@ server.put("/:id/orders/:idOrder", (req, res) => {
     .catch((err) => res.send(err.message));
 });
 
+server.delete("/:id/orders/:idOrder", (req, res, next) => {
+  const idOrder = req.params.idOrder;
+  Order.destroy({
+    where: { id: idOrder },
+  }).then((removed) => {
+    if (removed) {
+      res.status(200).end();
+    } else {
+      res.status(404).json({ message: "Not found" });
+    }
+  });
+});
+
 server.get("/orders", (req, res) => {
   
   Order.findAll()
@@ -243,6 +256,21 @@ server.get("/orders", (req, res) => {
     .catch((err) =>
       res.status(400).send(err, " WARNING! -> Order does not exist")
     );
+});
+
+server.get("/orders/search", (req, res) => {
+  const valor = req.query.query
+  Order.findAll({
+    where: {
+      [Op.or]: [
+        {status: valor}
+      ],
+    },
+  })
+   .then((orders) => {
+     res.send(orders);
+   })
+   .catch((err) => res.send(err));
 });
 
 
