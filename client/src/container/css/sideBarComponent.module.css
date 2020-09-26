@@ -4,7 +4,7 @@
   height: 1.5rem;
   border-radius: 15%;
   border-style: none;
-  background: #faba7a;
+  background: #f8e4ab;
   font-size: 0.9rem;
   right: 0.5rem;
   top: 0.5rem;
@@ -12,7 +12,7 @@
   position: absolute;
   padding-bottom: 4px;
   box-shadow: 0.3px 0.3px 0.6px rgb(0, 0, 0);
-  color: white;
+  color: rgb(22, 22, 22);
   z-index: 1;
 }
 .auth {
@@ -53,9 +53,11 @@
   color: white;
 }
 .admin {
-  margin: 50px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
+  margin-top: 15px;
 }
 .admin button {
   margin: 10px;
@@ -79,17 +81,25 @@
   border-radius: 10px;
 }
 .filtro {
-  margin-left: 20px;
-  margin-top: 20px;
+  margin: 20px;
   font-size: 18px;
   font-weight: 400;
+  border-style: none;
+  background: #444444;
+  padding: 5px;
+  border-radius: 7px;
+  color: white;
 }
 .botoncat {
   border-style: none;
   border-radius: 10px;
   background: #ffffff;
-  margin: 5px;
-  color: rgb(0, 0, 0);
+  font-size: 16px;
+  padding: 7px;
+  color: rgb(36, 35, 35);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: 400;
 }
 .boton {
   background: #444444;
@@ -102,4 +112,27 @@
 }
 .boton:hover {
   box-shadow: 0.3px 0.3px 1px rgb(44, 44, 44);
+}
+.userProfile {
+  width: 170px;
+  height: 180px;
+  background: #444444;
+  margin: 25px 0 0 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.userName {
+  font-size: 20px;
+  color: white;
+  margin-top: 10px;
+}
+.userImage {
+  width: 130px;
+  height: 120px;
+  border-radius: 50%;
+  margin-top: 5px;
+  box-shadow: 0.3px 0.3px 1.5px black;
 }

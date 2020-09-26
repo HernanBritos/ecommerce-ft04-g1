@@ -20,6 +20,7 @@ import EditReviewContainer from "./container/editReview";
 import OrderComponent from "./container/ordercomponent";
 import OrdenesCompra from "./container/ordenescompra";
 import Navbar from "./components/navBar";
+import UserProfile from "./components/userProfile";
 
 function App() {
   return (
@@ -62,7 +63,7 @@ function App() {
             path="/admin/products/edit/:id"
             exact={true}
             render={(p) => {
-              return <EditProduct producto={p.match.params.id} />;
+              return <EditProduct producto={p} />;
             }}
           />
           <Route
@@ -84,6 +85,13 @@ function App() {
             exact={true}
             render={() => {
               return <FormUser />;
+            }}
+          />
+          <Route
+            path="/users/profile"
+            exact={true}
+            render={() => {
+              return <UserProfile />;
             }}
           />
           <Route

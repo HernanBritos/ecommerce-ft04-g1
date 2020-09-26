@@ -49,7 +49,9 @@ function ProductComponent(props) {
                   <h4 className={cComponent.cardCat}>{productDet.category}</h4>
                   <div className={cComponent.cardDesc}>
                     <p>
-                      <i>{productDet.description}</i>
+                      <i className={cComponent.cardDesc}>
+                        {productDet.description}
+                      </i>
                     </p>
                   </div>
                   <ReactStars

@@ -3,7 +3,6 @@ import cComponent from "./css/editProduct.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { editProduct } from "../Redux/Products/Actions/productActions";
-import { detailsProduct } from "../Redux/Products/Actions/productActions";
 import { listCategory } from "../Redux/Categories/Actions/categoryActions";
 import FileUpload from "../components/utils/FileUpload";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -59,10 +58,9 @@ export default function EditProduct(props) {
 
   // Peticion de producto y categoria
   useEffect(() => {
-    dispatch(detailsProduct(props.producto));
     dispatch(listCategory());
-    setProductInput(productDet);
-  }, [dispatch, props.producto, productDet]);
+    setProductInput(props.producto.location.state);
+  }, [dispatch, props.producto.location.state, productDet]);
 
   // Todo lo que voy a renderizar en la pagina
   return (
@@ -108,7 +106,10 @@ export default function EditProduct(props) {
                   </div>
                 ) : categories.length > 0 ? (
                   <Select
-                    placeholder={productInput.category}
+                    defaultValue={{
+                      label: productInput.category,
+                      value: productInput.category,
+                    }}
                     onChange={handleCategoryInputChange}
                     options={categories.map((opt) => ({
                       label: opt.name,
