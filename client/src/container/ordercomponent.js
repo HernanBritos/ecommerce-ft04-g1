@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import oComponent from "./css/orderComponent.module.css";
-
 import cComponent from "./css/adminAddCategory.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -29,7 +28,7 @@ cartItems.map((el) => dispatch(removeFromCart(el.product)));
 
 };
 
-console.log(orderproducts);
+console.log(orderproducts)
 
   return (
     <div className={cComponent.actionpane}>
@@ -91,7 +90,7 @@ console.log(orderproducts);
             <tbody>
                     {orders &&
               orders
-                .filter((order) => order.id === orders.length+1)
+                .filter((order) => order === orders[orders.length-1])
                 .map((order) => (
                   <tr key={order.id}>
                     <td>{order.id} </td>

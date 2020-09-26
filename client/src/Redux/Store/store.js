@@ -8,7 +8,7 @@ import {
   categoryDetailsReducer,
 } from "../Categories/reducers/categoryReducers";
 import Cookie from "js-cookie";
-import { cartReducer, orderReducer, orderproductReducer } from "../Cart/reducers/cartReducer";
+import { cartReducer, orderReducer, orderproductReducer, allOrderReducer } from "../Cart/reducers/cartReducer";
 import {
   userListReducer,
   userDetailsReducer,
@@ -33,7 +33,8 @@ const reducer = combineReducers({
   userEdit: initialState,
   getReviews: getReviewReducer,
   getOrders: orderReducer,
-  getOrderProduct: orderproductReducer
+  getOrderProduct: orderproductReducer,
+  getAllOrders: allOrderReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

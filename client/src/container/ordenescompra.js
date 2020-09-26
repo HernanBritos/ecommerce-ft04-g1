@@ -11,7 +11,7 @@ function OrdenesCompra(props) {
   const { orders } = getOrders;
 
   return (
-    <div >
+    <div className={oComponent.options} >
       <div className={oComponent.catalogo2}>
         <Link to="/">
           <button className={oComponent.botonBack}>

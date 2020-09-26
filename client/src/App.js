@@ -20,7 +20,9 @@ import AddReviewContainer from "./container/addReviewcontainer";
 import EditReviewContainer from "./container/editReview";
 import OrderComponent from "./container/ordercomponent";
 import OrdenesCompra from "./container/ordenescompra";
-import Navbar from './components/navBar'
+import Navbar from './components/navBar';
+import OrdersTotal from "./container/orderstotal";
+import OrderDetail from "./container/orderdetail";
 
 function App() {
   return (
@@ -60,6 +62,16 @@ function App() {
             path="/admin/categories/add"
             exact={true}
             render={() => <FormCategory />}
+          />
+          <Route
+            path="/admin/orders"
+            exact={true}
+            render={() => <OrdersTotal />}
+          />
+          <Route
+            path="/admin/orders/:id/detail"
+            exact={true}
+            render={(i) => <OrderDetail id={i} />}
           />
           <Route
             path="/product/:id"

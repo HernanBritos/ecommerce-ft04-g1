@@ -5,7 +5,10 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDERPRODUCT_LIST_REQUEST,
-  ORDERPRODUCT_LIST_SUCCESS
+  ORDERPRODUCT_LIST_SUCCESS,
+  ORDER_LIST_ALL_SUCCESS,
+  ORDER_LIST_ALL_REQUEST,
+  ORDER_STATUS
 } from "../constantes/cartConstant";
 
 function cartReducer(state = { cartItems: [] }, action) {
@@ -46,6 +49,34 @@ function orderReducer(state = { orders: [] }, action) {
   }
 }
 
+function allOrderReducer(state = { allorders: [] }, action) {
+  // const filter = (el) => {
+  //   return el.id !== action.payload;
+  // };
+  switch (action.type) {
+    case ORDER_LIST_ALL_REQUEST:
+      return { loading: true };
+    case ORDER_LIST_ALL_SUCCESS:
+      return { allorders: action.payload, loading: false };
+    case ORDER_STATUS:
+      const oldOrder = state.allorders.find((allorder) => allorder.id === action.payload);
+      console.log(oldOrder);
+      const newOrder = oldOrder;
+   return {
+        allorders: state.allorders.map((allorder) => {
+          if(oldOrder.status === "pendiente"){
+            newOrder.status = "confirmado";
+          } else {
+            newOrder.status = "pendiente"
+          }
+          return allorder.id === oldOrder.id ? newOrder : allorder;
+        }), 
+      }; 
+      default:
+      return state;
+  }
+}
+
 function orderproductReducer(state = { orderproducts: []}, action) {
   switch (action.type) {
     case ORDERPRODUCT_LIST_REQUEST:
@@ -57,4 +88,4 @@ function orderproductReducer(state = { orderproducts: []}, action) {
   }
 }
 
-export { cartReducer, orderReducer, orderproductReducer };
+export { cartReducer, orderReducer, orderproductReducer, allOrderReducer };
