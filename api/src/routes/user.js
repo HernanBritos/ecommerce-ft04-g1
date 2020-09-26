@@ -245,6 +245,21 @@ server.get("/orders", (req, res) => {
     );
 });
 
+server.get("/orders/search", (req, res) => {
+  const valor = req.query.query
+  Order.findAll({
+    where: {
+      [Op.or]: [
+        {status: valor}
+      ],
+    },
+  })
+   .then((orders) => {
+     res.send(orders);
+   })
+   .catch((err) => res.send(err));
+});
+
 
 server.get("/:id", (req, res) => {
   const id = req.params.id;

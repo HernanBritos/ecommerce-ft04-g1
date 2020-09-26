@@ -10,10 +10,18 @@ function OrdenesCompra(props) {
   const getOrders = useSelector((state) => state.getOrders);
   const { orders } = getOrders;
 
+  console.log(props)
+
   return (
     <div className={oComponent.options} >
       <div className={oComponent.catalogo2}>
-        <Link to="/">
+        <Link to={{
+          pathname:
+            "/users/" +
+            `${props.props.match.params.id}` +
+            "/orders/",
+        }}
+         >
           <button className={oComponent.botonBack}>
             <ArrowBackIcon />
           </button>

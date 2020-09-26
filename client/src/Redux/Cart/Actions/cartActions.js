@@ -57,17 +57,37 @@ const fetchOrders = (id) => async (dispatch) => {
   } catch (error) {}
 };
 
-const fetchAllOrders = () => async (dispatch) => {
-  try {
-    dispatch({ type: ORDER_LIST_ALL_REQUEST });
+const fetchAllOrders = (status) => async (dispatch) => {
+  if (status === "todos") {
+   dispatch({ type: ORDER_LIST_ALL_REQUEST });
     const { data } = await axios.get(
       `http://localhost:3001/users/orders`
     );
     dispatch({
       type: ORDER_LIST_ALL_SUCCESS,
       payload: data,
+    });}
+    if(status === "pendiente") {
+      dispatch({ type: ORDER_LIST_ALL_REQUEST });
+    const { data } = await axios.get(
+      `http://localhost:3001/users/orders/search?query=${status}`
+    );
+    dispatch({
+      type: ORDER_LIST_ALL_SUCCESS,
+      payload: data,
     });
-  } catch (error) {}
+    } 
+    if (status === "confirmado"){
+      dispatch({ type: ORDER_LIST_ALL_REQUEST });
+    const { data } = await axios.get(
+      `http://localhost:3001/users/orders/search?query=${status}`
+    );
+    dispatch({
+      type: ORDER_LIST_ALL_SUCCESS,
+      payload: data,
+    });
+    } 
+    
 };
 
 const fetchOrderProducts = () => async (dispatch) => {
