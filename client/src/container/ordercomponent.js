@@ -7,9 +7,8 @@ import {
   fetchOrders,
   fetchOrderProducts,
   removeFromCart,
-  cancelOrder
+  cancelOrder,
 } from "../Redux/Cart/Actions/cartActions";
-
 
 function OrderComponent(props) {
   const dispatch = useDispatch();
@@ -22,29 +21,25 @@ function OrderComponent(props) {
   const getOrderProduct = useSelector((state) => state.getOrderProduct);
   const { orderproducts } = getOrderProduct;
 
-
-  
-useEffect(() =>  {
+  useEffect(() => {
     dispatch(fetchOrders(props.producto.match.params.id));
-  dispatch(fetchOrderProducts())
-  dispatch(fetchOrders(props.producto.match.params.id));
+    dispatch(fetchOrderProducts());
+    dispatch(fetchOrders(props.producto.match.params.id));
   }, []);
 
-const handleSubmit = () => {
-cartItems.map((el) => dispatch(removeFromCart(el.product)));
-
-};
-
-const handleCancelSubmit = (e) => {
-  if(orders && orders.length) {
-    const idUser = orders[orders.length-1].idUser;
-    const idOrder = orders[orders.length-1].id
-    dispatch(cancelOrder(idUser, idOrder));
+  const handleSubmit = () => {
     cartItems.map((el) => dispatch(removeFromCart(el.product)));
-    dispatch(fetchOrders(idUser));
-  } 
   };
 
+  const handleCancelSubmit = (e) => {
+    if (orders && orders.length) {
+      const idUser = orders[orders.length - 1].idUser;
+      const idOrder = orders[orders.length - 1].id;
+      dispatch(cancelOrder(idUser, idOrder));
+      cartItems.map((el) => dispatch(removeFromCart(el.product)));
+      dispatch(fetchOrders(idUser));
+    }
+  };
 
   return (
     <div className={cComponent.actionpane}>
@@ -62,20 +57,20 @@ const handleCancelSubmit = (e) => {
       ) : (
         items &&
         items.map((el) => (
-          <div key={el.product} className={`${cComponent.carritoPage}`}>
-            <div className={`${cComponent.cards}`}>
+          <div key={el.product} className={`${oComponent.carritoPage}`}>
+            <div className={`${oComponent.cards}`}>
               <img
-                className={`${cComponent.cardImage}`}
+                className={`${oComponent.cardImage}`}
                 src={`/imagenes/uploads/${el.img}`}
                 alt="fotoCarrito"
               />
-              <div className={`${cComponent.cardDet}`}>
+              <div className={`${oComponent.cardDet}`}>
                 <Link to={`/product/${el.product}`}>{el.name}</Link>
               </div>
-              <div className={`${cComponent.qty}`}>
+              <div className={`${oComponent.qty}`}>
                 <label htmlFor="stock">Cantidad: {el.qty} </label>
               </div>
-              <div className={`${cComponent.cardPrice}`}>
+              <div className={`${oComponent.cardPrice}`}>
                 <h4>Precio</h4>
                 <span>$ {el.price}</span>
               </div>
@@ -90,66 +85,70 @@ const handleCancelSubmit = (e) => {
         </h4>
       </div>
       <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
-      <md-content layout-padding>
-        <div className="tables">
-          <table className="table  table-striped table-bordered table-hover table-checkable order-column dataTable">
-            <thead>
-              <tr>
-              <th scope="col">Id de Orden</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Direccion</th>
-              <th scope="col">Envio</th>
-              <th scope="col">Forma de pago</th>
-              <th scope="col">Status</th>
-              <th scope="col">Precio Total</th>
-              </tr>
-            </thead>
-            <tbody>
-                    {orders &&
-              orders
-                .filter((order) => order === orders[orders.length-1])
-                .map((order) => (
-                  <tr key={order.id}>
-                    <td>{order.id} </td>
-                    <td>{order.date}</td>
-                    <td>{order.address} </td>
-                    <td>{order.shipping}</td>
-                    <td>{order.paymentmethod}</td>
-                    <td>{order.status}</td>
-                    <td>${order.priceTotal}</td>
-                  </tr>
-                ))}
-                   
-            </tbody>
-          </table>
-        </div>
-      </md-content>
-    </div>
+        <md-content layout-padding>
+          <div className="tables">
+            <table className="table-responsive-xl mx-auto table-striped table-bordered table-hover table-checkable order-column dataTable">
+              <thead>
+                <tr>
+                  <th scope="col">Id de Orden</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Direccion</th>
+                  <th scope="col">Envio</th>
+                  <th scope="col">Forma de pago</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Precio Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders &&
+                  orders
+                    .filter((order) => order === orders[orders.length - 1])
+                    .map((order) => (
+                      <tr key={order.id}>
+                        <td>{order.id} </td>
+                        <td>{order.date}</td>
+                        <td>{order.address} </td>
+                        <td>{order.shipping}</td>
+                        <td>{order.paymentmethod}</td>
+                        <td>{order.status}</td>
+                        <td>${order.priceTotal}</td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
+          </div>
+        </md-content>
+      </div>
 
       <div className={cComponent.footerdos}>
-          <Link
-            to={{
-              pathname: `/`,
-            }}
-          >
-            <button 
-            type="button" className="btn btn-primary btn-lg btn-block"
+        <Link
+          to={{
+            pathname: `/`,
+          }}
+        >
+          <button
+            type="button"
+            className="btn btn-primary btn-lg btn-block"
             onClick={handleSubmit}
-            >Confirmar Pedido</button>
-          </Link>
-          <Link
-            to={{
-              pathname: `/`,
-            }}
           >
-            <button 
-            type="button" className="btn btn-secondary btn-lg btn-block"
+            Confirmar Pedido
+          </button>
+        </Link>
+        <Link
+          to={{
+            pathname: `/`,
+          }}
+        >
+          <button
+            type="button"
+            className="btn btn-secondary btn-lg btn-block"
             onClick={handleCancelSubmit}
-            
-            >Cancelar Pedido</button>
-          </Link>
-        </div>
-        
+          >
+            Cancelar Pedido
+          </button>
+        </Link>
+      </div>
+
       <div className={oComponent.footer}>
         <Link
           to={{

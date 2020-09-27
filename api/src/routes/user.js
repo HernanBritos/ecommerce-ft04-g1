@@ -206,7 +206,6 @@ server.get("/:id/orders", (req, res) => {
 });
 
 server.put("/:id/orders/:idOrder", (req, res) => {
-  
   const idOrder = req.params.idOrder;
 
   Order.update(
@@ -217,7 +216,7 @@ server.put("/:id/orders/:idOrder", (req, res) => {
       address: req.body.address,
       description: req.body.description,
       paymentmethod: req.body.paymentmethod,
-      shipping: req.body.shipping
+      shipping: req.body.shipping,
     },
     {
       where: {
@@ -227,9 +226,7 @@ server.put("/:id/orders/:idOrder", (req, res) => {
     }
   )
     .then((response) => {
-    
       res.send(response);
-     
     })
     .catch((err) => res.send(err.message));
 });
@@ -248,7 +245,6 @@ server.delete("/:id/orders/:idOrder", (req, res, next) => {
 });
 
 server.get("/orders", (req, res) => {
-  
   Order.findAll()
     .then((response) => {
       res.status(200).json(response);
@@ -259,20 +255,17 @@ server.get("/orders", (req, res) => {
 });
 
 server.get("/orders/search", (req, res) => {
-  const valor = req.query.query
+  const valor = req.query.query;
   Order.findAll({
     where: {
-      [Op.or]: [
-        {status: valor}
-      ],
+      [Op.or]: [{ status: valor }],
     },
   })
-   .then((orders) => {
-     res.send(orders);
-   })
-   .catch((err) => res.send(err));
+    .then((orders) => {
+      res.send(orders);
+    })
+    .catch((err) => res.send(err));
 });
-
 
 server.get("/:id", (req, res) => {
   const id = req.params.id;
@@ -284,8 +277,6 @@ server.get("/:id", (req, res) => {
     })
     .catch((err) => res.status(404).send(err));
 });
-
-
 
 server.post("/:id/orders", (req, res, next) => {
   const id = req.params.id;

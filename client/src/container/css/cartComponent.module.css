@@ -1,6 +1,6 @@
 .products {
-  background-color: #fcb064;
-  padding-top: 30px;
+  background-color: #ffffff;
+  padding-top: 150px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
@@ -11,6 +11,7 @@
   border-radius: 10px;
   border-width: 0.5px;
   background-color: #f8e4ab;
+  margin-top: 80px;
 }
 .titulo {
   font-weight: 600;
@@ -68,4 +69,90 @@
   padding: 30px;
   font-size: 25px;
   font-weight: 300;
+}
+
+@media (max-width: 576px) {
+  .products {
+    background-color: #ffffff;
+    padding-top: 130px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    font-size: 14px;
+  }
+  .carritoPage {
+    width: 95%;
+    height: 100%;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 0.5px;
+    background-color: #f8e4ab;
+    font-size: small;
+    margin: auto;
+  }
+  .titulo {
+    font-weight: 600;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-size: 48px;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 1px rgb(20, 20, 20);
+  }
+  .cards {
+    width: 95%;
+    height: 100px;
+    background: rgb(255, 255, 255);
+    margin: 10px;
+    display: flex;
+  }
+  .cardImage {
+    width: 100px;
+    height: 100px;
+  }
+  .cardDet {
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 30px;
+  }
+  .cardPrice {
+    position: static;
+    margin-top: 4%;
+    flex-direction: column;
+    font-size: small;
+    font-weight: 400;
+    margin-right: 20px;
+  }
+  .cardPrice h4 {
+    font-size: 15px;
+  }
+  .qty input {
+    width: 50px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+  }
+  .qty {
+    position: static;
+    margin: auto;
+  }
+  .button {
+    width: 50px;
+    height: 25px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  .footer form {
+    display: flex;
+    flex-direction: row;
+  }
 }
