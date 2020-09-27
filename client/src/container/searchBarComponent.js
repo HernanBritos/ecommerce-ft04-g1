@@ -26,7 +26,7 @@ export default function SearchBarComponent() {
       <form onSubmit={handleSubmit}>
         <div className={sBar.bar}>
           <button className={sBar.boton} type="submit">
-            <SearchIcon />
+            <SearchIcon className={sBar.btnImage} />
           </button>
           <input
             className={sBar.search}

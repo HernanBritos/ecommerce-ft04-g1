@@ -9,14 +9,52 @@
   box-shadow: 0.3px 0.3px 2px grey;
 }
 .image {
-  width: 150px;
-  max-height: 150px;
-  border-radius: 10px;
-  margin-left: 15px;
+  font-size: 13px;
+  color: black;
 }
 .component {
   box-shadow: 0.3px 0.3px 2px grey;
   width: 350px;
   padding: 1px 10px 10px 10px;
   border-radius: 8px;
+}
+.message {
+  width: 120px;
+  display: flex;
+  margin: 20px;
+  background: #444444;
+  color: white;
+  border-radius: 10px;
+  padding: 3px;
+}
+@media (max-width: 576px) {
+  .fullarea {
+    width: 150px;
+    height: 150px;
+    background: white;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    display: flex;
+    box-shadow: 0.3px 0.3px 2px grey;
+  }
+  .image {
+    font-size: 13px;
+    color: black;
+  }
+  .component {
+    box-shadow: 0.3px 0.3px 2px grey;
+    width: 350px;
+    padding: 1px 10px 10px 10px;
+    border-radius: 8px;
+  }
+  .message {
+    width: 120px;
+    display: flex;
+    margin: 20px;
+    background: #444444;
+    color: white;
+    border-radius: 10px;
+    padding: 3px;
+  }
 }

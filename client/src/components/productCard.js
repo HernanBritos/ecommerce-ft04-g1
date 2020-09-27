@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import pCard from "./css/productCard.module.css";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Redux/Cart/Actions/cartActions";
 var placeholder = "/imagenes/Placeholder.png";
-
 function ProductCard(props) {
   const dispatch = useDispatch();
 
@@ -39,7 +38,7 @@ function ProductCard(props) {
             count={5}
             value={props.producto.rating}
             edit={false}
-            size={15}
+            size={12}
             isHalf={true}
           />
 
@@ -61,7 +60,7 @@ function ProductCard(props) {
               </Link>
             </span>
           ) : (
-            <div className="alert-danger"> Sin Stock!</div>
+            <div className={`alert-danger ${pCard.nostock}`}> Sin Stock!</div>
           )}
         </div>
       </div>

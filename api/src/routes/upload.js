@@ -19,8 +19,8 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).single("file");
 
-server.post("/", async (req, res) => {
-  await upload(req, res, (err) => {
+server.post("/", (req, res) => {
+  upload(req, res, (err) => {
     if (err) {
       res.json({ success: false, err: err });
     } else {

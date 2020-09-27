@@ -52,7 +52,6 @@ function CartComponent(props) {
       dispatch(fetchOrders(input.idUser));
     }
     fetchUser();
-    
   }, [dispatch, productId, qty, input.idUser]);
 
   const checkoutHandler = async () => {
@@ -78,7 +77,6 @@ function CartComponent(props) {
         });
         dispatch(fetchOrders(input.idUser));
         return data;
-
       });
 
     return null;
@@ -94,15 +92,6 @@ function CartComponent(props) {
 
   return (
     <div className={cComponent.products} ng-app="app" ng-controller="AppCtrl">
-      <div className={cComponent.actionpane}>
-        <Link to="/">
-          <button className="btn btn-info">Volver a Home</button>
-        </Link>
-        <center>
-          <h2 className={`${cComponent.titulo}`}>Detalle de su carrito</h2>
-        </center>
-      </div>
-
       {cartItems.length === 0 ? (
         <div className="alert-info">El carrito está vacío</div>
       ) : (
@@ -146,22 +135,11 @@ function CartComponent(props) {
       )}
       <div className={`${cComponent.footer}`}>
         <form>
-          {/* <div className="form-group">
-            <label htmlFor="idUser">Id User: </label>
-            <input
-              className="form-control"
-              placeholder="Nombre"
-              name="idUser"
-              value={input.idUser}
-              type="number"
-              onChange={handleInputChange}
-            />
-          </div> */}
           <div className="form-group">
             <label htmlFor="address">Direccion: </label>
             <input
               className="form-control"
-              placeholder="Nombre"
+              placeholder="Domicilio"
               name="address"
               value={input.address}
               type="text"
@@ -172,7 +150,7 @@ function CartComponent(props) {
             <label htmlFor="description">Descripcion: </label>
             <input
               className="form-control"
-              placeholder="Nombre"
+              placeholder="Descripcion"
               name="description"
               value={input.description}
               type="text"
@@ -183,7 +161,7 @@ function CartComponent(props) {
             <label htmlFor="paymentmethod">Forma de pago: </label>
             <input
               className="form-control"
-              placeholder="Nombre"
+              placeholder="Forma de pago"
               name="paymentmethod"
               value={input.paymentmethod}
               type="text"
@@ -194,7 +172,7 @@ function CartComponent(props) {
             <label htmlFor="shipping">Envio: </label>
             <input
               className="form-control"
-              placeholder="Nombre"
+              placeholder="Envio"
               name="shipping"
               value={input.shipping}
               type="text"
@@ -248,7 +226,7 @@ function CartComponent(props) {
         >
           <button
             type="button"
-            class="btn btn-light"
+            class="btn btn-info"
             data-toggle="button"
             aria-pressed="false"
             autocomplete="off"
