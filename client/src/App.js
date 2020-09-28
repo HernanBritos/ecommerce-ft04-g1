@@ -24,7 +24,6 @@ import OrderDetail from "./container/orderdetail";
 import Navbar from "./components/navBar";
 import UserProfile from "./components/userProfile";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -121,7 +120,11 @@ function App() {
             path="/users/signup"
             exact={true}
             render={() => {
-              return <FormUser />;
+              return !JSON.parse(localStorage.getItem("user")) ? (
+                <FormUser />
+              ) : (
+                (window.location = "/")
+              );
             }}
           />
           <Route
@@ -149,7 +152,11 @@ function App() {
             path="/users/login"
             exact={true}
             render={(u) => {
-              return <Login u={u} />;
+              return !JSON.parse(localStorage.getItem("user")) ? (
+                <Login u={u} />
+              ) : (
+                (window.location = "/")
+              );
             }}
           />
           <Route

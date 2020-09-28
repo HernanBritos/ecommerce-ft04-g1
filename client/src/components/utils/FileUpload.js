@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import fUp from "./FileUpload.module.css";
 import Dropzone from "react-dropzone";
 import { PlusOutlined } from "@ant-design/icons";
@@ -8,14 +8,19 @@ function FileUpload(props) {
     path: "",
   });
   const [Loading, setLoading] = useState(false);
-  const onDrop = async (files) => {
+
+  useEffect(() => {
+    setImage({ path: null });
+  }, []);
+
+  const onDrop = (files) => {
     setLoading(true);
     let formData = new FormData();
     const config = {
       header: { "content-type": "multipart/form-data" },
     };
     formData.append("file", files[0]);
-    await axios
+    axios
       .post("http://localhost:3001/product/upload", formData, config)
       .then((response) => {
         if (response.data.success === true) {
@@ -49,16 +54,13 @@ function FileUpload(props) {
             </div>
           )}
         </Dropzone>
-        {!Loading ? (
-          <div>
-            <img
-              className={fUp.image}
-              src={`/imagenes/uploads/${Image.path}`}
-              alt={` `}
-            />
-          </div>
+        {!Image.path ? (
+          <span></span>
         ) : (
-          <div className="alert alert-info">Cargando...</div>
+          <div>
+            <p className={fUp.image}>{Image.path}</p>
+            <div className={` ${fUp.message}`}>Imagen subida con éxito!</div>
+          </div>
         )}
       </div>
     </div>

@@ -61,19 +61,21 @@ function ProductComponent(props) {
                     size={15}
                     isHalf={true}
                   />
-                  <div className={`${cComponent.qty}`}>
-                    <label htmlFor="stock">Cantidad: </label>
-                    <input
-                      name="stock"
-                      type="number"
-                      className="form-control"
-                      id="stock"
-                      value={qty}
-                      onChange={(e) => {
-                        setQty(e.target.value);
-                      }}
-                    />
-                  </div>
+                  {productDet.stock > 0 && (
+                    <div className={`${cComponent.qty}`}>
+                      <label htmlFor="stock">Cantidad: </label>
+                      <input
+                        name="stock"
+                        type="number"
+                        className="form-control"
+                        id="stock"
+                        value={qty}
+                        onChange={(e) => {
+                          setQty(e.target.value);
+                        }}
+                      />
+                    </div>
+                  )}
                   {!JSON.parse(localStorage.getItem("user")) ? (
                     <Link
                       to={{
@@ -105,12 +107,14 @@ function ProductComponent(props) {
                   <h5>Precio</h5>
                   <span>$ {productDet.price}</span>
                 </div>
-                <button
-                  onClick={handleAddToCart}
-                  className={` ${cComponent.addcart}`}
-                >
-                  Añadir al carrito
-                </button>
+                {productDet.stock > 0 && (
+                  <button
+                    onClick={handleAddToCart}
+                    className={` ${cComponent.addcart}`}
+                  >
+                    Añadir al carrito
+                  </button>
+                )}
               </div>
             </div>
           </div>

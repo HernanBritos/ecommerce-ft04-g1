@@ -8,7 +8,6 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import axios from "axios";
 import { removeFromCart } from "../Redux/Cart/Actions/cartActions";
 
-
 function SideBarComponent(props) {
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categoryList);
@@ -69,12 +68,12 @@ function SideBarComponent(props) {
             JSON.parse(localStorage.getItem("user")).rol === "admin" && (
               <Link to="/admin">
                 <button onClick={props.onclose} className={` ${sBar.boton} `}>
-                  <SupervisorAccountIcon />
+                  <SupervisorAccountIcon className={sBar.imgBotones} />
                 </button>
               </Link>
             )}
           <button onClick={logout} className={`${sBar.boton}`}>
-            <ExitToAppIcon />
+            <ExitToAppIcon className={sBar.imgBotones} />
           </button>
         </div>
         <div className="dropdown">

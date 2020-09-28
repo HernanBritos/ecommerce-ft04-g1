@@ -22,9 +22,11 @@ function HeaderInicio() {
         <button className={hInicio.brandButton} onClick={openMenu}>
           &#9776;
         </button>
-        <a className={hInicio.brand} href="/">
-          Asia Pilar Shoes
-        </a>
+        <div className={hInicio.brand}>
+          <a href="/">Asia</a>
+          <a href="/">Pilar</a>
+          <a href="/">Shoes</a>
+        </div>
         <Link
           to={{
             pathname: "/users/cart",
