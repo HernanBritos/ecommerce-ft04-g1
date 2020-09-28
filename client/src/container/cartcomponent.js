@@ -161,7 +161,7 @@ function CartComponent(props) {
             <label htmlFor="address">Direccion: </label>
             <input
               className="form-control"
-              placeholder="Nombre"
+              placeholder="Eg: Av.9 de julio, 2142"
               name="address"
               value={input.address}
               type="text"
@@ -169,10 +169,10 @@ function CartComponent(props) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Descripcion: </label>
+            <label htmlFor="description">Email:  </label>
             <input
               className="form-control"
-              placeholder="Nombre"
+              placeholder="email"
               name="description"
               value={input.description}
               type="text"
@@ -183,7 +183,7 @@ function CartComponent(props) {
             <label htmlFor="paymentmethod">Forma de pago: </label>
             <input
               className="form-control"
-              placeholder="Nombre"
+              placeholder="Efectivo/tarjeta"
               name="paymentmethod"
               value={input.paymentmethod}
               type="text"
@@ -194,7 +194,7 @@ function CartComponent(props) {
             <label htmlFor="shipping">Envio: </label>
             <input
               className="form-control"
-              placeholder="Nombre"
+              placeholder="Envio"
               name="shipping"
               value={input.shipping}
               type="text"
@@ -241,21 +241,6 @@ function CartComponent(props) {
             </button>
           </Link>
         )}
-        <Link
-          to={{
-            pathname: "/users/signup",
-          }}
-        >
-          <button
-            type="button"
-            class="btn btn-light"
-            data-toggle="button"
-            aria-pressed="false"
-            autocomplete="off"
-          >
-            Regístrese
-          </button>
-        </Link>
       </div>
     </div>
   );
