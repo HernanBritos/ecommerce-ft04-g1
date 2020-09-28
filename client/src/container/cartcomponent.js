@@ -106,6 +106,7 @@ function CartComponent(props) {
               <div className={`${cComponent.cardDet}`}>
                 <Link to={`/product/${el.product}`}>{el.name}</Link>
               </div>
+
               <div className={`${cComponent.qty}`}>
                 <label htmlFor="stock">Cantidad: </label>
                 <input
@@ -114,7 +115,12 @@ function CartComponent(props) {
                   className="form-control"
                   id="stock"
                   value={el.qty}
+                  min="1"
+                  max={el.stock}
                   onChange={(e) => {
+                    // if (e.target.value > e.target.max) {
+                    //   e.target.value = e.target.max;
+                    // }
                     return dispatch(addToCart(el.product, e.target.value));
                   }}
                 />
@@ -124,6 +130,7 @@ function CartComponent(props) {
                 >
                   Eliminar
                 </button>
+                <p>Stock: {el.stock} items</p>
               </div>
               <div className={`${cComponent.cardPrice}`}>
                 <h4>Precio</h4>
@@ -147,7 +154,7 @@ function CartComponent(props) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Email:  </label>
+            <label htmlFor="description">Email: </label>
             <input
               className="form-control"
               placeholder="email"

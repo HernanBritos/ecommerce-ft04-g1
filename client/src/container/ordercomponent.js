@@ -9,6 +9,7 @@ import {
   removeFromCart,
   cancelOrder,
 } from "../Redux/Cart/Actions/cartActions";
+import axios from "axios";
 
 function OrderComponent(props) {
   const dispatch = useDispatch();
@@ -29,6 +30,11 @@ function OrderComponent(props) {
 
   const handleSubmit = () => {
     cartItems.map((el) => dispatch(removeFromCart(el.product)));
+    cartItems.map((el) => {
+      return axios.put(`http://localhost:3001/products/${el.product}`, {
+        stock: el.stock - el.qty,
+      });
+    });
   };
 
   const handleCancelSubmit = (e) => {
@@ -43,6 +49,7 @@ function OrderComponent(props) {
 
   return (
     <div className={cComponent.actionpane}>
+      {console.log(cartItems)}
       <div className={cComponent.actionpane}>
         <Link to="/">
           <button className="btn btn-info">Volver a Home</button>

@@ -29,7 +29,7 @@ export default function AdminAddCategory() {
 
         <div className="tables">
           <table
-            className={`table-responsive-xl mx-auto ${cComponent.tabla} table-striped table-bordered table-hover table-checkable order-column dataTable`}
+            className={`table-responsive-xl col-xl mx-auto table-striped table-bordered table-hover table-checkable order-column dataTable`}
           >
             <thead>
               <tr>

@@ -52,7 +52,7 @@ server.post("/", isAdmin, async (req, res) => {
 // Retorna 200 si se modificó con exito,
 // y retorna los datos del producto modificado.
 
-server.put("/:id", isAdmin, (req, res, next) => {
+server.put("/:id", isAuthenticated, (req, res, next) => {
   const id = req.params.id;
 
   Product.update(
