@@ -73,6 +73,7 @@ server.put("/:id", (req, res, next) => {
       phone: req.body.phone,
       address: req.body.address,
       rol: req.body.rol,
+      image: req.body.image,
     },
     {
       where: {
@@ -330,5 +331,4 @@ server.post("/signup", async (req, res) => {
       .catch((err) => res.send(err));
   }
 });
-
 module.exports = server;

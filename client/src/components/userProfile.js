@@ -1,31 +1,23 @@
-import React from 'react';
+import React from "react";
 import uP from "./css/userProfile.module.css";
-import { Link } from "react-router-dom";
-import { editUser, getUserDetails } from "../Redux/Users/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import OrderComponent from '../container/ordercomponent';
-
-
-
+import UserFileUpload from "./utils/userFileUpload";
+const axios = require("axios");
 
 const UserProfile = (props) => {
-
-  // Estados 
-  const dispatch = useDispatch();
-  const userDetails = useSelector((state) => state.userDetails);
-  const { userDet, loadingUserDet, errorUserDet } = userDetails;
+  // Estados
   const [userInput, setUserInput] = useState({
-    name: '',
-    lastname:'' ,
-    email: '',
-    password: '',
-    phone: '',
-    address:'',
+    name: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    address: "",
+    password: "",
+    image: "",
   });
   const user = JSON.parse(localStorage.getItem("user"));
   // Acciones de middleware
-  
+
   const handleInputChange = function (e) {
     setUserInput({
       ...userInput,
@@ -35,15 +27,40 @@ const UserProfile = (props) => {
 
   const handleSubmit = function (e) {
     e.preventDefault();
-    dispatch(editUser(userInput));
+    axios
+      .put(`http://localhost:3001/users/${user.id}`, {
+        name: `${userInput.name}`,
+        lastname: `${userInput.lastname}`,
+        email: `${userInput.email}`,
+        phone: `${userInput.phone}`,
+        address: `${userInput.address}`,
+        image: `${userInput.image}`,
+      })
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data.data[1][0]));
+        window.location = "/users/profile";
+        return data;
+      });
   };
 
-  // useEffect(() => {
-  //   dispatch(getUserDetails(user.id));
-  //   setUserInput(userDet);
-  // }, []);
+  useEffect(() => {
+    setUserInput({
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
+      phone: user.phone,
+      address: user.address,
+      image: user.image,
+    });
+  }, []);
 
- 
+  const UpdateImages = (newImages) => {
+    setUserInput({
+      ...userInput,
+      image: newImages,
+    });
+  };
+
   return (
     <div className={`row ${uP.profile}`}>
       <div className="col-3">
@@ -88,7 +105,7 @@ const UserProfile = (props) => {
           </a>
         </div>
       </div>
-      <div className="col-9">
+      <div className="col-4">
         <div className="tab-content" id="v-pills-tabContent">
           <div
             className="tab-pane fade"
@@ -96,16 +113,14 @@ const UserProfile = (props) => {
             role="tabpanel"
             aria-labelledby="v-pills-profile-tab"
           >
-          <form  onSubmit={handleSubmit}>
-            <h3 className='my-3'>
-                {" "} Mis datos{" "}
-            </h3>
-            <div className="form-group">
+            <form onSubmit={handleSubmit}>
+              <h3 className="my-3"> Mis datos </h3>
+              <div className="form-group">
                 <label htmlFor="name"> Nombre: </label>
                 <input
-                  className='form-control'
+                  className="form-control"
                   name="name"
-                  value={user.name}
+                  value={userInput.name}
                   onChange={handleInputChange}
                 />
               </div>
@@ -113,8 +128,8 @@ const UserProfile = (props) => {
                 <label htmlFor="lastname"> Apellido: </label>
                 <input
                   name="lastname"
-                  className='form-control'
-                  value={user.lastname}
+                  className="form-control"
+                  value={userInput.lastname}
                   onChange={handleInputChange}
                 />
               </div>
@@ -122,27 +137,17 @@ const UserProfile = (props) => {
                 <label htmlFor="email"> Email: </label>
                 <input
                   name="email"
-                  className='form-control'
-                  value={user.email}
+                  className="form-control"
+                  value={userInput.email}
                   onChange={handleInputChange}
                 />
               </div>
-              {/* <div className="form-group">
-                <label htmlFor="price"> Contraseña: </label>
-                <input
-                  name="password"
-                  className='form-control'
-                  value={user.password}
-                  type="password"
-                  onChange={handleInputChange}
-                />
-              </div> */}
               <div className="form-group">
                 <label htmlFor="phone"> Telefono </label>
                 <input
                   name="phone"
-                  className='form-control'
-                  value={user.phone}
+                  className="form-control"
+                  value={userInput.phone}
                   type="text"
                   onChange={handleInputChange}
                 />
@@ -151,40 +156,51 @@ const UserProfile = (props) => {
                 <label htmlFor="address">Direccion: </label>
                 <input
                   name="address"
-                  className='form-control mx-sm-3 mb-2'
-                  value={user.address}
+                  className="form-control mx-sm-3 mb-2"
+                  value={userInput.address}
                   onChange={handleInputChange}
                 />
               </div>
+              <UserFileUpload refreshFunction={UpdateImages} />
               <button type="submit" className="btn-success">
                 Guardar cambios
               </button>
-          </form> 
+            </form>
           </div>
+
           <div
             className="tab-pane fade"
             id="v-pills-messages"
             role="tabpanel"
             aria-labelledby="v-pills-messages-tab"
           >
-            <a className='btn btn-info'  href={`/users/${user.id}/orders/historial`} >
+            <a
+              className="btn btn-info"
+              href={`/users/${user.id}/orders/historial`}
+            >
               Ver mis Ordenes
             </a>
           </div>
           <div
-            className="tab-pane fade" 
+            className="tab-pane fade"
             id="v-pills-settings"
             role="tabpanel"
             aria-labelledby="v-pills-settings-tab"
           >
             <h3> Desea cambiar su contraseña? </h3>
-            <div>
+            <form className="d-flex mb-3 flex-column">
               <label> Contraseña Nueva </label>
-              <input className= 'col-md-4' 
-                onChange={handleInputChange}>
-              </input>
-            </div>
-            <button class="btn btn-primary" type="submit">Cambiar contraseña</button>
+              <input
+                name="password"
+                type="password"
+                className="col-md-3"
+                value={userInput.password}
+                onChange={handleInputChange}
+              ></input>
+            </form>
+            <button class="btn btn-primary" type="submit">
+              Cambiar contraseña
+            </button>
           </div>
         </div>
       </div>

@@ -36,10 +36,19 @@ function SideBarComponent(props) {
         {JSON.parse(localStorage.getItem("user")) ? (
           <Link to="/users/profile">
             <div className={sBar.userProfile}>
-              <img
-                className={sBar.userImage}
-                src="/imagenes/user-template.JPG"
-              ></img>
+              {JSON.parse(localStorage.getItem("user")).image ? (
+                <img
+                  className={sBar.userImage}
+                  src={`/imagenes/uploads/${
+                    JSON.parse(localStorage.getItem("user")).image
+                  }`}
+                ></img>
+              ) : (
+                <img
+                  className={sBar.userImage}
+                  src={`/imagenes/Placeholder.png`}
+                ></img>
+              )}
               <h4 className={sBar.userName}>
                 {JSON.parse(localStorage.getItem("user")).name}
               </h4>

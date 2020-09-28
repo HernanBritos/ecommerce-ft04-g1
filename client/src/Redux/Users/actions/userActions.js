@@ -61,8 +61,8 @@ const addUser = (user) => {
   // return (window.location = "http://localhost:3000/");
 };
 
-const editUser = (user) => {
-  axios
+const editUser = async (user) => {
+  await axios
     .put(`http://localhost:3001/users/${user.id}`, {
       name: `${user.name}`,
       lastname: `${user.lastname}`,
