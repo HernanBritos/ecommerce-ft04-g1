@@ -147,10 +147,10 @@ function CartComponent(props) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Descripcion: </label>
+            <label htmlFor="description">Email:  </label>
             <input
               className="form-control"
-              placeholder="Descripcion"
+              placeholder="email"
               name="description"
               value={input.description}
               type="text"
@@ -219,21 +219,6 @@ function CartComponent(props) {
             </button>
           </Link>
         )}
-        <Link
-          to={{
-            pathname: "/users/signup",
-          }}
-        >
-          <button
-            type="button"
-            class="btn btn-info"
-            data-toggle="button"
-            aria-pressed="false"
-            autocomplete="off"
-          >
-            Regístrese
-          </button>
-        </Link>
       </div>
     </div>
   );

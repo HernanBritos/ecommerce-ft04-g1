@@ -1,14 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import oComponent from "./css/orderComponent.module.css";
 import cComponent from "./css/adminAddCategory.module.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import {fetchOrders} from '../Redux/Cart/Actions/cartActions';
+
 
 function OrdenesCompra(props) {
   const getOrders = useSelector((state) => state.getOrders);
   const { orders } = getOrders;
-
+  const dispatch = useDispatch();
   console.log(props)
+
+  useEffect(() =>  {
+    dispatch(fetchOrders(props.props.match.params.id));
+  }, []);
+
+
 
   return (
 

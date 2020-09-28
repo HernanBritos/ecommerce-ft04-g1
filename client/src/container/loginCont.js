@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import { userForm } from "../container/css/userForm.module.css";
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -28,7 +29,7 @@ function LoginContainer(props) {
         if (data.data.user) {
           localStorage.setItem("user", JSON.stringify(data.data.user));
           return (window.location = `/`);
-        }
+        } 
         return data;
       });
   };
@@ -123,14 +124,15 @@ function LoginContainer(props) {
         />
         <p className="text-danger mt-3"></p>
         <button className="btn btn-lg btn-primary btn-block mb-3" type="submit">
-          Login
+          Iniciar Sesion 
         </button>
-      </form>
-      {/* <form onSubmit={getUser}>
+        <h6> No estas registrado? Registrate </h6>
+        <Link to={{ pathname: "/users/signup",}}>
         <button className="btn btn-lg btn-primary btn-block mb-3" type="submit">
-          Get User
+          Registrarse
         </button>
-      </form> */}
+        </Link>
+      </form>
     </div>
   );
 }
