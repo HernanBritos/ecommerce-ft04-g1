@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
     rol: {
       type: DataTypes.ENUM,
       values: ["user", "admin"],
-      defaultValue: "user",
+      defaultValue: "admin",
     },
     phone: {
       type: DataTypes.STRING,
