@@ -24,16 +24,5 @@ This is a student project we made as part of our education at [Soy Henry](https:
 - Database: 
     + PostgreSQL
     
-    # Previews
-
-### Home page:
-
-![alt text](./Readme_Images/Home_Page.jpeg "Home Page")
-
-### Product Page:
-![alt text](./Readme_Images/Product_Page.jpeg "Product Page")
-
-### Login:
-![alt text](./Readme_Images/Login.jpeg "Login")
 
 
