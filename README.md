@@ -5,9 +5,9 @@
 ## Asia Pilar Shoes
  Instagram Profile  [Asia](https://www.instagram.com/asiapilarshoes/)
 
-This is a student project we made as part of our education at [Soy Henry](https://www.soyhenry.com/), which consisted of creating a full-stack React application from scratch.
+This is a student project I made as part of our education at [Soy Henry](https://www.soyhenry.com/), which consisted of creating a full-stack React application from scratch.
 
-### Our stack of technologies:
+### Stack of technologies:
 
 - Front End:
     + HTML - CSS - Javascript
